@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr" ng-app="Madera">
+<head>
+  <meta charset="utf-8">
+  <title>Madera</title>
+  <link rel="stylesheet" href="lib/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="lib/normalize.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="lib/angular.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body>
+  <div ng-include="'_navbar.html'"></div>
+  <div class="container">
+    <!--div ng-controler="getList" class="table-responsive"> -->
+    <div ng-app="Madera" ng-controller="customersCtrl">
+      <div class="row">
+        <div class="col-md-4">
+            Recherche: <input type="text" placeholder="Rechercher" ng-model="searchText">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>
+                  <a href="#" ng-click="sortType = 'num_devis'">N° Devis
+                    <span ng-show="sortType == 'num_devis'  && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="sortType == 'num_devis'  && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
+                  </a>
+                </td>
+                <td>
+                  <a href="#" ng-click="sortType = 'nom_commercial'">Commercial
+                     <span ng-show="sortType == 'nom_commercial' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
+                     <span ng-show="sortType == 'nom_commercial' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
+                   </a>
+                 </td>
+                <td>
+                  <a href="#" ng-click="sortType = 'nom_client'">Client
+                     <span ng-show="sortType == 'nom_client' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
+                     <span ng-show="sortType == 'nom_client' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
+                   </a>
+                 </td>
+                <td>
+                  <a href="#" ng-click="sortType = 'date_creation'">Date de création
+                     <span ng-show="sortType == 'date_creation' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
+                     <span ng-show="sortType == 'date_creation' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
+                   </a>
+                 </td>
+                <td>
+                  <a href="#" ng-click="sortType = 'date_modif'">Date de modification
+                     <span ng-show="sortType == 'date_modif' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
+                     <span ng-show="sortType == 'date_modif' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
+                   </a>
+                 </td>
+                <td>
+                  <a href="#" ng-click="sortType = 'data.etat'">Avancement
+                     <span ng-show="sortType == 'etat' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
+                     <span ng-show="sortType == 'etat' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
+                   </a>
+                 </td>
+              </tr>
+              <tbody>
+                <tr ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
+                  <td>{{data.num_devis}}</td>
+                  <td>{{data.nom_commercial}}</td>
+                  <td>{{data.nom_client}}</td>
+                  <td>{{data.date_creation}}</td>
+                  <td>{{data.date_modif}}</td>
+                  <td>{{data.etat}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

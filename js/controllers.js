@@ -25,7 +25,6 @@ angular
       };
     }])
 
-  ////////////////////////  Accueil controler  ///////////////////////////////////////////////////////
   /////////////////////// Header controler (navbar) ////////////////////////////////////////////////
 
 
@@ -36,10 +35,12 @@ angular
     };
   }
 }])
-
+  ////////////////////////  list controler  ///////////////////////////////////////////////////////
   .controller('customersCtrl', function($scope, $http) {
-      $http.get("list.json").then(function(response) {
-          $scope.datas = response.data;
+    $scope.sortType     = 'num_devis'; // tri sur le num_devis par defaut
+    $scope.sortReverse  = false;  // sens du tri par defaut
+    $scope.searchText   = ''; // entrée saisie pour filtre
+    $http.get("listeDevis.json").then(function(response) {
+      $scope.datas = response.data;
       });
-       $scope.datas =$scope.datas.query();
   });
