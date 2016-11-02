@@ -41,4 +41,5 @@ angular
       $http.get("list.json").then(function(response) {
           $scope.datas = response.data;
       });
+       $scope.datas =$scope.datas.query();
   });

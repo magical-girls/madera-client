@@ -15,7 +15,7 @@
     <div class="container">
 <!--div ng-controler="getList" class="table-responsive"> -->
 <div ng-app="Madera" ng-controller="customersCtrl">
-
+  Recherche: <input ng-model="query">
   <table class="table">
     <thead>
       <tr>
@@ -27,7 +27,7 @@
         <td>Avancement</td>
       </tr>
       <tbody>
-        <tr ng-repeat="data in datas">
+        <tr ng-repeat="data in datas | filter:query">
           <td>{{data.num_devis}}</td>
           <td>{{data.nom_commercial}}</td>
           <td>{{data.nom_client}}</td>
