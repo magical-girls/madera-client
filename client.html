@@ -17,7 +17,9 @@
     <div class="container" ng-app="Madera" ng-controller="formCtrl">
         <h1>Client</h1>
         <form method="GET" id="my_form"></form>
-        <table>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
             <tr> 
                 <td>
                     <label>Nom</label>
@@ -28,12 +30,30 @@
                     <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
                 </td>
                 <td>
-                    <label>Prenom</label>
-                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
+                    <label>Date de naissance</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.date_naissance_client">
                 </td>
                 <td>
-                    <label>Prenom</label>
-                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
+                    <label>Téléphone</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.telephone_client">
+                </td>
+            </tr>
+            <tr> 
+                <td>
+                    <label>Adresse</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.adresse">
+                </td>
+                <td>
+                    <label>Profession</label>
+                    <input type="text" name="nom_client" form="my_form" ng-model="datas.client.profession">
+                </td>
+                <td>
+                    <label>Mail</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.mail">
+                </td>
+                <td>
+                    <label>Date de création</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.date_creation_client">
                 </td>
             </tr>
         </table>
