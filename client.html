@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr" ng-app="Madera">
+<head>
+  <meta charset="utf-8">
+  <title>Madera</title>
+  <link rel="stylesheet" href="lib/normalize.css">
+
+  <link rel="stylesheet" href="lib/bootstrap.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="lib/angular.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body>
+    <div ng-include="'navbar.html'"></div>
+    <div class="container" ng-app="Madera" ng-controller="formCtrl">
+        <h1>Client</h1>
+        <form method="GET" id="my_form"></form>
+        <table>
+            <tr>
+                <td>
+                    <label>Nom</label>
+                    <input type="text" name="nom_client" form="my_form" ng-model="datas.client.nom_client">
+                </td>
+                <td>
+                    <label>Prenom</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
+                </td>
+                <td>
+                    <label>Prenom</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
+                </td>
+                <td>
+                    <label>Prenom</label>
+                    <input type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
+                </td>
+            </tr>
+        </table>
+        <button type="button" form="my_form">ok</button>
+
+    </div>
+
+</body>
+</html>

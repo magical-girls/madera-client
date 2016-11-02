@@ -43,4 +43,12 @@ angular
     $http.get("listeDevis.json").then(function(response) {
       $scope.datas = response.data;
       });
-  });
+  })
+
+  // Formulaire client
+    .controller('formCtrl', function($scope, $http) {
+      $http.get("client.json").then(function(response) {
+          $scope.datas = response.data;
+      });
+       console.log("test");
+    });

@@ -1,0 +1,21 @@
+{
+    "client": {
+        "nom_client": "1",
+        "prenom_client": "jean",
+        "date_naissance_client": "un pigeon",
+        "telephone_client": "0660825966",
+        "adresse": "02/01/2016",
+        "profession": "Ouvreur d'huître profesionnel",
+        "mail": "gege@live.fr",
+        "date_creation_client": "01/01/2016"
+    },
+    "commercial": {
+        "nom_commercial":"2",
+        "matricule":"jacques",
+        "mail_commercial":"jaja@gmail.com",
+        "telephone_commercial":"0654856977",
+        "date_modif":"03/01/2016",
+        "etat":"en cours",
+        "date_creation_devis": "05/12/2010"
+    }
+}
