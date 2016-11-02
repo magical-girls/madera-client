@@ -25,42 +25,42 @@
           <table class="table">
             <thead>
               <tr>
-                <td>
+                <th>
                   <a href="#" ng-click="sortType = 'num_devis'">N° Devis
                     <span ng-show="sortType == 'num_devis'  && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
                     <span ng-show="sortType == 'num_devis'  && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
                   </a>
-                </td>
-                <td>
+                </th>
+                <th>
                   <a href="#" ng-click="sortType = 'nom_commercial'">Commercial
                      <span ng-show="sortType == 'nom_commercial' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
                      <span ng-show="sortType == 'nom_commercial' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
                    </a>
-                 </td>
-                <td>
+                 </th>
+                <th>
                   <a href="#" ng-click="sortType = 'nom_client'">Client
                      <span ng-show="sortType == 'nom_client' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
                      <span ng-show="sortType == 'nom_client' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
                    </a>
-                 </td>
-                <td>
+                 </th>
+                <th>
                   <a href="#" ng-click="sortType = 'date_creation'">Date de création
                      <span ng-show="sortType == 'date_creation' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
                      <span ng-show="sortType == 'date_creation' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
                    </a>
-                 </td>
-                <td>
+                 </th>
+                <th>
                   <a href="#" ng-click="sortType = 'date_modif'">Date de modification
                      <span ng-show="sortType == 'date_modif' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
                      <span ng-show="sortType == 'date_modif' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
                    </a>
-                 </td>
-                <td>
+                 </th>
+                <th>
                   <a href="#" ng-click="sortType = 'data.etat'">Avancement
                      <span ng-show="sortType == 'etat' && !sortReverse" ng-click="sortReverse = true" class="glyphicon glyphicon-triangle-bottom"></span>
                      <span ng-show="sortType == 'etat' && sortReverse" ng-click="sortReverse = false" class="glyphicon glyphicon-triangle-top"></span>
                    </a>
-                 </td>
+                 </th>
               </tr>
               <tbody>
                 <tr ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
