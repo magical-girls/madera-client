@@ -34,22 +34,44 @@ angular
     }
   }])
   ////////////////////////  list controler  ///////////////////////////////////////////////////////
-  .controller('devisCtrl', function ($scope, $http) {
+.controller('devisCtrl', function($scope, $http,$modal) {
     $scope.sortType = 'num_devis'; // tri sur le num_devis par defaut
     $scope.sortReverse = false;  // sens du tri par defaut
     $scope.searchText = ''; // entrée saisie pour filtre
-    $http.get("listeDevis.json").then(function (response) {
+  $http.get("liste_devis.json").then(function(response) {
       $scope.datas = response.data;
     });
 
     $scope.confirmDelete = function () {
-      var message = "Etes-vous certain de vouloir supprimer ce devis?";
-      if (message && !confirm(message)) {
-        console.log("pas supprimer");
-      } else {
-        console.log(" supprimer");
+    var dialogOpts = {
+    backdrop: true,
+    keyboard: true,
+    templateUrl: 'modal_sup.html', // Url du template HTML
+    controller: ['$scope', '$modalInstance','scopeParent', 'id',
+        function($scope, $modalInstance,scopeParent,id) { //Controller de la fenêtre. Il doit prend en paramètre tous les élèments du "resolve".
+            $scope.delete = function() {
+              //Suppression du devis
+              //scopeParent.delete(id);
+              $modalInstance.close(); //on ferme le modal
+            };
+            $scope.cancel = function() {
+            // Appel à la fonction d'annulation.
+            $modalInstance.dismiss('cancel');
+            };
+        }
+    ],
+    resolve: {
+        scopeParent: function() {
+            return $scope; //On passe à la fenêtre modal une référence vers le scope parent.
+        },
+        id: function(){
+            return $scope.id; // On passe en paramètre l'id de l'élément à supprimer.
+        }
       }
-    };
+};
+ //Ouverture de la fenêtre
+$modal.open(dialogOpts);
+  };
 
     $scope.getAvancementColor = function (input) {
       /*if (input == "en attente") {
@@ -103,6 +125,7 @@ angular
         return "greenFont glyphicon glyphicon-ok";
       }
     }
+
     $scope.oneAtATime = false;
   })
   .directive("test", function () {
