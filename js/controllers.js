@@ -96,7 +96,7 @@ $modal.open(dialogOpts);
 
   // Formulaire client
   .controller('formCtrl', function ($scope, $http) {
-    $http.get("client.json").then(function (response) {
+    $http.get("devis.json").then(function (response) {
       $scope.datas = response.data;
     });
     console.log("test");
