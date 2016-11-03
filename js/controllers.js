@@ -72,7 +72,7 @@ angular
     $scope.getIconValidator = function (input) {
       var result = true;
       for (var i = 0 ; i < input.length ; i++){
-        if (input[i] == undefined || input[i] == ""){ 
+        if (input[i] == undefined || input[i] == ""){
           result = false;
         }
       }
@@ -85,7 +85,7 @@ angular
     }
 
     $scope.oneAtATime = false;
-
+})
 .directive("test", function() {
   return {
     // A = attribut, C= classe, E = element
@@ -98,4 +98,3 @@ angular
     }
   }
   });
-
