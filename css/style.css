@@ -8,10 +8,26 @@
     color: seagreen;
 }
 
+.orangeFont{
+    color: darkorange;
+}
+
+.greyFont{
+    color:gray;
+}
+
+.blueFont{
+    color: cornflowerblue;
+}
+
 .panel-default > .panel-heading {
     background-color: #fff !important;
 }
 
 .noOutline{
     outline: 0;
+}
+
+.bold{
+    font-weight: bold;
 }
