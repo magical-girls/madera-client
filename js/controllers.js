@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular
-  .module('Madera', [])
+  .module('Madera', ['ui.bootstrap','ngSanitize','angular.filter'])
   /////////////////////////////// Sign in controller  ///////////////////////////////////////////////////
   .controller('connectCtrl', ['$scope', function($scope) {
     var user ="user";
@@ -51,4 +51,8 @@ angular
           $scope.datas = response.data;
       });
        console.log("test");
+
+$scope.oneAtATime = true;
+
     });
+

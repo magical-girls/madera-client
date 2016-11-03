@@ -11,10 +11,11 @@
     },
     "commercial": {
         "nom_commercial":"2",
-        "matricule":"jacques",
+        "prenom_commercial": "jacques",
+        "matricule":"12456789",
         "mail_commercial":"jaja@gmail.com",
         "telephone_commercial":"0654856977",
-        "date_modif":"03/01/2016",
+        "date_derniere_modif":"03/01/2016",
         "etat":"en cours",
         "date_creation_devis": "05/12/2010"
     }
