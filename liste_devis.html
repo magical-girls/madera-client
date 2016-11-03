@@ -72,7 +72,7 @@
                   <td>{{data.nom_client}}</td>
                   <td>{{data.date_creation}}</td>
                   <td>{{data.date_modif}}</td>
-                  <td test class="reussi"><strong>{{data.etat}}</strong></td>
+                  <td test ng-class="getAvancementColor(data.etat)">{{data.etat}}</td>
                   <td><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></td>
                   <td><a href="#" ng-click="confirmDelete()"><span class="glyphicon glyphicon-trash"></span></a></td>
                   <td><a href="#"><span class="glyphicon glyphicon-print"></span></a></td>
