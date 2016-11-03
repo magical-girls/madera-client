@@ -1,1 +1,17 @@
 /* app css stylesheet */
+
+.redFont{
+    color: red;
+}
+
+.greenFont{
+    color: seagreen;
+}
+
+.panel-default > .panel-heading {
+    background-color: #fff !important;
+}
+
+.noOutline{
+    outline: 0;
+}

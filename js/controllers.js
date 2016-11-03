@@ -68,9 +68,9 @@ angular
         }
       }
       if (result == false){
-         return "glyphicon glyphicon-remove";
+         return "redFont glyphicon glyphicon-remove";
        } else {
-        return "glyphicon glyphicon-ok";
+        return "greenFont glyphicon glyphicon-ok";
        }
 
     }
