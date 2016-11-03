@@ -26,14 +26,12 @@ angular
     }])
 
   /////////////////////// Header controler (navbar) ////////////////////////////////////////////////
-
-
-.controller('HeaderController', ['$scope', function($scope) {
-  function HeaderController($scope, $location){
-    $scope.isActive = function (viewLocation) {
+  .controller('HeaderController', ['$scope', function($scope) {
+    function HeaderController($scope, $location){
+      $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
-    };
-  }
+      };
+    }
 }])
   ////////////////////////  list controler  ///////////////////////////////////////////////////////
   .controller('customersCtrl', function($scope, $http) {
