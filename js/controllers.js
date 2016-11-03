@@ -3,14 +3,14 @@
 /* Controllers */
 
 angular
-  .module('Madera', ['ui.bootstrap','ngSanitize','angular.filter'])
+  .module('Madera', ['ui.bootstrap', 'ngSanitize', 'angular.filter'])
 /////////////////////////////// Sign in controller  ///////////////////////////////////////////////////
 .controller('connectCtrl', ['$scope', function($scope) {
   var user ="user";
   var pass = "pass";
   console.log("coucou");
   $scope.checkUser= function () {
-    // Récupération de variables, voir : http://www.w3schools.com/angular/tryit.asp?filename=try_ng_form
+      // Récupération de variables, voir : http://www.w3schools.com/angular/tryit.asp?filename=try_ng_form
     console.log("name : " + $scope.login);
     console.log("pass : " + $scope.pass);
     //var urlHor = "http://app-f84c6d3d-ce9d-4499-a234-4cfcdd148e5e.cleverapps.io/user/auth";
@@ -29,10 +29,10 @@ angular
 .controller('HeaderController', ['$scope', function($scope) {
   function HeaderController($scope, $location){
     $scope.isActive = function (viewLocation) {
-      return viewLocation === $location.path();
+        return viewLocation === $location.path();
     };
   }
-}])
+  }])
 ////////////////////////  list controler  ///////////////////////////////////////////////////////
 .controller('devisCtrl', function($scope, $http) {
   $scope.sortType     = 'num_devis'; // tri sur le num_devis par defaut
@@ -59,8 +59,32 @@ angular
   });
   console.log("test");
 
-$scope.oneAtATime = true;
- })
+    $scope.isEmpty = function (input) {
+      console.log(input[0]);
+      if (input[0] != undefined) {
+        return true;
+      } else {
+        return false;
+      }
+      //return true; //$scope.data && $scope.data.client && $scope.data.client.adhesion.dateDepart && $scope.data.client.adhesion.dateDepart.substring(6) == $scope.currentYear;
+    }
+
+    $scope.getIconValidator = function (input) {
+      var result = true;
+      for (var i = 0 ; i < input.length ; i++){
+        if (input[i] == undefined || input[i] == ""){ 
+          result = false;
+        }
+      }
+      if (result == false){
+         return "glyphicon glyphicon-remove";
+       } else {
+        return "glyphicon glyphicon-ok";
+       }
+
+    }
+
+    $scope.oneAtATime = false;
 
 .directive("test", function() {
   return {
@@ -73,4 +97,5 @@ $scope.oneAtATime = true;
       }
     }
   }
-});
+  });
+
