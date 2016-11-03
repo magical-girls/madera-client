@@ -26,8 +26,8 @@ angular
   }])
 
   /////////////////////// Header controler (navbar) ////////////////////////////////////////////////
-  .controller('HeaderController', ['$scope', function ($scope) {
-    function HeaderController($scope, $location) {
+  .controller('navbarController', ['$scope', function ($scope) {
+    function navbarController($scope, $location) {
       $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
       };
@@ -76,16 +76,16 @@ $modal.open(dialogOpts);
     $scope.getAvancementColor = function (input) {
       /*if (input == "en attente") {
         return "orangeFont";
-      } 
+      }
       else*/ if (input == "refusé") {
         return "bold redFont";
       }
       /*else if (input == "validé") {
         return "greyFont";
-      }  
+      }
       else if (input == "en cours") {
         return "blueFont";
-      }*/ 
+      }*/
       else if (input == "terminé") {
         return "bold greenFont";
       }
