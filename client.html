@@ -19,109 +19,135 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.4/angular-filter.js"></script>
 
+	<style>
+		input.ng-invalid {
+			border-color: red;
+		}
+		
+		input.ng-valid {
+			border-color: lightgreen;
+		}
+	</style>
+
 </head>
 
 <body>
 	<div ng-include="'_navbar.html'"></div>
 	<div class="container" ng-app="Madera" ng-controller="formCtrl">
+
 		<form method="GET" id="my_form"></form>
 		<div class="row">
 			<div class="col-md-12">
 				<accordion close-others="oneAtATime">
-					<accordion-group is-open="group.isOpen">
+					<accordion-group ng-init="isOpen = true" is-open="isOpen">
 						<accordion-heading>
 							<!-- Client -->
-							<h2>1. Création/chargement du Client <span class="glyphicon glyphicon-ok"></span></h2>
+							<h2>1. Création/chargement du Client
+								<span ng-class="getIconValidator([datas.client.nom_client, datas.client.prenom_client, datas.client.date_naissance_client, datas.client.telephone_client, datas.client.adresse, datas.client.profession, datas.client.mail, datas.client.date_creation_client])"></span>
+							</h2>
 						</accordion-heading>
 						<table class="table">
 							<tr>
 								<td>
 									<label>Nom</label>
-									<input type="text" name="nom_client" form="my_form" ng-model="datas.client.nom_client">
+									<input required required type="text" name="nom_client" form="my_form" ng-model="datas.client.nom_client">
 								</td>
 								<td>
 									<label>Prenom</label>
-									<input type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
+									<input required type="text" name="prenom_client" form="my_form" ng-model="datas.client.prenom_client">
 								</td>
 								<td>
 									<label>Date de naissance</label>
-									<input type="text" name="prenom_client" form="my_form" ng-model="datas.client.date_naissance_client">
+									<input required type="text" name="prenom_client" form="my_form" ng-model="datas.client.date_naissance_client">
 								</td>
 								<td>
 									<label>Téléphone</label>
-									<input type="text" name="prenom_client" form="my_form" ng-model="datas.client.telephone_client">
+									<input required type="text" name="prenom_client" form="my_form" ng-model="datas.client.telephone_client">
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<label>Adresse</label>
-									<input type="text" name="prenom_client" form="my_form" ng-model="datas.client.adresse">
+									<input required type="text" name="prenom_client" form="my_form" ng-model="datas.client.adresse">
 								</td>
 								<td>
 									<label>Profession</label>
-									<input type="text" name="nom_client" form="my_form" ng-model="datas.client.profession">
+									<input required type="text" name="nom_client" form="my_form" ng-model="datas.client.profession">
 								</td>
 								<td>
 									<label>Mail</label>
-									<input type="text" name="prenom_client" form="my_form" ng-model="datas.client.mail">
+									<input required type="text" name="prenom_client" form="my_form" ng-model="datas.client.mail">
 								</td>
 								<td>
 									<label>Date de création</label>
-									<input type="text" name="prenom_client" form="my_form" ng-model="datas.client.date_creation_client">
+									<input required type="text" name="prenom_client" form="my_form" ng-model="datas.client.date_creation_client">
 								</td>
 							</tr>
 						</table>
 					</accordion-group>
-					<!-- Commercial -->
-					<h2>2. Définition/choix du Commercial <span class="glyphicon glyphicon-ok"></span></h2>
-					<table class="table">
-						<tr>
-							<td>
-								<label>Nom</label>
-								<input type="text" name="nom_commercial" form="my_form" ng-model="datas.commercial.nom_commercial">
-							</td>
-							<td>
-								<label>Prenom</label>
-								<input type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.prenom_commercial">
-							</td>
-							<td>
-								<label>Matricule</label>
-								<input type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.matricule">
-							</td>
-							<td>
-								<label>Mail</label>
-								<input type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.mail_commercial">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label>Téléphone</label>
-								<input type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.telephone_commercial">
-							</td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-					<!-- Devis -->
-					<h2>3. Saisie du devis <span class="glyphicon glyphicon-remove"></span></h2>
-					<table class="table">
-						<tr>
-							<td>
-								<label>Création du devis</label>
-								<input type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.date_creation_devis">
-							</td>
-							<td>
-								<label>Dernière modification</label>
-								<input type="text" name="nom_commercial" form="my_form" ng-model="datas.commercial.date_derniere_modif">
-							</td>
-							<td>
-								<label>Etat du devis</label>
-								<input type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.etat">
-							</td>
-							<td></td>
-						</tr>
-					</table>
+					<accordion-group>
+						<!-- Commercial -->
+						<accordion-heading>
+							<h2>2. Définition/choix du Commercial
+							<span ng-class="getIconValidator([datas.commercial.nom_commercial, datas.commercial.prenom_commercial, datas.commercial.matricule, datas.commercial.mail_commercial, datas.commercial.telephone_commercial])"></span>
+							</h2>
+						</accordion-heading>
+						<table class="table">
+							<tr>
+								<td>
+									<label>Nom</label>
+									<input required type="text" name="nom_commercial" form="my_form" ng-model="datas.commercial.nom_commercial">
+								</td>
+								<td>
+									<label>Prenom</label>
+									<input required type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.prenom_commercial">
+								</td>
+								<td>
+									<label>Matricule</label>
+									<input required type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.matricule">
+								</td>
+								<td>
+									<label>Mail</label>
+									<input required type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.mail_commercial">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>Téléphone</label>
+									<input required type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.telephone_commercial">
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</accordion-group>
+					<accordion-group>
+						<!-- <accordion-group is-open="group.isOpen.Devis"> -->
+						<accordion-heading>
+							<!-- Devis -->
+							<h2>3. Saisie du devis
+								<span ng-class="getIconValidator([datas.commercial.date_creation_devis, datas.commercial.date_derniere_modif, datas.commercial.etat])"></span>
+							</h2>
+						</accordion-heading>
+						<table class="table">
+							<tr>
+								<td>
+									<label>Création du devis</label>
+									<input required type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.date_creation_devis">
+								</td>
+								<td>
+									<label>Dernière modification</label>
+									<input required type="text" name="nom_commercial" form="my_form" ng-model="datas.commercial.date_derniere_modif">
+								</td>
+								<td>
+									<label>Etat du devis</label>
+									<input required type="text" name="prenom_commercial" form="my_form" ng-model="datas.commercial.etat">
+								</td>
+								<td></td>
+							</tr>
+						</table>
+					</accordion-group>
 				</accordion>
 			</div>
 		</div>

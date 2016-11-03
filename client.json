@@ -1,6 +1,6 @@
 {
     "client": {
-        "nom_client": "1",
+        "nom_client": "",
         "prenom_client": "jean",
         "date_naissance_client": "un pigeon",
         "telephone_client": "0660825966",
