@@ -5,20 +5,37 @@
   <title>Madera</title>
   <link rel="stylesheet" href="lib/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
-  <script src="lib/angular.js"></script>
-  <script src="js/controllers.js"></script>
   <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.4/angular-filter.js"></script>
 </head>
 <body ng-controller="connectCtrl">
   <div class="container" >
     <div class="row">
-      <div class="col-md-offset-3  col-md-6">
+      <div class="col-md-8">
         <!--Sidebar content-->
-        <div>
-          Login: <input ng-model="login">
-          Mot de passe: <input ng-model="pass">
-          <button class="btn btn-default btn-sm" ng-click="checkUser()">Connexion</button>
-        </div>
+        <form  class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="login">Utilisateur</label>
+            <div class="col-sm-10">
+              <input class="form-control" ng-model="login">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="pass">Mot de passe</label>
+            <div class="col-sm-10">
+              <input class="form-control" ng-model="pass">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Connexion</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
