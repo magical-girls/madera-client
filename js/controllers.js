@@ -7,7 +7,6 @@
   .module('Madera', ['ui.bootstrap', 'ngSanitize', 'angular.filter','ngRoute'])
   .config(['$routeProvider',
     function($routeProvider) {
-
         // Système de routage
         $routeProvider
         .when('/index', {
