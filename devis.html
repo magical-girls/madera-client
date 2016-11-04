@@ -6,7 +6,7 @@
 				<accordion-group ng-init="isOpen = true" is-open="isOpen">
 					<accordion-heading>
 						<!-- Client -->
-						<h2>1. Création/chargement du Client
+						<h2>1. Création/édition du Client
 							<span ng-class="getIconValidator([datas.client.nom_client, datas.client.prenom_client, datas.client.date_naissance_client, datas.client.telephone_client, datas.client.adresse, datas.client.profession, datas.client.mail, datas.client.date_creation_client])"></span>
 						</h2>
 					</accordion-heading>
@@ -52,7 +52,7 @@
 				<accordion-group>
 					<!-- Commercial -->
 					<accordion-heading>
-						<h2>2. Définition/choix du Commercial
+						<h2>2. Sélection du Commercial
 							<span ng-class="getIconValidator([datas.commercial.nom_commercial, datas.commercial.prenom_commercial, datas.commercial.matricule, datas.commercial.mail_commercial, datas.commercial.telephone_commercial])"></span>
 						</h2>
 					</accordion-heading>
@@ -186,7 +186,8 @@
 							</td>-->
 							<td>
 								<!--<button>Editer</button>-->
-								<button ng-click="removeChoixCatalogueRow(company.id_row)">Supprimer</button>
+								
+								<a ng-click="removeChoixCatalogueRow(company.id_row)"><span class="glyphicon glyphicon-trash"></span></a>
 							</td>
 						</tr>
 					</table>

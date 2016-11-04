@@ -183,7 +183,6 @@ angular
     // Remove row where id_row match with inputIdRow
     $scope.removeChoixCatalogueRow = function (inputIdRow) {
       var index;
-      console.log(inputIdRow);
       for (var i in $scope.choixCatalogue) {
         var id_row = $scope.choixCatalogue[i].id_row;
         if (id_row == inputIdRow) {
