@@ -37,3 +37,6 @@
   left:50%;
   transform: translate(-50%,-50%);
 }
+.form-horizontal .control-label.text-left{
+    text-align: left;
+}
