@@ -10,23 +10,23 @@
         // Système de routage
         $routeProvider
         .when('/index', {
-            templateUrl: '../index.html',
+            templateUrl: 'index.html',
             controller: 'connectCtrl'
         })
         .when('/accueil', {
-            templateUrl: '../accueil.html',
+            templateUrl: 'accueil.html',
             controller: 'accueilCtrl'
         })
-        .when('/list_devis', {
-            templateUrl: '../liste_devis.html',
+        .when('/liste_devis', {
+            templateUrl: 'liste_devis.html',
             controller: 'listDevisCtrl'
         })
-        .when('edit_devis', {
-            templateUrl: '../devis.html',
+        .when('/edit_devis', {
+            templateUrl: 'devis.html',
             controller: 'formCtrl'
         })
         .when('/catalogue', {
-            templateUrl: '../list_catalogue.html',
+            templateUrl: 'list_catalogue.html',
             controller: 'catalogueCtrl'
         })
         .otherwise({
@@ -173,5 +173,9 @@ $modal.open(dialogOpts);
   })
   //////////////////////// sub menu catalogue controler/////////////////
   .controller('submenuCtrl', ['$scope', function ($scope) {
+
+  }])
+  //////////////////////// page d'accueil /
+  .controller('accueilCtrl', ['$scope', function ($scope) {
 
   }]);
