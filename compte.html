@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <!-- Si on appuie sur le bouton modifier on affiche le formualire -->
+    <form class="form-horizontal">
+      <legend>{{users.prenom}} - {{users.nom}}
+        <div class="pull-right">N° {{users.matricule}}
+          <a ng-click="modifier=true" ng-show="!modifier" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+        </div>
+      </legend>
+      <div ng-show="modifier">
+        <div class="form-group">
+          <label class="col-md-3 control-label " for="mail">Email: </label>
+          <div class="col-sm-8">
+            <input class="form-control" type="text" ng-model="mail" value="{{users.mail}}" placeholder="{{users.mail}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="Tel">Tel: </label>
+          <div class="col-sm-8">
+            <input class="form-control" ng-model="tel" type="text" placeholder="{{users.telephone}}" value="{{users.telephone}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="pass">Mot de passe</label>
+          <div class="col-sm-8">
+            <input class="form-control" type="password" ng-model="pass1">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="pass">Confirmer le mot de passe</label>
+          <div class="col-sm-8">
+            <input class="form-control"  type="password" ng-model="pass2">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-8">
+            <input class="btn btn-primary pull-right" type="button" ng-click="verifCompte()"  ng-show="modifier" value="Confirmer">
+          </div>
+        </div>
+      </div>
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    </form>
+    <!-- Sinon on affiche un récapitulatif-->
+    <div ng-show="!modifier">
+      <b>E-mail: </b><p >{{users.mail}}</p>
+      <b>Tel: </b><p >{{users.telephone}}</p>
+    </div>
+  </div>
+</div>

@@ -29,6 +29,10 @@ angular
           templateUrl: 'list_catalogue.html',
           controller: 'catalogueCtrl'
         })
+        .when('/compte', {
+            templateUrl: 'compte.html',
+            controller: 'compteCtrl'
+        })
         .otherwise({
           redirectTo: '/accueil'
         });
@@ -38,22 +42,22 @@ angular
   .controller('connectCtrl', ['$scope', '$ngRoute', function ($scope, $ngRoute) {
     var user = "user";
     var pass = "pass";
-    console.log("coucou");
+    var alert =[];
     $scope.checkUser = function () {
       // Récupération de variables, voir : http://www.w3schools.com/angular/tryit.asp?filename=try_ng_form
-      console.log("name : " + $scope.login);
-      console.log("pass : " + $scope.pass);
       //var urlHor = "http://app-f84c6d3d-ce9d-4499-a234-4cfcdd148e5e.cleverapps.io/user/auth";
       console.log("user récup = " + user);
       if ($scope.login == user) {
         if ($scope.pass == pass) {
           console.log("connexion ok");
-
         }
       } else {
-        console.log("Aucun utilisateur de ce nom la");
+        $scope.alerts.push({type: 'danger', msg: 'Identifiants incorrects'});
       }
     };
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
   }])
 
   /////////////////////// Header controler (navbar) ////////////////////////////////////////////////
@@ -69,7 +73,7 @@ angular
     $scope.sortType = 'num_devis'; // tri sur le num_devis par defaut
     $scope.sortReverse = false;  // sens du tri par defaut
     $scope.searchText = ''; // entrée saisie pour filtre
-    $http.get("liste_devis.json").then(function (response) {
+    $http.get("liste_devis.json").then(function(response) {
       $scope.datas = response.data;
     });
 
@@ -131,7 +135,6 @@ angular
     $http.get("devis.json").then(function (response) {
       $scope.datas = response.data;
     });
-
     $scope.isEmpty = function (input) {
       console.log(input[0]);
       if (input[0] != undefined) {
@@ -176,7 +179,6 @@ angular
       link: function (scope, element, attrs) {
         if (attrs.class == "reussi") {
           element.addClass('text-success');
-          //$compile(element)(scope);
         }
       }
     }
@@ -188,4 +190,30 @@ angular
   //////////////////////// page d'accueil /
   .controller('accueilCtrl', ['$scope', function ($scope) {
 
+  }])
+  /////////////////////// Compte controler ///////////////////////////
+  .controller('compteCtrl', ['$scope', '$http', function ($scope, $http) {
+    var modifier=false;
+    var errMsg="";
+    $scope.alerts = []; //Contiendra toutes les alerts à afficher
+    $http.get("compte.json").then(function (response) {
+      $scope.users = response.data;
+    });
+      $scope.verifCompte = function () { //pour l'instant on teste seulement que les deux mots de passe sont identiques
+        var ok=false;
+        if ($scope.pass1 != $scope.pass2) {
+           $scope.alerts.push({type: 'danger', msg: 'Mots de passe incorrect'}); // on crée une alert erreur
+        }else{
+          ok=true;
+        }
+        if(ok){
+          //faire les changement dans la bdd
+          modifier=false; // changement effectués, on affiche plus le formulaire
+          $scope.alerts.push({type: 'success', msg: 'Changement effectués'}); // on crée une alert succes
+        }
+      };
+      // pour fermer les alerts
+      $scope.closeAlert = function(index) {
+          $scope.alerts.splice(index, 1);
+        };
   }]);
