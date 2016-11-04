@@ -2,10 +2,41 @@
 
 /* Controllers */
 
-angular
-  .module('Madera', ['ui.bootstrap', 'ngSanitize', 'angular.filter'])
+
+  angular
+  .module('Madera', ['ui.bootstrap', 'ngSanitize', 'angular.filter','ngRoute'])
+  .config(['$routeProvider',
+    function($routeProvider) {
+
+        // Système de routage
+        $routeProvider
+        .when('/index', {
+            templateUrl: '../index.html',
+            controller: 'connectCtrl'
+        })
+        .when('/accueil', {
+            templateUrl: '../accueil.html',
+            controller: 'accueilCtrl'
+        })
+        .when('/list_devis', {
+            templateUrl: '../liste_devis.html',
+            controller: 'listDevisCtrl'
+        })
+        .when('edit_devis', {
+            templateUrl: '../devis.html',
+            controller: 'formCtrl'
+        })
+        .when('/catalogue', {
+            templateUrl: '../list_catalogue.html',
+            controller: 'catalogueCtrl'
+        })
+        .otherwise({
+           redirectTo: '/accueil'
+       });
+    }
+])
   /////////////////////////////// Sign in controller  ///////////////////////////////////////////////////
-  .controller('connectCtrl', ['$scope', function ($scope) {
+  .controller('connectCtrl', ['$scope', '$ngRoute', function ($scope, $ngRoute) {
     var user = "user";
     var pass = "pass";
     console.log("coucou");
@@ -18,6 +49,7 @@ angular
       if ($scope.login == user) {
         if ($scope.pass == pass) {
           console.log("connexion ok");
+
         }
       } else {
         console.log("Aucun utilisateur de ce nom la");
@@ -33,8 +65,8 @@ angular
       };
     }
   }])
-  ////////////////////////  list controler  ///////////////////////////////////////////////////////
-.controller('devisCtrl', function($scope, $http,$modal) {
+  //////////////////////// devis list controler  ///////////////////////////////////////////////////////
+.controller('listDevisCtrl', function($scope, $http,$modal) {
     $scope.sortType = 'num_devis'; // tri sur le num_devis par defaut
     $scope.sortReverse = false;  // sens du tri par defaut
     $scope.searchText = ''; // entrée saisie pour filtre
@@ -139,4 +171,8 @@ $modal.open(dialogOpts);
         }
       }
     }
-  });
+  })
+  //////////////////////// sub menu catalogue controler/////////////////
+  .controller('submenuCtrl', ['$scope', function ($scope) {
+
+  }]);
