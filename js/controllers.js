@@ -42,21 +42,22 @@
   .controller('connectCtrl', ['$scope', '$ngRoute', function ($scope, $ngRoute) {
     var user = "user";
     var pass = "pass";
+    var alert =[];
     $scope.checkUser = function () {
       // Récupération de variables, voir : http://www.w3schools.com/angular/tryit.asp?filename=try_ng_form
-      console.log("name : " + $scope.login);
-      console.log("pass : " + $scope.pass);
       //var urlHor = "http://app-f84c6d3d-ce9d-4499-a234-4cfcdd148e5e.cleverapps.io/user/auth";
       console.log("user récup = " + user);
       if ($scope.login == user) {
         if ($scope.pass == pass) {
           console.log("connexion ok");
-
         }
       } else {
-        console.log("Aucun utilisateur de ce nom la");
+        $scope.alerts.push({type: 'danger', msg: 'Identifiants incorrects'});
       }
     };
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+      };
   }])
 
   /////////////////////// Header controler (navbar) ////////////////////////////////////////////////
@@ -200,7 +201,7 @@ $modal.open(dialogOpts);
           $scope.alerts.push({type: 'success', msg: 'Changement effectués'}); // on crée une alert succes
         }
       };
-      // pour fermer les alerts 
+      // pour fermer les alerts
       $scope.closeAlert = function(index) {
           $scope.alerts.splice(index, 1);
         };
