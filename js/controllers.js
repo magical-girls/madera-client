@@ -168,14 +168,16 @@ angular
 
     $http.get("catalogue.json").then(function (response) {
       $scope.catalogue = response.data;
-      $scope.catalogue.push({"id": "5","nom_gamme": "Gamme 2" });
+      //$scope.catalogue.push({"id": "5","nom_gamme": "Gamme 2" });
     });
 
-    $scope.addGammeRow = function(inputName, inputEmployees, inputHeadoffice){
-      $scope.catalogue.push({ 'id':inputName, 'nom_gamme': inputEmployees});
-      $scope.name='';
+    $scope.choixCatalogue = [];
+
+    $scope.addChoixCatalogueRow = function(inputNomGamme, inputNomModule, inputNomComposant){
+      $scope.choixCatalogue.push({'nom_gamme':inputNomGamme, 'nom_module': inputNomModule, 'nom_composant':inputNomComposant});
+      /*$scope.name='';
       $scope.employees='';
-      $scope.headoffice='';
+      $scope.headoffice='';*/
     }
 
   })

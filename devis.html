@@ -139,34 +139,32 @@
 						</select>						
 					</div>
 					-->
-
 					<table class="table">
 						<tr>
 							<td>
 								<label>Choix de la gamme : </label>
 								<select ng-model="select.gamme">
-									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
+									<option ng-repeat="x in catalogue.gamme" value={{x.nom_gamme}}>{{x.nom_gamme}}</option>
 								</select>
 							</td>
 							<td>
 								<label>Choix du module : </label>
 								<select ng-model="select.module">
-									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
+									<option ng-repeat="x in catalogue.module" value={{x.nom_module}}>{{x.nom_module}}</option>
 								</select>
 							</td>
 							<td>
 								<label>Choix des composants : </label>
 								<select ng-model="select.composant">
-									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
+									<option ng-repeat="x in catalogue.composant" value={{x.nom_composant}}>{{x.nom_composant}}</option>
 								</select>
 							</td>
 							<td>
-								<button ng-click="addGammeRow(select.gamme, select.module, select.composant)">Ajouter</button>
+								<button ng-click="addChoixCatalogueRow(select.gamme, select.module, select.composant)">Ajouter</button>
 								<button>Annuler</button>
 							</td>
 						</tr>
 					</table>
-					{{catalogue}}<br/>
 					Vos choix :
 					<table class="table">
 						<tr>
@@ -176,17 +174,18 @@
 							<th>Composant(s)</th>
 							<th></th>
 						</tr>
-						<tr ng-repeat="company in catalogue">
-							<td>1</td>
-							<td>{{company.id}}</td>
+						<tr ng-repeat="company in choixCatalogue">
+							<td>{{$index+1}}</td>
 							<td>{{company.nom_gamme}}</td>
-							<td>
+							<td>{{company.nom_module}}</td>
+							<td>{{company.nom_composant}}</td>
+							<!--<td>
 								<select ng-model="select.composant">
 									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
 								</select>
-							</td>
+							</td>-->
 							<td>
-								<button>Editer</button>
+								<!--<button>Editer</button>-->
 								<button>Supprimer</button>
 							</td>
 						</tr>

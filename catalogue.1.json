@@ -1,0 +1,42 @@
+[{
+    "id": "1",
+    "nom_gamme": "Gamme 1",
+    "module": [
+        {
+        "nom_module" : "Module 1",
+        "description_module" : "Description module 1"
+        },
+        {
+        "nom_module" : "Module 2",
+        "description_module" : "Description module 2"
+        }
+    ]
+},
+{
+    "id": "2",
+    "nom_gamme": "Gamme 2",
+    "module": [
+        {
+        "nom_module" : "Module 1",
+        "description_module" : "Description module 1"
+        },
+        {
+        "nom_module" : "Module 2",
+        "description_module" : "Description module 2"
+        }
+    ]
+},
+{
+    "id": "3",
+    "nom_gamme": "Gamme 3",
+    "module": [
+        {
+        "nom_module" : "Module 1",
+        "description_module" : "Description module 1"
+        },
+        {
+        "nom_module" : "Module 2",
+        "description_module" : "Description module 2"
+        }
+    ]
+}]
