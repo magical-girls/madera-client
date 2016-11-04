@@ -9,7 +9,7 @@
 {
   "num_devis":"2",
   "nom_commercial":"jacques",
-  "nom_client":"un imbécile",
+  "nom_client":"un ananas",
   "dateCreation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"terminé"
@@ -17,7 +17,7 @@
 {
   "num_devis":"3",
   "nom_commercial":"jacques",
-  "nom_client":"un imbécile",
+  "nom_client":"une pomme",
   "dateCreation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"validé"
@@ -25,7 +25,7 @@
 {
   "num_devis":"4",
   "nom_commercial":"jacques",
-  "nom_client":"un imbécile",
+  "nom_client":"un artichaut",
   "dateCreation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"en attente"
@@ -33,7 +33,7 @@
 {
   "num_devis":"5",
   "nom_commercial":"jacques",
-  "nom_client":"un imbécile",
+  "nom_client":"une pizza",
   "dateCreation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"terminé"
@@ -41,7 +41,7 @@
 {
   "num_devis":"6",
   "nom_commercial":"jacques",
-  "nom_client":"un imbécile",
+  "nom_client":"une cannette",
   "dateCreation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"refusé"
