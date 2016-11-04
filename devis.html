@@ -111,7 +111,7 @@
 							<td></td>
 						</tr>
 					</table>
-					
+
 					<!-- Gamme -->
 					<!--				
 					<div>
@@ -121,7 +121,7 @@
 						</select>						
 					</div>
 					-->
-					<!-- Modules --> 
+					<!-- Modules -->
 					<!--
 					<div ng-show="select.gamme == 2" class="paddingLeft50px">
 						<label> Choix d'un module : </label>
@@ -130,7 +130,7 @@
 						</select>						
 					</div>
 					-->
-					<!-- Composant --> 
+					<!-- Composant -->
 					<!--
 					<div ng-show="select.gamme2 == 2" class="paddingLeft100px">
 						<label> Choix d'un composant : </label>
@@ -146,28 +146,28 @@
 								<label>Choix de la gamme : </label>
 								<select ng-model="select.gamme">
 									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
-								</select>	
+								</select>
 							</td>
 							<td>
 								<label>Choix du module : </label>
 								<select ng-model="select.module">
 									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
-								</select>	
+								</select>
 							</td>
 							<td>
 								<label>Choix des composants : </label>
 								<select ng-model="select.composant">
 									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
-								</select>	
+								</select>
 							</td>
 							<td>
-								<button>Ajouter</button>
+								<button ng-click="addGammeRow(select.gamme, select.module, select.composant)">Ajouter</button>
 								<button>Annuler</button>
 							</td>
 						</tr>
 					</table>
-
-					Vos choix : 
+					{{catalogue}}<br/>
+					Vos choix :
 					<table class="table">
 						<tr>
 							<th>#</th>
@@ -176,18 +176,14 @@
 							<th>Composant(s)</th>
 							<th></th>
 						</tr>
-						<tr>
+						<tr ng-repeat="company in catalogue">
 							<td>1</td>
-							<td>
-								Gamme 1
-							</td>
-							<td>
-								Module 1
-							</td>
+							<td>{{company.id}}</td>
+							<td>{{company.nom_gamme}}</td>
 							<td>
 								<select ng-model="select.composant">
 									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
-								</select>	
+								</select>
 							</td>
 							<td>
 								<button>Editer</button>

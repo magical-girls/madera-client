@@ -160,7 +160,7 @@ angular
       }
     }
 
-    $scope.oneAtATime = false;
+    $scope.oneAtATime = true;
 
     $http.get("devis.json").then(function (response) {
       $scope.devis = response.data;
@@ -168,7 +168,15 @@ angular
 
     $http.get("catalogue.json").then(function (response) {
       $scope.catalogue = response.data;
+      $scope.catalogue.push({"id": "5","nom_gamme": "Gamme 2" });
     });
+
+    $scope.addGammeRow = function(inputName, inputEmployees, inputHeadoffice){
+      $scope.catalogue.push({ 'id':inputName, 'nom_gamme': inputEmployees});
+      $scope.name='';
+      $scope.employees='';
+      $scope.headoffice='';
+    }
 
   })
 
