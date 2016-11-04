@@ -30,8 +30,8 @@ angular
           controller: 'catalogueCtrl'
         })
         .when('/compte', {
-            templateUrl: 'compte.html',
-            controller: 'compteCtrl'
+          templateUrl: 'compte.html',
+          controller: 'compteCtrl'
         })
         .otherwise({
           redirectTo: '/accueil'
@@ -42,7 +42,7 @@ angular
   .controller('connectCtrl', ['$scope', '$ngRoute', function ($scope, $ngRoute) {
     var user = "user";
     var pass = "pass";
-    var alert =[];
+    var alert = [];
     $scope.checkUser = function () {
       // Récupération de variables, voir : http://www.w3schools.com/angular/tryit.asp?filename=try_ng_form
       //var urlHor = "http://app-f84c6d3d-ce9d-4499-a234-4cfcdd148e5e.cleverapps.io/user/auth";
@@ -52,12 +52,12 @@ angular
           console.log("connexion ok");
         }
       } else {
-        $scope.alerts.push({type: 'danger', msg: 'Identifiants incorrects'});
+        $scope.alerts.push({ type: 'danger', msg: 'Identifiants incorrects' });
       }
     };
-    $scope.closeAlert = function(index) {
-        $scope.alerts.splice(index, 1);
-      };
+    $scope.closeAlert = function (index) {
+      $scope.alerts.splice(index, 1);
+    };
   }])
 
   /////////////////////// Header controler (navbar) ////////////////////////////////////////////////
@@ -73,7 +73,7 @@ angular
     $scope.sortType = 'num_devis'; // tri sur le num_devis par defaut
     $scope.sortReverse = false;  // sens du tri par defaut
     $scope.searchText = ''; // entrée saisie pour filtre
-    $http.get("liste_devis.json").then(function(response) {
+    $http.get("liste_devis.json").then(function (response) {
       $scope.datas = response.data;
     });
 
@@ -131,7 +131,7 @@ angular
 
   // Formulaire client
   .controller('formCtrl', function ($scope, $http) {
-    
+
     $http.get("devis.json").then(function (response) {
       $scope.datas = response.data;
     });
@@ -173,12 +173,27 @@ angular
 
     $scope.choixCatalogue = [];
 
-    $scope.addChoixCatalogueRow = function(inputNomGamme, inputNomModule, inputNomComposant){
-      $scope.choixCatalogue.push({'nom_gamme':inputNomGamme, 'nom_module': inputNomModule, 'nom_composant':inputNomComposant});
+    $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputNomComposant) {
+      $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'nom_composant': inputNomComposant });
       /*$scope.name='';
       $scope.employees='';
       $scope.headoffice='';*/
-    }
+    };
+
+    // Remove row where id_row match with inputIdRow
+    $scope.removeChoixCatalogueRow = function (inputIdRow) {
+      var index;
+      console.log(inputIdRow);
+      for (var i in $scope.choixCatalogue) {
+        var id_row = $scope.choixCatalogue[i].id_row;
+        if (id_row == inputIdRow) {
+          index = i;
+          break;
+        }
+      }
+      $scope.choixCatalogue.splice( index, 1 );	
+
+    };
 
   })
 
@@ -203,27 +218,27 @@ angular
   }])
   /////////////////////// Compte controler ///////////////////////////
   .controller('compteCtrl', ['$scope', '$http', function ($scope, $http) {
-    var modifier=false;
-    var errMsg="";
+    var modifier = false;
+    var errMsg = "";
     $scope.alerts = []; //Contiendra toutes les alerts à afficher
     $http.get("compte.json").then(function (response) {
       $scope.users = response.data;
     });
-      $scope.verifCompte = function () { //pour l'instant on teste seulement que les deux mots de passe sont identiques
-        var ok=false;
-        if ($scope.pass1 != $scope.pass2) {
-           $scope.alerts.push({type: 'danger', msg: 'Mots de passe incorrect'}); // on crée une alert erreur
-        }else{
-          ok=true;
-        }
-        if(ok){
-          //faire les changement dans la bdd
-          modifier=false; // changement effectués, on affiche plus le formulaire
-          $scope.alerts.push({type: 'success', msg: 'Changement effectués'}); // on crée une alert succes
-        }
-      };
-      // pour fermer les alerts
-      $scope.closeAlert = function(index) {
-          $scope.alerts.splice(index, 1);
-        };
+    $scope.verifCompte = function () { //pour l'instant on teste seulement que les deux mots de passe sont identiques
+      var ok = false;
+      if ($scope.pass1 != $scope.pass2) {
+        $scope.alerts.push({ type: 'danger', msg: 'Mots de passe incorrect' }); // on crée une alert erreur
+      } else {
+        ok = true;
+      }
+      if (ok) {
+        //faire les changement dans la bdd
+        modifier = false; // changement effectués, on affiche plus le formulaire
+        $scope.alerts.push({ type: 'success', msg: 'Changement effectués' }); // on crée une alert succes
+      }
+    };
+    // pour fermer les alerts
+    $scope.closeAlert = function (index) {
+      $scope.alerts.splice(index, 1);
+    };
   }]);
