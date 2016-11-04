@@ -37,3 +37,19 @@
   left:50%;
   transform: translate(-50%,-50%);
 }
+
+input.ng-invalid {
+    border-color: red;
+}
+
+input.ng-valid {
+    border-color: lightgreen;
+}
+
+.paddingLeft50px{
+    padding-left: 50px;
+}
+
+.paddingLeft100px{
+    padding-left: 100px;
+}
