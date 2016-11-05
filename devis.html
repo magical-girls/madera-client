@@ -110,58 +110,28 @@
 							</td>
 							<td></td>
 						</tr>
-					</table>
-
-					<!-- Gamme -->
-					<!--				
-					<div>
-						<label> Choix d'une gamme : </label>
-						<select ng-model="select.gamme">
-							<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
-						</select>						
-					</div>
-					-->
-					<!-- Modules -->
-					<!--
-					<div ng-show="select.gamme == 2" class="paddingLeft50px">
-						<label> Choix d'un module : </label>
-						<select ng-model="select.gamme2">
-							<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
-						</select>						
-					</div>
-					-->
-					<!-- Composant -->
-					<!--
-					<div ng-show="select.gamme2 == 2" class="paddingLeft100px">
-						<label> Choix d'un composant : </label>
-						<select ng-model="select.gamme3">
-							<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>
-						</select>						
-					</div>
-					-->
-					<table class="table">
 						<tr>
 							<td>
-								<label>Choix de la gamme : </label>
+								<label>Gamme : </label>
 								<select ng-model="select.gamme">
-									<option ng-repeat="x in catalogue.gamme" value={{x.nom_gamme}}>{{x.nom_gamme}}</option>
+									<option ng-repeat="x in catalogue.gamme" value={{x.id_gamme}} >{{x.nom_gamme}}</option>
 								</select>
 							</td>
 							<td>
-								<label>Choix du module : </label>
+								<label>Module : </label>
 								<select ng-model="select.module">
-									<option ng-repeat="x in catalogue.module" value={{x.nom_module}}>{{x.nom_module}}</option>
+									<option ng-repeat="x in catalogue.module" value="{{x.id_module}}" ng-if="getMatchModule(select.gamme, x._id_gamme)">{{x.nom_module}}</option>
 								</select>
 							</td>
 							<td>
-								<label>Choix des composants : </label>
+								<label>Composants : </label>
 								<select ng-model="select.composant">
-									<option ng-repeat="x in catalogue.composant" value={{x.nom_composant}}>{{x.nom_composant}}</option>
+									<option ng-repeat="x in catalogue.composant" value={{x.id_composant}} ng-if="getMatchComposant(select.module, x._id_module)">{{x.nom_composant}}</option>
 								</select>
 							</td>
 							<td>
-								<button ng-click="addChoixCatalogueRow(select.gamme, select.module, select.composant)">Ajouter</button>
-								<button>Reset</button>
+								<button ng-click="addChoixCatalogueRow(select.gamme, select.module, select.composant)" ng-disabled="select.gamme == undefined || select.module == undefined || select.composant == undefined">Ajouter</button>
+								<button ng-click="">Reset</button>
 							</td>
 						</tr>
 					</table>
@@ -172,6 +142,7 @@
 							<th>Gamme</th>
 							<th>Module</th>
 							<th>Composant(s)</th>
+							<th>Prix HT</th>
 							<th></th>
 						</tr>
 						<tr ng-repeat="company in choixCatalogue">
@@ -179,6 +150,7 @@
 							<td>{{company.nom_gamme}}</td>
 							<td>{{company.nom_module}}</td>
 							<td>{{company.nom_composant}}</td>
+							<td>{{company.prix_composant_ht_euros}}</td>
 							<!--<td>
 								<select ng-model="select.composant">
 									<option ng-repeat="x in catalogue" value={{x.id}}>{{x.nom_gamme}}</option>

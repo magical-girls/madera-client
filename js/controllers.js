@@ -174,11 +174,12 @@ angular
     $scope.choixCatalogue = [];
 
     $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputNomComposant) {
-      $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'nom_composant': inputNomComposant });
-      /*$scope.name='';
-      $scope.employees='';
-      $scope.headoffice='';*/
+      $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'nom_composant': inputNomComposant, 'prix_composant_ht_euros': $scope.getComposantPrix() });
     };
+
+    $scope.getComposantPrix = function () {
+      return 100;
+    }
 
     // Remove row where id_row match with inputIdRow
     $scope.removeChoixCatalogueRow = function (inputIdRow) {
@@ -190,9 +191,44 @@ angular
           break;
         }
       }
-      $scope.choixCatalogue.splice( index, 1 );	
-
+      $scope.choixCatalogue.splice(index, 1);
     };
+
+    // Récupération de tous les modules d'une gamme
+    $scope.getMatchModule = function (inputId, inputIdGamme) {
+      //console.log($scope.catalogue.module[0]._id_gamme[0]);
+      var resultMatchModule = false;
+      for (var i = 0 ; i < inputIdGamme.length ; i++){
+        if (inputIdGamme[i] == inputId){
+          resultMatchModule = true
+        } 
+      }
+      return resultMatchModule;
+      /*
+      for (var i in $scope.catalogue.module) {
+        for (var j in $scope.catalogue.module[i]._id_gamme) {
+          var catalogueModuleId = $scope.catalogue.module[i]._id_gamme[j];
+          console.log("inputId : " + inputId + " - " + catalogueModuleId);
+          if (inputId == catalogueModuleId) {
+            console.log("match");
+            return true;
+          }
+        }
+      }
+      return false;
+      */
+    }
+
+    // Récupération de tous les composants d'un module
+    $scope.getMatchComposant = function (inputId, inputIdComposant) {
+      var resultMatchComposant = false;
+      for (var i = 0 ; i < inputIdComposant.length ; i++){
+        if (inputIdComposant[i] == inputId){
+          resultMatchComposant = true
+        } 
+      }
+      return resultMatchComposant;
+    }    
 
   })
 
