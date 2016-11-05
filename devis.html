@@ -114,13 +114,13 @@
 							<td>
 								<label>Gamme : </label>
 								<select ng-model="select.gamme">
-									<option ng-repeat="x in catalogue.gamme" value={{x.id_gamme}} >{{x.nom_gamme}}</option>
+									<option ng-repeat="x in catalogue.gamme" value={{x.id_gamme}} ng-click="select.module=null;select.composant=null">{{x.nom_gamme}}</option>
 								</select>
 							</td>
 							<td>
 								<label>Module : </label>
 								<select ng-model="select.module">
-									<option ng-repeat="x in catalogue.module" value="{{x.id_module}}" ng-if="getMatchModule(select.gamme, x._id_gamme)">{{x.nom_module}}</option>
+									<option ng-repeat="x in catalogue.module" value="{{x.id_module}}" ng-if="getMatchModule(select.gamme, x._id_gamme)" ng-click="select.composant=null">{{x.nom_module}}</option>
 								</select>
 							</td>
 							<td>
@@ -131,7 +131,7 @@
 							</td>
 							<td>
 								<button ng-click="addChoixCatalogueRow(select.gamme, select.module, select.composant)" ng-disabled="select.gamme == undefined || select.module == undefined || select.composant == undefined">Ajouter</button>
-								<button ng-click="">Reset</button>
+								<button ng-click="select.gamme=null;select.module=null;select.composant=null">Reset</button>
 							</td>
 						</tr>
 					</table>

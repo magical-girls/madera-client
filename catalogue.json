@@ -57,7 +57,7 @@
             "id_composant": "c2",
             "nom_composant": "composant 2",
             "description_composant": "lorem ipsum",
-            "prix_composant_ht_euros" : "100",
+            "prix_composant_ht_euros" : "200",
             "_id_module": [
                 "m1"
             ]
@@ -66,7 +66,7 @@
             "id_composant": "c3",
             "nom_composant": "composant 3",
             "description_composant": "lorem ipsum",
-            "prix_composant_ht_euros" : "100",
+            "prix_composant_ht_euros" : "300",
             "_id_module": [
                 "m1",
                 "m2",
