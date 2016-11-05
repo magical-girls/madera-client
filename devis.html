@@ -130,7 +130,7 @@
 								</select>
 							</td>
 							<td>
-								<button ng-click="addChoixCatalogueRow(select.gamme, select.module, select.composant)" ng-disabled="select.gamme == undefined || select.module == undefined || select.composant == undefined">Ajouter</button>
+								<button ng-click="addChoixCatalogueRow(select.gamme, select.module, select.composant); select.gamme=null;select.module=null;select.composant=null" ng-disabled="select.gamme == undefined || select.module == undefined || select.composant == undefined">Ajouter</button>
 								<button ng-click="select.gamme=null;select.module=null;select.composant=null">Reset</button>
 							</td>
 						</tr>
