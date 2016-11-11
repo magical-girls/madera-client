@@ -1,21 +1,37 @@
-<!doctype html>
-<html lang="fr" ng-app="Madera">
-<head>
-  <meta charset="utf-8">
-  <title>Madera</title>
-  <link rel="stylesheet" href="lib/normalize.css">
-  <link rel="stylesheet" href="lib/bootstrap.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.4/angular-filter.js"></script>
 
-</head>
-<body >
-    <div class="container"> page d'accueil</div>
-</body>
-<html>
+<div class="container" ng-controller="accueilCtrl">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Bonjour {{session.user.prenom}} {{session.user.nom}}</h2>
+    </div>
+    <div class="pull-right">Date du jour</div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Dernières notifications: </h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul>
+        <li ng-repeat="datas in devis | orderBy:date_creation_devis" >
+          {{devis.commercial.prenom_commercial}} - {{devis.commercial.nom_commercial}} - {{devis.commercial.etat}} - {{devis.commercial.date_derniere_modif}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Notifications personnelles: </h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul>
+        <li ng-repeat="datas in devis | orderBy:date_creation_devis" >
+          {{devis.commercial.prenom_commercial}} - {{devis.commercial.nom_commercial}} - {{devis.commercial.etat}} - {{devis.commercial.date_derniere_modif}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

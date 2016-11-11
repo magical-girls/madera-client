@@ -260,8 +260,13 @@ $scope.getMatchComposant = function (inputId, inputIdComposant) {
 
 }])
 //////////////////////// page d'accueil /
-.controller('accueilCtrl', ['$scope', function ($scope) {
-
+.controller('accueilCtrl', ['$scope','$http', function ($scope,$http) {
+  $http.get("session.json").then(function (response) {
+    $scope.session = response.data;
+  });
+  $http.get("devis.json").then(function (response) {
+    $scope.devis = response.data;
+  });
 }])
 /////////////////////// Compte controler ///////////////////////////
 .controller('compteCtrl', ['$scope', '$http', function ($scope, $http) {
