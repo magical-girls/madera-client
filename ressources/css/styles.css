@@ -1,0 +1,8 @@
+.done-true {
+      text-decoration: line-through;
+      color: #1b906366;
+}
+
+.done-false {
+      color: orangered;
+}

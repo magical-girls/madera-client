@@ -3,20 +3,27 @@
 <head>
   <meta charset="utf-8">
   <title>Madera</title>
-  <link rel="stylesheet" href="lib/normalize.css">
-  <link rel="stylesheet" href="lib/bootstrap.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-sanitize.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.4/angular-filter.js"></script>
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/master/angular-material.css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+  <!-- Material icons -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script>  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  <script src="src/app.js"></script>
+  <script src="src/controllers/controllers.js"></script>
+  <script src="src/routes/routing.js"></script>
+  <script src="src/services/devisProvider.js"></script>
+  <script src="src/services/fournisseursProvider.js"></script>
+  <script src="src/theme/theme.js"></script>
+  	<!-- Controllers -->
 
 </head>
 <body >
-  <div ng-include="'_navbar.html'"></div>
+  <div ng-include="'./views/_navbar.html'"></div>
   <div ng-view></div>
 </body>
 </html>

@@ -1,0 +1,10 @@
+{{item}}
+<br/>{{categories}}
+
+<form>
+    <label>name : </label>
+    <input ng-model="item.name" type="text" name="name">
+
+    <label>category : <label>
+    <select ng-model="item.category_id" ng-options="category.id as category.name for category in categories"></select>
+</form>
