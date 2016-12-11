@@ -4,7 +4,7 @@
 
 app
 /////////////////////// tabs controller  ///////////////////////////////////////////////////
-
+//Pour rediriger vers les bonnes routes
 .controller('tabCtrl', function($scope, $location, $log) {
         $scope.selectedIndex = 0;
         $scope.$watch('selectedIndex', function(current, old) {
@@ -26,12 +26,14 @@ app
     })
 /////////////////////// liste controller  ///////////////////////////////////////////////////
 .controller('listCtrl',  function ($scope, $routeParams, devisProvider, fournisseursProvider,$mdDialog) {
-  console.log("heyo!");
+
   var param=$routeParams.param; // on récupère la valeur passée dans l'url
+  //initialisation des variables
   $scope.displayDevis=false;
   $scope.displayCatalogue=false;
   $scope.displayFournisseur=false;
   $scope.sortReverse = false; // sens du tri par defaut
+  /// Gestion de l'icône d'inversion du tri
   $scope.setReverseIcon = function (){
     if ( $scope.sortReverse == false) {
       $scope.reverseIcon ="keyboard_arrow_down"
@@ -44,13 +46,7 @@ app
   $scope.setReverseIcon();
   $scope.searchText = ''; // vide le champ de recherche
   // Test pour récupérer les données correspondant au paramètre envoyé
-  $scope.getSelectedText = function() {
-    if ($scope.sortType !== undefined) {
-      console.log("You have selected: Item " + $scope.sortType);
-    } else {
-      console.log("Please select an item");
-    }
-  };
+
   switch (param) {
     case "devis":
       $scope.pageTitle ="Liste des devis";
