@@ -16,7 +16,7 @@ app
                     $location.url("/liste/devis");
                     break;
                 case 2:
-                    $location.url("/liste/catalogue");
+                    $location.url("/catalogue");
                     break;
                 case 3:
                     $location.url("/liste/fournisseurs");
@@ -33,7 +33,7 @@ app
   $scope.displayCatalogue=false;
   $scope.displayFournisseur=false;
   $scope.sortReverse = false; // sens du tri par defaut
-  /// Gestion de l'icône d'inversion du tri
+  /// Gestion de l'icône d
   $scope.setReverseIcon = function (){
     if ( $scope.sortReverse == false) {
       $scope.reverseIcon ="keyboard_arrow_down"
@@ -46,7 +46,13 @@ app
   $scope.setReverseIcon();
   $scope.searchText = ''; // vide le champ de recherche
   // Test pour récupérer les données correspondant au paramètre envoyé
-
+  $scope.getSelectedText = function() {
+    if ($scope.sortType !== undefined) {
+      console.log("You have selected: Item " + $scope.sortType);
+    } else {
+      console.log("Please select an item");
+    }
+  };
   switch (param) {
     case "devis":
       $scope.pageTitle ="Liste des devis";
@@ -55,25 +61,12 @@ app
       $scope.labels=devisProvider.getDevisLabels();
       $scope.displayDevis=true;
 
-      /*$scope.getAvancementColor = function (input) {
-        if (input == "refusé") {
-          return "bold redFont";
-        }
-        else if (input == "terminé") {
-          return "bold greenFont";
-        }
-      }*/
-    break;
-    case "catalogue":
-      $scope.pageTitle ="Catalogue";
-
-      $scope.displayCatalogue=true;
-    break;
+      break;
     case "fournisseurs":
       $scope.pageTitle ="Liste des fournisseurs";
       $scope.datas = fournisseursProvider.getFournisseurs();
       $scope.labels=fournisseursProvider.getFournisseursLabels();
-      $scope.displayFournisseur=true;
+      $scope.displayFournisseurs=true;
     break;
     default:
   }
@@ -90,4 +83,12 @@ app
                $scope.status = 'You decided to keep your record.';
          });
    };
+})
+.controller('catalogueCtrl',  function ($scope, $routeParams, catalogueProvider,$mdDialog) {
+  $scope.datasGammes = catalogueProvider.getGammes();
+  $scope.datasModules = catalogueProvider.getModules();
+  $scope.datasComposants = catalogueProvider.getComposants();
+
+
+
 })

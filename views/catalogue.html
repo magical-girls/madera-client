@@ -1,0 +1,32 @@
+<div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp">
+  <md-card>
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="Gammes" ng-click="showGammes();">
+        <md-content class="md-padding">
+          <h1 class="md-display-2" >Gammes</h1>
+          <div ng-include="'./views/_liste_gammes.html'"></div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Modules" ng-click="showModules();">
+        <md-content class="md-padding">
+          <h1 class="md-display-2" >Modules</h1>
+          <div ng-include="'./views/_liste_modules.html'"></div>
+
+        </md-content>
+      </md-tab>
+      <md-tab label="Composants" ng-click="showComposants();">
+        <md-content class="md-padding">
+          <h1 class="md-display-2" >Composants</h1>
+          <div ng-include="'./views/_liste_composants.html'"></div>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</md-card>
+</div>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+-->

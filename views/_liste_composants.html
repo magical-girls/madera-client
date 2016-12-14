@@ -2,10 +2,12 @@
   <md-content>
     <md-list >
       <!--<md-subheader class="md-no-sticky"></md-subheader>-->
-      <md-list-item class="md-2-line contact-item" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
+      <md-list-item  class="md-2-line contact-item" ng-repeat="composant in datasComposants | orderBy:sortType:sortReverse | filter:searchText">
       <div class="md-list-item-text compact">
-        <span><h3>{{data.num_devis}}</h3>{{data.nom_client}}</span>
-        <p>Créé le {{data.date_creation}} Dernière modification le {{data.date_modif}}</p>
+        <span><h3>{{composant.id_composant}}</h3>{{composant.nom_composant}}</span>
+        <p>Description: {{composant.description_composant}}</p>
+        <p>Gamme: {{composant._id_module}}</p>
+
         <md-button class="md-secondary" ng-click="" aria-label="Edit">
           <ng-md-icon icon="create"></ng-md-icon>
         </md-button>

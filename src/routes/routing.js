@@ -15,6 +15,10 @@ function ($routeProvider) {
     templateUrl: 'views/liste.html',
     controller: 'listCtrl'
   })
+  .when('/catalogue', {
+    templateUrl: 'views/catalogue.html',
+    controller: 'catalogueCtrl'
+  })
   .when('/edit_devis', {
     templateUrl: 'views/devis.html',
     controller: 'formCtrl'
