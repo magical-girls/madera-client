@@ -89,6 +89,18 @@ app
   $scope.datasModules = catalogueProvider.getModules();
   $scope.datasComposants = catalogueProvider.getComposants();
 
-
+  $scope.showConfirm = function(event) {
+      var confirm = $mdDialog.confirm()
+         .title('Etes-vous sur de vouloir supprimer cet élément?')
+         .ariaLabel('TutorialsPoint.com')
+         .targetEvent(event)
+         .ok('Oui')
+         .cancel('Non');
+         $mdDialog.show(confirm).then(function() {
+            $scope.status = 'Record deleted successfully!';
+            }, function() {
+               $scope.status = 'You decided to keep your record.';
+         });
+   };
 
 })
