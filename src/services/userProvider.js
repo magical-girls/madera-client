@@ -11,7 +11,7 @@ var user=[
     }
 ];
 app.service('userProvider', function(){
-  this.getFournisseurs = function(){
+  this.getUser = function(){
     return user;
   }
 })

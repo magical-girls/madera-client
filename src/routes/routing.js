@@ -27,6 +27,10 @@ function ($routeProvider) {
     templateUrl: 'views/compte.html',
     controller: 'compteCtrl'
   })
+  .when('/devis/:param', {
+    templateUrl: 'views/devis.html',
+    controller: 'editDevisCtrl'
+  })
   .otherwise({
     redirectTo: '/liste/devis'
   });

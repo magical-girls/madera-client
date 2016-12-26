@@ -23,9 +23,13 @@ app
                     break;
             }
         });
+        $scope.showProfile = function(event) {
+          $location.url("/compte");
+          // TO DO ajouter en parametre identifiant user
+        };
     })
 /////////////////////// liste controller  ///////////////////////////////////////////////////
-.controller('listCtrl',  function ($scope, $routeParams, devisProvider, fournisseursProvider,$mdDialog) {
+.controller('listCtrl',  function ($scope, $routeParams,$location, devisProvider, fournisseursProvider,$mdDialog) {
 
   var param=$routeParams.param; // on récupère la valeur passée dans l'url
   //initialisation des variables
@@ -36,10 +40,10 @@ app
   /// Gestion de l'icône d
   $scope.setReverseIcon = function (){
     if ( $scope.sortReverse == false) {
-      $scope.reverseIcon ="keyboard_arrow_down"
+      $scope.reverseIcon ="ic_keyboard_arrow_down_black_24px"
       console.log("false "+$scope.reverseIcon);
     }else {
-      $scope.reverseIcon ="keyboard_arrow_up"
+      $scope.reverseIcon ="ic_keyboard_arrow_up_black_24px"
       console.log("true "+$scope.reverseIcon);
     }
   };
@@ -60,7 +64,10 @@ app
       $scope.datas = devisProvider.getDevis();
       $scope.labels=devisProvider.getDevisLabels();
       $scope.displayDevis=true;
-
+      $scope.goToDevis=function($event) {
+        console.log("/devis/"+$event);
+        $location.url("/devis/"+$event);
+      }
       break;
     case "fournisseurs":
       $scope.pageTitle ="Liste des fournisseurs";
@@ -70,7 +77,7 @@ app
     break;
     default:
   }
-  $scope.showConfirm = function(event) {
+  $scope.showConfirm = function($event) {
       var confirm = $mdDialog.confirm()
          .title('Etes-vous sur de vouloir supprimer cet élément?')
          .ariaLabel('TutorialsPoint.com')
@@ -103,4 +110,10 @@ app
          });
    };
 
+})
+.controller('compteCtrl',  function ($scope, $routeParams, userProvider,$mdDialog) {
+  $scope.user=userProvider.getUser();
+})
+.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider,$mdDialog) {
+  $scope.datas=devisProvider.getaDevis();
 })

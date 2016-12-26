@@ -68,9 +68,22 @@ var devis=  [{
   "etat":"refusé"
 }
 ];
+var aDevis=  [{
+  "id_devis":"1",
+  "num_devis":"32",
+  "nom_commercial":"jean",
+  "nom_client":"braille",
+  "date_creation":"01/01/2016",
+  "date_modif":"02/01/2016",
+  "etat":"en cours"
+}
+];
 app.service('devisProvider', function(){
   this.getDevis = function(){
     return devis;
+  }
+  this.getaDevis = function(){
+    return aDevis;
   }
   this.getDevisLabels = function(){
     return devisLabel;

@@ -1,0 +1,27 @@
+<div ng-controller="compteCtrl" layout="column" layout-padding="" ng-cloak="" class="inputdemoIcons" ng-app="Madera">
+  <md-card>
+    <h2>Infos personnelles</h2>
+  <br>
+  <md-content class="md-no-momentum">
+    <md-input-container class="md-icon-float md-block">
+      <label>Nom</label>
+      <md-icon md-svg-src="ressources/img/icons/ic_person_black_24px.svg" class="name"></md-icon>
+      <input ng-model="user.name" type="text">
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <md-icon md-svg-src="ressources/img/icons/ic_call_black_24px.svg"></md-icon>
+      <input ng-model="user.phone" type="text" placeholder="Téléphone">
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <md-icon md-svg-src="ressources/img/icons/ic_mail_black_24px.svg" class="email"></md-icon>
+      <input ng-model="user.email" type="email" placeholder="Email">
+    </md-input-container>
+  </md-content>
+</md-card>
+<md-card>
+  <h2>Mes rendez-vous</h2>
+
+</md-card>
+</div>
