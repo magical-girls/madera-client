@@ -1,5 +1,5 @@
 'use strict';
-var user=[
+var user=
   {
     "id":"1",
     "nom":"Simpson",
@@ -9,9 +9,20 @@ var user=[
     "mail":"homer.simpson@gmail.com",
     "pass":"motdepasse"
     }
-];
+;
+var client=
+  {
+    "id":"1",
+    "nom":"Lionheart",
+    "prenom":"Squall",
+    "telephone":"0296375474",
+    "mail":"squall.lionheart@gmail.com"
+  };
 app.service('userProvider', function(){
   this.getUser = function(){
     return user;
+  }
+  this.getClient = function(){
+    return client;
   }
 })

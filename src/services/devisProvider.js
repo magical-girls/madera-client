@@ -1,4 +1,5 @@
 'use strict';
+// pour filtre dans select
 var devisLabel=[
   {"name":"N° devis",
     "value":"num_devis"},
@@ -16,8 +17,8 @@ var devisLabel=[
 var devis=  [{
   "id_devis":"1",
   "num_devis":"32",
-  "nom_commercial":"jean",
-  "nom_client":"braille",
+  "nom_commercial":"jean braille",
+  "nom_client":"Alban Tourloupe",
   "date_creation":"01/01/2016",
   "date_modif":"02/01/2016",
   "etat":"en cours"
@@ -25,8 +26,8 @@ var devis=  [{
 {
   "id_devis":"2",
   "num_devis":"33",
-  "nom_commercial":"Alain",
-  "nom_client":"Terrieur",
+  "nom_commercial":"Alain Terrieur",
+  "nom_client":"Rudy LeRenne",
   "date_creation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"terminé"
@@ -34,8 +35,8 @@ var devis=  [{
 {
   "id_devis":"3",
   "num_devis":"34",
-  "nom_commercial":"Agathe",
-  "nom_client":"Theblouze",
+  "nom_commercial":"Agathe Theblouze",
+  "nom_client":"Cathy Penflamme",
   "date_creation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"validé"
@@ -43,8 +44,8 @@ var devis=  [{
 {
   "id_devis":"4",
   "num_devis":"48",
-  "nom_commercial":"Gérard",
-  "nom_client":"Menvussa",
+  "nom_commercial":"Gérard Menvussa",
+  "nom_client":"Alphy Celle",
   "date_creation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"en attente"
@@ -52,8 +53,8 @@ var devis=  [{
 {
   "id_devis":"5",
   "num_devis":"65",
-  "nom_commercial":"Clara",
-  "nom_client":"Binne",
+  "nom_commercial":"Clara Binne",
+  "nom_client":"",
   "date_creation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"terminé"
@@ -68,16 +69,15 @@ var devis=  [{
   "etat":"refusé"
 }
 ];
-var aDevis=  [{
+var aDevis=  {
   "id_devis":"1",
   "num_devis":"32",
-  "nom_commercial":"jean",
-  "nom_client":"braille",
+  "nom_commercial":"Homer Simpson",
+  "nom_client":"Squall Leonheart",
   "date_creation":"01/01/2016",
   "date_modif":"02/01/2016",
   "etat":"en cours"
-}
-];
+};
 app.service('devisProvider', function(){
   this.getDevis = function(){
     return devis;

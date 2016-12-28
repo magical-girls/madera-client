@@ -1,57 +1,103 @@
 <div ng-cloak ng-app="Madera">
- <md-content class="md-padding" >
-        <div layout="column" layout-gt-xs="row" >
-           <md-card flex flex-gt-xs="50">
-               <h2>Client</h2>
-               <md-card-content>
-                   <p>Some content</p>
-               </md-card-content>
-           </md-card>
-           <md-card flex >
-               <h2>Commercial</h2>
-               <md-card-content>
-                   <p>Some content</p>
-               </md-card-content>
-           </md-card>
-       </div>
-   </md-content>
-   <md-content class="md-padding" >
-          <div layout="column" layout-gt-xs="row" >
-             <md-card flex >
-                 <h2>Devis</h2>
-                 <md-card-content>
-                     <p>Some content</p>
-                 </md-card-content>
-             </md-card>
-         </div>
-     </md-content>
- <md-content class="md-padding" >
-        <div layout="row"  layout-xs="column">
-           <md-card flex flex-gt-xs="50">
-               <h2>Commentaire client</h2>
-               <md-card-content>
-                   <p>Some content</p>
-               </md-card-content>
-               <md-card-actions layout="row" layout-align="end center">
-                 <md-button>Action 1</md-button>
-                 <md-button>Action 2</md-button>
-               </md-card-actions>
-           </md-card>
-           <md-card flex >
-               <h2>Commentaire Commercial</h2>
-               <md-card-content>
-                   <p>Some content</p>
-               </md-card-content>
-               <md-card-actions layout="row" layout-align="end center">
-                 <md-button>Action 1</md-button>
-                 <md-button>Action 2</md-button>
-               </md-card-actions>
-           </md-card>
-       </div>
-   </md-content>
-   <div layout="row"  layout-xs="column" layout-align="center">
-     <md-button>Enregistrer</md-button>
-     <md-button>Retour</md-button>
-     <md-button>Supprimer</md-button>
-   </div>
+  <md-content class="md-padding" >
+    <div layout="row"  layout-xs="column" >
+      <md-card flex flex-gt-xs="50">
+        <h2>Client</h2>
+        <md-card-content>
+          <p>Nom: {{clientData.prenom}} {{clientData.nom}}</p>
+          <p>Tel: {{clientData.telephone}}</p>
+          <p>E-mail: {{clientData.mail}}</p>
+        </md-card-content>
+      </md-card>
+      <md-card flex >
+        <h2>Commercial</h2>
+        <md-card-content>
+          <p>Nom: {{comData.prenom}} {{comData.nom}}</p>
+          <p>Matricule: {{comData.matricule}}</p>
+          <p>Tel: {{comData.telephone}}</p>
+          <p>E-mail: {{comData.mail}}</p>
+        </md-card-content>
+      </md-card>
+    </div>
+  </md-content>
+  <md-content class="md-padding" >
+    <div layout="column" layout-gt-xs="row" >
+      <md-card flex >
+        <h2>Devis</h2>
+        <h3>Informations</h3>
+        <md-card-content>
+          <div layout="row">
+            <p>Référence: {{devisData.num_devis}}</p>
+            <p flex></p>
+            <p>Statut: {{devisData.etat}}</p>
+          </div>
+          <p>Date de création: {{devisData.date_modif}}</p>
+          <p>Dernière modification: {{devisData.date_modif}}</p>
+        </md-card-content>
+        <md-divider></md-divider>
+        <h3>Sélection des éléments</h3>
+        <md-card-content>
+          <div layout="row">
+            <md-input-container flex>
+              <label>Gammes</label>
+              <md-select ng-model="sortType1">
+                <md-option ng-value="gamme.id_gamme" ng-repeat="gamme in gammes ">{{ gamme.nom_gamme }}</md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Modules</label>
+              <md-select ng-model="sortType2">
+                <md-option ng-value="module.id_module" ng-repeat="module in modules">{{ module.nom_module }}</md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Composants</label>
+              <md-select ng-model="sortType3">
+                <md-option ng-value="composant.id_composant" ng-repeat="composant in composants ">{{ composant.nom_composant }}</md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex="10">
+            <md-button class="md-secondary" ng-click="add($event)" aria-label="Add">
+              <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+            </md-button>
+            </md-input-container>
+          </div>
+        </md-card-content>
+        <h4>Description</h4>
+        <md-card-content>
+        </md-card-content>
+        <md-divider></md-divider>
+        <h2>Vos choix</h2>
+        <md-card-content>
+        </md-card-content>
+      </md-card>
+    </div>
+  </md-content>
+  <md-content class="md-padding" >
+    <div layout="row"  layout-xs="column">
+      <md-card flex flex-gt-xs="50">
+        <h2>Commentaire client</h2>
+        <md-card-content>
+          <p>Some content</p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Ajouter</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card flex >
+        <h2>Commentaire Commercial</h2>
+        <md-card-content>
+          <p>Some content</p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Ajouter</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div layout="row"  layout-xs="column" layout-align="center end">
+      <md-button>Enregistrer</md-button>
+      <md-button>Retour</md-button>
+      <md-button>Supprimer</md-button>
+    </div>
+  </md-content>
 </div>
