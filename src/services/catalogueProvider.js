@@ -63,6 +63,15 @@ var composants= [
         ]
     },
     {
+        "id_composant": "c4",
+        "nom_composant": "composant 4",
+        "description_composant": "lorem ipsum",
+        "prix_composant_ht_euros" : "400",
+        "_id_module": [
+            "m2"
+        ]
+    },
+    {
         "id_composant": "c3",
         "nom_composant": "composant 3",
         "description_composant": "lorem ipsum",

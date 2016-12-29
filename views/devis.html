@@ -40,24 +40,24 @@
           <div layout="row">
             <md-input-container flex>
               <label>Gammes</label>
-              <md-select ng-model="sortType1">
-                <md-option ng-value="gamme.id_gamme" ng-repeat="gamme in gammes ">{{ gamme.nom_gamme }}</md-option>
+              <md-select ng-model="gamme">
+                <md-option ng-value="g.id_gamme" ng-repeat="g in gammes "  ng-click="module=null;composant=null">{{ g.nom_gamme }}</md-option>
               </md-select>
             </md-input-container>
             <md-input-container flex>
               <label>Modules</label>
-              <md-select ng-model="sortType2">
-                <md-option ng-value="module.id_module" ng-repeat="module in modules">{{ module.nom_module }}</md-option>
+              <md-select ng-model="module">
+                <md-option ng-repeat="m in modules" ng-value="m.id_module" ng-if="getMatchModule(gamme,m._id_gamme)" ng-click="composant=null">{{ m.nom_module }}</md-option>
               </md-select>
             </md-input-container>
             <md-input-container flex>
               <label>Composants</label>
-              <md-select ng-model="sortType3">
-                <md-option ng-value="composant.id_composant" ng-repeat="composant in composants ">{{ composant.nom_composant }}</md-option>
+              <md-select ng-model="composant">
+                <md-option ng-value="c.id_composant" ng-repeat="c in composants " ng-if="getMatchComposant(module,c._id_module)">{{ c.nom_composant }}</md-option>
               </md-select>
             </md-input-container>
             <md-input-container flex="10">
-            <md-button class="md-secondary" ng-click="add($event)" aria-label="Add">
+            <md-button class="md-secondary" ng-click="addChoixCatalogueRow(gamme, module, composant)" ng-disabled="gamme == undefined || module == undefined || composant == undefined" aria-label="Add">
               <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
             </md-button>
             </md-input-container>
@@ -69,6 +69,29 @@
         <md-divider></md-divider>
         <h2>Vos choix</h2>
         <md-card-content>
+          <md-list>
+            <md-list-item>
+              <p>#</p>
+							<p>Gamme</p>
+							<p>Module</p>
+							<p>Composant(s)</p>
+							<p>Prix HT</p>
+							<p></p>
+            </md-list-item>
+            <md-list-item ng-repeat="choix in choixCatalogue" class="noright">
+              <p>{{$index+1}}</p>
+              <p>{{choix.nom_gamme}}</p>
+              <p>{{choix.nom_module}}</p>
+              <p>{{choix.nom_composant}}</p>
+              <p>{{choix.prix_composant_ht_euros}}</p>
+              <p>
+                <md-button class="md-secondary" ng-click="removeChoixCatalogueRow(choix.id_row)" aria-label="Delete">
+                  <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
+                </md-button>
+              </p>
+              <md-divider></md-divider>
+            </md-list-item>
+            </md-list>
         </md-card-content>
       </md-card>
     </div>
