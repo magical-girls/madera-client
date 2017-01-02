@@ -5,7 +5,7 @@
 app
 /////////////////////// tabs controller  ///////////////////////////////////////////////////
 //Pour rediriger vers les bonnes routes
-.controller('tabCtrl', function($scope, $location, $log) {
+.controller('tabCtrl', function($scope, $location, $log) { 
   $scope.selectedIndex = 0;
   $scope.$watch('selectedIndex', function(current, old) {
     switch (current) {
@@ -25,7 +25,7 @@ app
   });
   $scope.showProfile = function(event) {
     $location.url("/compte");
-    // TO DO ajouter en parametre identifiant user
+    // TO DO ajouter en parametre identifiant user 
   };
 })
 /////////////////////// liste controller  ///////////////////////////////////////////////////
