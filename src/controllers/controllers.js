@@ -93,8 +93,6 @@ app
     .ok('Oui')
     .cancel('Non');
     $mdDialog.show(confirm).then(function() {
-      console.log($event);
-
       $scope.deleteDevis($event)
     }, function() {
       $scope.status = 'You decided to keep your record.';
@@ -153,7 +151,6 @@ app
   //Récupérer les modules correspondants à la gamme
   $scope.getMatchModule = function (inputId,inputIdGamme) {
     var resultMatchModule = false;
-    console.log(inputId);
     for (var i = 0 ; i < inputIdGamme.length ; i++){
       if (inputIdGamme[i] == inputId){
         resultMatchModule = true
