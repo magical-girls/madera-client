@@ -82,6 +82,11 @@ app.service('devisProvider', function(){
   this.getDevis = function(){
     return devis;
   }
+  this.deleteDevis = function(inputDevis, inputNumDevis){
+    console.log("debug : deleteDevis from provider");
+    inputDevis.splice(inputNumDevis, 1);
+  }
+
   this.getaDevis = function(){
     return aDevis;
   }
