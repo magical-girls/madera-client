@@ -1,0 +1,20 @@
+{
+	"version": "0.1.0",
+	"command": "cmd", // start to show cmd (windows), cmd to redirect to visual studio output
+	//"isShellCommand": true,
+	//"suppressTaskName": true,
+	"tasks": [
+		{
+			"taskName": "_start",
+			"args": [
+				"",
+				"cmd",
+				"/k",
+				"${workspaceRoot}\\tests\\SpecRunner.html & exit"
+			],
+			"showOutput": "always",
+			"suppressTaskName": true,
+			"isBuildCommand": true
+		}
+	]
+}
