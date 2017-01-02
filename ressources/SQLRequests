@@ -1,0 +1,29 @@
+[
+    {
+        "id" : 1,
+        "request" : "fournisseurs",
+        "SQL" : "select id_fournisseur as id,
+                societe_fournisseur as societe,
+                tel_fournisseur as tel_societe,
+                adresse_fournisseur as adresse,
+                pays_fournisseur as pays,
+                categorie_fournisseur as categorie,
+                contacttel_fournisseur as tel_contact,
+                contactnom_fournisseur as nom_contact,
+                contactprenom_fournisseur as prenom_contact,
+                contactmail_fournisseur as mail_contact,
+                horraire_fournisseur as horraire from fournisseur"
+    },
+    {
+        "id" : 2,
+        "request" : "devis_en_cours",
+        "SQL" : "SELECT devis.reference_devis as id, client.nom_client as nom_client, datecreation_devis as date_creation, 
+                salarie.nom_salarie as nom_createur, max(devis_salarie.datemodif) as date_modif, s2.nom_salarie as nom_modif FROM devis
+                LEFT JOIN client ON devis.id_client = client.id_client
+                LEFT JOIN salarie ON devis.matricule_salarie = salarie.matricule_salarie
+                LEFT JOIN devis_salarie ON devis.reference_devis = devis_salarie.reference_devis
+                LEFT JOIN salarie as s2 ON devis_salarie.matricule_salarie = s2.matricule_salarie
+                GROUP BY devis.reference_devis, devis.status_devis
+                HAVING devis.status_devis = 1"
+    }
+]
