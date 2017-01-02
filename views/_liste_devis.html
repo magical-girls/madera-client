@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody md-body>
-      <tr md-row  mdSelectId="data.id_devis" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
+      <tr md-row  mdSelectId="data.id_devis" ng-click="goToDevis(data.id_devis)" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
         <td md-cell>{{data.num_devis}}</td>
         <td md-cell>{{data.nom_client}}</td>
         <td md-cell>{{data.date_creation}}</td>
