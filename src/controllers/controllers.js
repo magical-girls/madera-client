@@ -57,6 +57,7 @@ app
       console.log("Please select an item");
     }
   };
+  
   switch (param) {
     case "devis":
     $scope.pageTitle ="Liste des devis";
@@ -69,6 +70,11 @@ app
       console.log("/devis/"+$event);
       $location.url("/devis/"+$event);
     }
+
+    $scope.deleteDevis = function(numDevis){
+      devisProvider.deleteDevis(devis, numDevis);
+    }
+
     break;
     case "fournisseurs":
     $scope.pageTitle ="Liste des fournisseurs";
@@ -87,7 +93,9 @@ app
     .ok('Oui')
     .cancel('Non');
     $mdDialog.show(confirm).then(function() {
-      $scope.status = 'Record deleted successfully!';
+      console.log($event);
+
+      $scope.deleteDevis($event)
     }, function() {
       $scope.status = 'You decided to keep your record.';
     });
