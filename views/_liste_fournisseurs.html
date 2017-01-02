@@ -1,19 +1,33 @@
 <div id="list" layout="column" ng-cloak>
   <md-content>
-    <md-list >
-      <md-list-item ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText" ng-click="goToFounisseurs(data.id_fournisseur, $event)" class="noright">
-        <p>{{data.nom_fournisseur}}</p>
-        <p>{{data.description_fournisseur}}</p>
-        <p>{{data.tel_fournisseur}} </p>
-        <p>{{data.adresse_fournisseur}}</p>
-        <md-button class="md-secondary" ng-click="" aria-label="Edit">
-          <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
-        </md-button>
-        <md-button class="md-secondary" ng-click="showConfirm($event)" aria-label="Delete">
-          <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
-        </md-button>
-        <md-divider></md-divider>
-      </md-list-item>
-      </md-list>
-</md-content>
+    <md-table-container>
+      <table md-table>
+        <thead md-head>
+          <tr md-row>
+            <th md-column><span>Nom</span></th>
+            <th md-column><span>Description</span></th>
+            <th md-column>Téléphone</th>
+            <th md-column>Adresse</th>
+            <th md-column></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row mdSelectId="data.id_fournisseur" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
+            <td md-cell ng-click="goToFounisseurs(data.id_fournisseur)">{{data.nom_fournisseur}}</td>
+            <td md-cell ng-click="goToFounisseurs(data.fournisseur)">{{data.description_fournisseur}}</td>
+            <td md-cell ng-click="goToFounisseurs(data.fournisseur)">{{data.tel_fournisseur}}</td>
+            <td md-cell ng-click="goToFounisseurs(data.fournisseur)">{{data.adresse_fournisseur}}</td>
+            <td md-cell>
+              <md-button class="md-secondary" ng-click="" aria-label="Edit">
+                <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
+              </md-button>
+              <md-button ng-click="showConfirm(data.id_fournisseur)" aria-label="Delete">
+                <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
+              </md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-content>
 </div>

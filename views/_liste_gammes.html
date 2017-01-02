@@ -1,17 +1,31 @@
 <div id="list" layout="column" ng-cloak>
   <md-content>
-    <md-list >
-      <md-list-item ng-repeat="gamme in datasGammes | orderBy:sortType:sortReverse | filter:searchText" ng-click="goToGamme(gamme.id_gamme, $event)" class="noright">
-        <p>{{gamme.nom_gamme}}</p>
-        <p> {{gamme.description_gamme}}</p>
-        <md-button class="md-secondary" ng-click="" aria-label="Edit">
-          <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
-        </md-button>
-        <md-button class="md-secondary" ng-click="showConfirm($event)" aria-label="Delete">
-          <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
-        </md-button>
-        <md-divider></md-divider>
-      </md-list-item>
-    </md-list>
+    <div id="list" layout="column" ng-cloak>
+      <md-table-container>
+        <table md-table>
+          <thead md-head>
+            <tr md-row>
+              <th md-column><span>Nom</span></th>
+              <th md-column><span>Description</span></th>
+              <th md-column></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="gamme in datasGammes | orderBy:sortType:sortReverse | filter:searchText">
+              <td md-cell ng-click="goToGamme(data.id_gamme)">{{gamme.nom_gamme}}</td>
+              <td md-cell ng-click="goToGamme(data.id_gamme)">{{gamme.description_gamme}}</td>
+              <td md-cell>
+                <md-button class="md-secondary" ng-click="" aria-label="Edit">
+                  <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
+                </md-button>
+                <md-button ng-click="showConfirm(data.num_devis)" aria-label="Delete">
+                  <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
+                </md-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </div>
   </md-content>
 </div>

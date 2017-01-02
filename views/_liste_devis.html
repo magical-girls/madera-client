@@ -1,33 +1,33 @@
 <div id="list" layout="column" ng-cloak>
-<md-table-container>
-  <table md-table>
-    <thead md-head>
-      <tr md-row>
-        <th md-column><span>Référence</span></th>
-        <th md-column><span>Client</span></th>
-        <th md-column>Date de création</th>
-        <th md-column>Dernière modification</th>
-        <th md-column>Statut</th>
-        <th md-column></th>
-      </tr>
-    </thead>
-    <tbody md-body>
-      <tr md-row mdSelectId="data.id_devis" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
-        <td md-cell ng-click="goToDevis(data.id_devis)">{{data.num_devis}}</td>
-        <td md-cell ng-click="goToDevis(data.id_devis)">{{data.nom_client}}</td>
-        <td md-cell ng-click="goToDevis(data.id_devis)">{{data.date_creation}}</td>
-        <td md-cell ng-click="goToDevis(data.id_devis)">{{data.date_modif}}</td>
-        <td md-cell ng-click="goToDevis(data.id_devis)">{{data.etat}}</td>
-        <td md-cell>
-          <md-button class="md-secondary" ng-click="" aria-label="Edit">
-            <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
-          </md-button>
-          <md-button  ng-click="showConfirm(data.num_devis)" aria-label="Delete">
-            <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
-          </md-button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</md-table-container>
+  <md-table-container>
+    <table md-table>
+      <thead md-head>
+        <tr md-row>
+          <th md-column><span>Référence</span></th>
+          <th md-column><span>Client</span></th>
+          <th md-column>Date de création</th>
+          <th md-column>Dernière modification</th>
+          <th md-column>Statut</th>
+          <th md-column></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row mdSelectId="data.id_devis" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
+          <td md-cell ng-click="goToDevis(data.id_devis)">{{data.num_devis}}</td>
+          <td md-cell ng-click="goToDevis(data.id_devis)">{{data.nom_client}}</td>
+          <td md-cell ng-click="goToDevis(data.id_devis)">{{data.date_creation}}</td>
+          <td md-cell ng-click="goToDevis(data.id_devis)">{{data.date_modif}}</td>
+          <td md-cell ng-click="goToDevis(data.id_devis)">{{data.etat}}</td>
+          <td md-cell>
+            <md-button class="md-secondary" ng-click="" aria-label="Edit">
+              <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
+            </md-button>
+            <md-button ng-click="showConfirm(data.num_devis)" aria-label="Delete">
+              <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
+            </md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
 </div>
