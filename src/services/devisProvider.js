@@ -78,12 +78,23 @@ var aDevis=  {
   "date_modif":"02/01/2016",
   "etat":"en cours"
 };
+
+function getIndexDevisFromId(inputDevis, inputIdDevis){
+  var result = null;
+  for (var i = 0 ; i < inputDevis.length ; i++){
+    if (inputIdDevis == (inputDevis[i].num_devis)){
+      result = i;
+    }
+  }
+  return result;
+}
+
 app.service('devisProvider', function(){
   this.getDevis = function(){
     return devis;
   }
   this.deleteDevis = function(inputDevis, inputNumDevis){
-    inputDevis.splice(inputNumDevis, 1);
+    inputDevis.splice(getIndexDevisFromId(inputDevis, inputNumDevis), 1);
   }
 
   this.getaDevis = function(){
