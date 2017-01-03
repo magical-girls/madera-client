@@ -28,6 +28,9 @@ app
     // TO DO ajouter en parametre identifiant user 
   };
 })
+/////////////////////// Accueil controller //////////////////////////////////////////////////
+.controller('accueilCtrl',function($scope){
+})
 /////////////////////// liste controller  ///////////////////////////////////////////////////
 .controller('listCtrl',  function ($scope, $routeParams,$location, devisProvider, fournisseursProvider,$mdDialog, commonCode) {
 
@@ -37,26 +40,16 @@ app
   $scope.displayCatalogue=false;
   $scope.displayFournisseur=false;
   $scope.sortReverse = false; // sens du tri par defaut
-  /// Gestion de l'icône d
+  /// Gestion de l'icône 
   $scope.setReverseIcon = function (){
     if ( $scope.sortReverse == false) {
       $scope.reverseIcon ="ic_keyboard_arrow_down_black_24px"
-      console.log("false "+$scope.reverseIcon);
     }else {
       $scope.reverseIcon ="ic_keyboard_arrow_up_black_24px"
-      console.log("true "+$scope.reverseIcon);
     }
   };
   $scope.setReverseIcon();
   $scope.searchText = ''; // vide le champ de recherche
-  // Test pour récupérer les données correspondant au paramètre envoyé
-  $scope.getSelectedText = function() {
-    if ($scope.sortType !== undefined) {
-      console.log("You have selected: Item " + $scope.sortType);
-    } else {
-      console.log("Please select an item");
-    }
-  };
   
   switch (param) {
     case "devis":
@@ -67,7 +60,6 @@ app
     $scope.displayDevis=true;
     //consulter page devis (id devis en parametre)
     $scope.goToDevis=function($event) {
-      console.log("/devis/"+$event);
       $location.url("/devis/"+$event);
     }
 
@@ -109,7 +101,7 @@ app
   $scope.user=userProvider.getUser();
 })
 .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider,userProvider,catalogueProvider,$mdDialog) {
-  //Récupéreation des données
+  //Récupération des données
   $scope.devisData=devisProvider.getaDevis();
   $scope.clientData=userProvider.getClient();
   $scope.comData=userProvider.getUser();
