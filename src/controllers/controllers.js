@@ -104,7 +104,19 @@ app
   $scope.datasModules = catalogueProvider.getModules();
   $scope.datasComposants = catalogueProvider.getComposants();
 
-  $scope.showConfirm = function(event) {
+    $scope.deleteGamme = function(numGamme){
+      catalogueProvider.deleteGamme(gammes, numGamme);
+    }
+
+    $scope.deleteModule = function(numModule){
+      catalogueProvider.deleteModule(modules, numModule);
+    }
+
+    $scope.deleteComposant = function(numComposant){
+      catalogueProvider.deleteComposant(composants, numComposant);
+    }
+
+  $scope.showConfirm = function($event, action) {
     var confirm = $mdDialog.confirm()
     .title('Etes-vous sur de vouloir supprimer cet élément?')
     .ariaLabel('TutorialsPoint.com')
@@ -112,7 +124,16 @@ app
     .ok('Oui')
     .cancel('Non');
     $mdDialog.show(confirm).then(function() {
-      $scope.status = 'Record deleted successfully!';
+      //$scope.status = 'Record deleted successfully!';
+      if (action == "deleteGamme"){
+        $scope.deleteGamme($event);
+      }
+      else if (action == "deleteModule"){
+        $scope.deleteModule($event);
+      }
+      else if (action == "deleteComposant"){
+        $scope.deleteComposant($event);
+      }
     }, function() {
       $scope.status = 'You decided to keep your record.';
     });

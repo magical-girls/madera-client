@@ -82,15 +82,57 @@ var composants= [
             "m3"
         ]
     }
-]
+];
+
+function getIndexGammeFromId(inputGamme, inputIdGamme){
+  var result = null;
+  for (var i = 0 ; i < inputGamme.length ; i++){
+    if (inputIdGamme == (inputGamme[i].id_gamme)){
+      result = i;
+    }
+  }
+  return result;
+}
+
+function getIndexModuleFromId(inputModule, inputIdModule){
+  var result = null;
+  for (var i = 0 ; i < inputModule.length ; i++){
+    if (inputIdModule == (inputModule[i].id_module)){
+      result = i;
+    }
+  }
+  return result;
+}
+
+function getIndexComposantFromId(inputComposant, inputIdComposant){
+  var result = null;
+  for (var i = 0 ; i < inputGamme.length ; i++){
+    if (inputIdComposant == (inputComposant[i].id_composant)){
+      result = i;
+    }
+  }
+  return result;
+}
+
 app.service('catalogueProvider', function(){
   this.getGammes = function(){
     return gammes;
   }
+  this.deleteGamme = function(inputGamme, inputNumGamme){
+    inputGamme.splice(getIndexGammeFromId(inputGamme, inputNumGamme), 1);
+  }
+
   this.getModules = function(){
     return modules;
   }
+  this.deleteModule = function(inputModule, inputNumModule){
+    inputModule.splice(getIndexModuleFromId(inputModule, inputNumModule), 1);
+  }
+
   this.getComposants = function(){
     return composants;
+  }
+  this.deleteComposant = function(inputComposant, inputNumComposant){
+    inputComposant.splice(getIndexComposantFromId(inputComposant, inputNumComposant), 1);
   }
 })
