@@ -77,12 +77,7 @@ app
     default:
   }
 
-    $scope.deleteFournisseur = function(numFournisseur){
-      fournisseursProvider.deleteFournisseur(fournisseurs, numFournisseur);
-    }
-
     $scope.deleteSomething = function($event, action) {
-        console.log("deleteSomething from listCtrl");
         commonCode.showConfirm($event, action);
     }
 
@@ -93,7 +88,6 @@ app
   $scope.datasComposants = catalogueProvider.getComposants();
 
     $scope.deleteSomething = function($event, action) {
-        console.log("deleteSomething from catalogueCtrl" + $event + " " + action);
         commonCode.showConfirm($event, action);
     }
 })
