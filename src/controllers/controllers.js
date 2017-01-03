@@ -84,8 +84,13 @@ app
     break;
     default:
   }
+
+    $scope.deleteFournisseur = function(numFournisseur){
+      fournisseursProvider.deleteFournisseur(fournisseurs, numFournisseur);
+    }
   //Modal de confirmation de suppression
-  $scope.showConfirm = function($event) {
+  $scope.showConfirm = function($event, action) {
+    console.log("debugtest" + action);
     var confirm = $mdDialog.confirm()
     .title('Etes-vous sur de vouloir supprimer cet élément?')
     .ariaLabel('TutorialsPoint.com')
@@ -93,7 +98,13 @@ app
     .ok('Oui')
     .cancel('Non');
     $mdDialog.show(confirm).then(function() {
-      $scope.deleteDevis($event)
+      //$scope.status = 'Record deleted successfully!';
+      if (action == "deleteDevis"){
+        $scope.deleteDevis($event)
+      }
+      else if (action == "deleteFournisseur"){
+        $scope.deleteFournisseur($event);
+      }
     }, function() {
       $scope.status = 'You decided to keep your record.';
     });

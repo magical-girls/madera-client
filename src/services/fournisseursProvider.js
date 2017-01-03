@@ -29,10 +29,25 @@ var fournisseurs=[
   "tel_fournisseur":"36303630",
   "description_fournisseur":"Planches de bois (à peine) grignotées "
 }];
+
+function getIndexFournisseurFromId(inputFournisseur, inputIdFournisseur){
+  var result = null;
+  for (var i = 0 ; i < inputFournisseur.length ; i++){
+    if (inputIdFournisseur == (inputFournisseur[i].id_Fournisseur)){
+      result = i;
+    }
+  }
+  return result;
+}
+
 app.service('fournisseursProvider', function(){
   this.getFournisseurs = function(){
     return fournisseurs;
   }
+  this.deleteFournisseur = function(inputFournisseur, inputNumFournisseur){
+    inputFournisseur.splice(getIndexFournisseurFromId(inputFournisseur, inputNumFournisseur), 1);
+  }
+
   this.getFournisseursLabels = function(){
     return fournisseursLabel;
   }

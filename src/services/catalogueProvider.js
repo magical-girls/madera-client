@@ -106,7 +106,7 @@ function getIndexModuleFromId(inputModule, inputIdModule){
 
 function getIndexComposantFromId(inputComposant, inputIdComposant){
   var result = null;
-  for (var i = 0 ; i < inputGamme.length ; i++){
+  for (var i = 0 ; i < inputComposant.length ; i++){
     if (inputIdComposant == (inputComposant[i].id_composant)){
       result = i;
     }
@@ -133,6 +133,8 @@ app.service('catalogueProvider', function(){
     return composants;
   }
   this.deleteComposant = function(inputComposant, inputNumComposant){
+    console.log(inputComposant);
+    console.log("debugfromcatalogueprovider : " + inputNumComposant);
     inputComposant.splice(getIndexComposantFromId(inputComposant, inputNumComposant), 1);
   }
 })
