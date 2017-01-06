@@ -2,6 +2,7 @@
 <div ng-app="Madera" ng-controller="listCtrl">
   <md-content class="md-padding" >
   <md-card>
+       <md-card-content>
     <h2>{{pageTitle}}</h2>
       <div layout="row"  layout-xs="column" >
       <md-input-container flex>
@@ -9,7 +10,7 @@
         <input ng-model="searchText" type="text">
       </md-input-container>
       <md-input-container flex>
-        <label>Trier par</label>
+        <label>Trier par ordre de...</label>
         <md-select ng-model="sortType">
           <md-option ng-value="label.value" ng-repeat="label in labels ">{{ label.name }}</md-option>
         </md-select>
@@ -20,6 +21,7 @@
         </md-button>
       </md-input-container>
     </div>
+       </md-card-content>
     <md-card-content>
       <div ng-if="displayDevis" ng-include="'./views/_liste_devis.html'"></div>
       <div ng-if="displayFournisseurs" ng-include="'./views/_liste_fournisseurs.html'"></div>

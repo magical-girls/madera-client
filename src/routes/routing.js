@@ -5,7 +5,7 @@ function ($routeProvider) {
   $routeProvider
   .when('/index', {
     templateUrl: 'index.html',
-    controller: 'connectCtrl'
+    controller: 'indexCtrl'
   })
   .when('/accueil', {
     templateUrl: 'views/accueil.html',
@@ -31,8 +31,8 @@ function ($routeProvider) {
     templateUrl: 'views/devis.html',
     controller: 'editDevisCtrl'
   })
-  .otherwise({
-    redirectTo: '/liste/devis'
+  .when('/signin', {
+    templateUrl: 'views/signin.html',
+    controller: 'signinCtrl'
   });
-}
-])
+}])

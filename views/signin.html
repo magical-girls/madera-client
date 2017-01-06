@@ -1,0 +1,23 @@
+<div ng-controller="signinCtrl" layout="column" layout-padding="" ng-cloak="" ng-app="Madera">
+  <md-card>
+    <h2>Connexion</h2>
+  <br>
+  <md-content class="md-padding">
+    <div layout-align="center end">
+      <md-input-container class="md-icon-float md-block">
+        <label>Login</label>
+        <md-icon md-svg-src="ressources/img/icons/ic_person_black_24px.svg" class="name"></md-icon>
+        <input ng-model="login" type="text">
+      </md-input-container>
+      <md-input-container class="md-icon-float md-block">
+        <label>Mot de passe</label>
+        <md-icon md-svg-src="ressources/img/icons/ic_vpn_key_black_24px.svg" class="name"></md-icon>
+        <input ng-model="pass" type="text">
+      </md-input-container>
+       <div layout-align="center end">
+        <md-button class="md-raised" ng-click="checkUser()">Connexion</md-button>
+       </div>
+    </div>
+  </md-content>
+</md-card>
+</div>
