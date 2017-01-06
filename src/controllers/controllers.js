@@ -55,7 +55,7 @@ app
 
   })
   /////////////////////// liste controller  ///////////////////////////////////////////////////
-  .controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, fournisseursProvider, $mdDialog) {
+.controller('listCtrl',  function ($scope, $routeParams,$location, devisProvider, fournisseursProvider,$mdDialog, commonCode) {
 
     var param = $routeParams.param; // on récupère la valeur passée dans l'url
     //initialisation des variables
@@ -100,68 +100,19 @@ app
       default:
     }
 
-    $scope.deleteFournisseur = function (numFournisseur) {
-      fournisseursProvider.deleteFournisseur(fournisseurs, numFournisseur);
+    $scope.deleteSomething = function($event, action) {
+        commonCode.showConfirm($event, action);
     }
-    //Modal de confirmation de suppression
-    $scope.showConfirm = function ($event, action) {
-      console.log("debugtest" + action);
-      var confirm = $mdDialog.confirm()
-        .title('Etes-vous sur de vouloir supprimer cet élément?')
-        .ariaLabel('TutorialsPoint.com')
-        .targetEvent(event)
-        .ok('Oui')
-        .cancel('Non');
-      $mdDialog.show(confirm).then(function () {
-        if (action == "deleteDevis") {
-          $scope.deleteDevis($event)
-        }
-        else if (action == "deleteFournisseur") {
-          $scope.deleteFournisseur($event);
-        }
-      }, function () {
-        //suppression annulée
-      });
-    };
+
   })
-  .controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvider, $mdDialog) {
+.controller('catalogueCtrl',  function ($scope, $routeParams, catalogueProvider,$mdDialog, commonCode) {
     $scope.datasGammes = catalogueProvider.getGammes();
     $scope.datasModules = catalogueProvider.getModules();
     $scope.datasComposants = catalogueProvider.getComposants();
 
-    $scope.deleteGamme = function (numGamme) {
-      catalogueProvider.deleteGamme(gammes, numGamme);
+    $scope.deleteSomething = function($event, action) {
+        commonCode.showConfirm($event, action);
     }
-
-    $scope.deleteModule = function (numModule) {
-      catalogueProvider.deleteModule(modules, numModule);
-    }
-
-    $scope.deleteComposant = function (numComposant) {
-      catalogueProvider.deleteComposant(composants, numComposant);
-    }
-
-    $scope.showConfirm = function ($event, action) {
-      var confirm = $mdDialog.confirm()
-        .title('Etes-vous sur de vouloir supprimer cet élément?')
-        .ariaLabel('TutorialsPoint.com')
-        .targetEvent(event)
-        .ok('Oui')
-        .cancel('Non');
-      $mdDialog.show(confirm).then(function () {
-        if (action == "deleteGamme") {
-          $scope.deleteGamme($event);
-        }
-        else if (action == "deleteModule") {
-          $scope.deleteModule($event);
-        }
-        else if (action == "deleteComposant") {
-          $scope.deleteComposant($event);
-        }
-      }, function () {
-        $scope.status = 'You decided to keep your record.';
-      });
-    };
   })
   .controller('compteCtrl', function ($scope, $routeParams, userProvider, $mdDialog) {
     $scope.user = userProvider.getUser();
