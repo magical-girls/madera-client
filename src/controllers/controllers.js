@@ -82,8 +82,8 @@ app
         $scope.labels = devisProvider.getDevisLabels();
         $scope.displayDevis = true;
         //consulter page devis (id devis en parametre)
-        $scope.goToDevis = function ($event) {
-          $location.url("/devis/" + $event);
+        $scope.goToDevis = function ($id,$edit) {
+          $location.url("/devis/" + $id+"/"+$edit);
         }
 
         $scope.deleteDevis = function (numDevis) {
@@ -118,6 +118,8 @@ app
     $scope.user = userProvider.getUser();
   })
   .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog) {
+    // Vérification du mode edition (activé ou non)
+    $scope.edit = $routeParams.edit;
     //Récupération des données
     $scope.devisData = devisProvider.getaDevis();
     $scope.clientData = userProvider.getClient();
@@ -125,8 +127,17 @@ app
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
     $scope.composants = catalogueProvider.getComposants();
-
-    // initialisation des choix
+    //Gestion des commentaires
+     $scope.clientComment = [];
+     $scope.commercialComment = [];
+     $scope.addComment = function (txt, target) {
+       if(taget=="client"){
+        $scope.clientComment.push({ 'id_row': new Date().getTime(), 'comment_txt': txt, 'comment_date': new Date().getTime()});
+       }else{
+        $scope.commercialComment.push({ 'id_row': new Date().getTime(), 'comment_txt': txt, 'comment_date': new Date().getTime()});
+       }
+    };
+    // initialisation des choix (tableau)
     $scope.choixCatalogue = [];
     $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputNomComposant) {
       $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'nom_composant': inputNomComposant });

@@ -4,18 +4,51 @@
       <md-card flex flex-gt-xs="50">
         <md-card-content>
           <h2>Client</h2>
-          <p>Nom: {{clientData.prenom}} {{clientData.nom}}</p>
-          <p>Tel: {{clientData.telephone}}</p>
-          <p>E-mail: {{clientData.mail}}</p>
+          <div layout-gt-xs="row" layout-xs="column">
+            <md-input-container class="md-block">
+              <label>Prénom</label>
+              <input ng-disabled="edit=='false'" ng-model="clientData.prenom" type="text">
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Nom</label>
+              <input ng-disabled="edit=='false'" ng-model="clientData.nom" type="text">
+            </md-input-container>
+          </div>
+          <md-input-container class="md-block">
+            <label>Tel</label>
+            <input ng-disabled="edit=='false'" ng-model="clientData.telephone" type="text">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>E-mail</label>
+            <input ng-disabled="edit=='false'" ng-model="clientData.mail" type="text">
+          </md-input-container>
         </md-card-content>
       </md-card>
       <md-card flex>
         <h2>Commercial</h2>
         <md-card-content>
-          <p>Nom: {{comData.prenom}} {{comData.nom}}</p>
-          <p>Matricule: {{comData.matricule}}</p>
-          <p>Tel: {{comData.telephone}}</p>
-          <p>E-mail: {{comData.mail}}</p>
+          <div layout-gt-xs="row" layout-xs="column">
+            <md-input-container class="md-block">
+              <label>Prénom</label>
+              <input ng-disabled="edit=='false'" ng-model="comData.prenom" type="text">
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Nom</label>
+              <input ng-disabled="edit=='false'" ng-model="comData.nom" type="text">
+            </md-input-container>
+          </div>
+          <md-input-container class="md-block">
+            <label>Matricule</label>
+            <input ng-disabled="edit=='false'" ng-model="comData.matricule" type="text">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Tel</label>
+            <input ng-disabled="edit=='false'" ng-model="comData.telephone" type="text">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>E-mail</label>
+            <input ng-disabled="edit=='false'" ng-model="comData.mail" type="text">
+          </md-input-container>
         </md-card-content>
       </md-card>
     </div>
@@ -40,19 +73,19 @@
           <div layout="row">
             <md-input-container flex>
               <label>Gammes</label>
-              <md-select ng-model="gamme">
+              <md-select ng-model="gamme" ng-disabled="edit=='false'">
                 <md-option ng-value="g.id_gamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom_gamme }}</md-option>
               </md-select>
             </md-input-container>
             <md-input-container flex>
               <label>Modules</label>
-              <md-select ng-model="module">
+              <md-select ng-model="module" ng-disabled="edit=='false'">
                 <md-option ng-repeat="m in modules" ng-value="m.id_module" ng-if="getMatchModule(gamme,m._id_gamme)" ng-click="composant=null">{{ m.nom_module }}</md-option>
               </md-select>
             </md-input-container>
             <md-input-container flex>
               <label>Composants</label>
-              <md-select ng-model="composant">
+              <md-select ng-model="composant" ng-disabled="edit=='false'">
                 <md-option ng-value="c.id_composant" ng-repeat="c in composants " ng-if="getMatchComposant(module,c._id_module)">{{ c.nom_composant }}</md-option>
               </md-select>
             </md-input-container>
@@ -104,19 +137,61 @@
       <md-card flex flex-gt-xs="50">
         <h2>Commentaire client</h2>
         <md-card-content>
-          <p>Some content</p>
+          <md-table-container>
+            <table md-table>
+              <thead md-head>
+                <tr md-row>
+                  <th md-column><span>Date</span></th>
+                  <th md-column><span>Commentaires</span></th>
+                </tr>
+              </thead>
+              <tbody md-body>
+                <tr md-row ng-repeat="comment in clientComment">
+                  <td md-cell>{comment.comment_date}}</td>
+                  <td md-cell>{comment.comment_txt}}</td>
+                </tr>
+              </tbody>
+            </table>
+              <div ng-show="addClientComment=='true'">
+            <md-input-container class="md-block">
+              <label>Tapez votre commentaire</label>
+              <textarea ng-model="clientCommentary" md-maxlength="150" rows="6" md-select-on-focus=""></textarea>
+            </md-input-container>
+          </div>
+          </md-table-container>
         </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-raised" >Ajouter</md-button>
+        <md-card-actions layout="row" layout-align="end center">        
+          <md-button class="md-raised" ng-disabled="edit=='false'">Ajouter</md-button>
         </md-card-actions>
       </md-card>
       <md-card flex>
         <h2>Commentaire Commercial</h2>
         <md-card-content>
-          <p>Some content</p>
+          <md-table-container>
+            <table md-table>
+              <thead md-head>
+                <tr md-row>
+                  <th md-column><span>Date</span></th>
+                  <th md-column><span>Commentaires</span></th>
+                </tr>
+              </thead>
+              <tbody md-body>
+                <tr md-row ng-repeat="comment in commercialComment">
+                  <td md-cell>{comment.comment_date}}</td>
+                  <td md-cell>{comment.comment_txt}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </md-table-container>
+          <div ng-show="addClientComment=='true'">
+            <md-input-container class="md-block">
+              <label>Tapez votre commentaire</label>
+              <textarea ng-model="clientCommentary" md-maxlength="100" rows="6" md-select-on-focus=""></textarea>
+            </md-input-container>
+          </div>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-raised" >Ajouter</md-button>
+          <md-button class="md-raised" ng-disabled="edit=='false'">Ajouter</md-button>
         </md-card-actions>
       </md-card>
     </div>
