@@ -127,14 +127,23 @@ app
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
     $scope.composants = catalogueProvider.getComposants();
+    $scope.addClientComment=false;
+    $scope.addCommercialComment=false;
+
     //Gestion des commentaires
      $scope.clientComment = [];
      $scope.commercialComment = [];
      $scope.addComment = function (txt, target) {
-       if(taget=="client"){
+       console.log(target);
+       console.log(txt);
+       if(target=='client'){
         $scope.clientComment.push({ 'id_row': new Date().getTime(), 'comment_txt': txt, 'comment_date': new Date().getTime()});
+        $scope.clientCommentary=null;
+        $scope.addClientComment=false;
        }else{
         $scope.commercialComment.push({ 'id_row': new Date().getTime(), 'comment_txt': txt, 'comment_date': new Date().getTime()});
+        $scope.commercialCommentary=null;
+        $scope.addCommercialComment=false;
        }
     };
     // initialisation des choix (tableau)
