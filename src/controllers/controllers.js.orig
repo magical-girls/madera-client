@@ -3,6 +3,7 @@
 /* Controllers */
 
 app
+<<<<<<< HEAD
   /////////////////////// tabs controller  ///////////////////////////////////////////////////
   //Pour rediriger vers les bonnes routes
   .controller('tabCtrl', function ($scope, $location, $log) {
@@ -41,21 +42,53 @@ app
   })
   /////////////////////// Sign in controller  /////////////////////////////////////////////////
   .controller('signinCtrl', function ($scope, $rootScope, $location, $window) {
-    /* $scope.checkUser = function () {
-       if ($scope.login == "user" && $scope.pass == "pass") {
-         //$window.sessionStorage.setItem("connected", true);
-         $rootScope.connected=true;
-         console.log( $rootScope.connected);
-         $location.url("/accueil");
-       }
-     }*/
+   /* $scope.checkUser = function () {
+      if ($scope.login == "user" && $scope.pass == "pass") {
+        //$window.sessionStorage.setItem("connected", true);
+        $rootScope.connected=true;
+        console.log( $rootScope.connected);
+        $location.url("/accueil");
+      }
+    }*/
   })
   /////////////////////// Accueil controller //////////////////////////////////////////////////
   .controller('accueilCtrl', function ($scope) {
+=======
+/////////////////////// tabs controller  ///////////////////////////////////////////////////
+//Pour rediriger vers les bonnes routes
+.controller('tabCtrl', function($scope, $location, $log) { 
+  $scope.selectedIndex = 0;
+  $scope.$watch('selectedIndex', function(current, old) {
+    switch (current) {
+      case 0:
+      $location.url("/accueil");
+      break;
+      case 1:
+      $location.url("/liste/devis");
+      break;
+      case 2:
+      $location.url("/catalogue");
+      break;
+      case 3:
+      $location.url("/liste/fournisseurs");
+      break;
+    }
+  });
+  $scope.showProfile = function(event) {
+    $location.url("/compte");
+    // TO DO ajouter en parametre identifiant user 
+  };
+})
+/////////////////////// Accueil controller //////////////////////////////////////////////////
+.controller('accueilCtrl',function($scope){
+})
+/////////////////////// liste controller  ///////////////////////////////////////////////////
+.controller('listCtrl',  function ($scope, $routeParams,$location, devisProvider, fournisseursProvider,$mdDialog, commonCode) {
+>>>>>>> 2324146b6f3b52ff5c5361b86bba2485bf5cc427
 
   })
   /////////////////////// liste controller  ///////////////////////////////////////////////////
-  .controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, fournisseursProvider, $mdDialog, commonCode) {
+  .controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, fournisseursProvider, $mdDialog) {
 
     var param = $routeParams.param; // on récupère la valeur passée dans l'url
     //initialisation des variables
@@ -82,10 +115,11 @@ app
         $scope.labels = devisProvider.getDevisLabels();
         $scope.displayDevis = true;
         //consulter page devis (id devis en parametre)
-        $scope.goToDevis = function ($id, $edit) {
-          $location.url("/devis/" + $id + "/" + $edit);
+        $scope.goToDevis = function ($event) {
+          $location.url("/devis/" + $event);
         }
 
+<<<<<<< HEAD
         $scope.deleteDevis = function (numDevis) {
           devisProvider.deleteDevis(devis, numDevis);
         }
@@ -100,33 +134,73 @@ app
       default:
     }
 
-    $scope.deleteSomething = function ($event, action) {
-      commonCode.showConfirm($event, action);
+    $scope.deleteFournisseur = function (numFournisseur) {
+      fournisseursProvider.deleteFournisseur(fournisseurs, numFournisseur);
     }
-    //FAB
-    $scope.addNewDevis = function () {
-        console.log("new devis");
-    }
+    //Modal de confirmation de suppression
+    $scope.showConfirm = function ($event, action) {
+      console.log("debugtest" + action);
+      var confirm = $mdDialog.confirm()
+        .title('Etes-vous sur de vouloir supprimer cet élément?')
+        .ariaLabel('TutorialsPoint.com')
+        .targetEvent(event)
+        .ok('Oui')
+        .cancel('Non');
+      $mdDialog.show(confirm).then(function () {
+        if (action == "deleteDevis") {
+          $scope.deleteDevis($event)
+        }
+        else if (action == "deleteFournisseur") {
+          $scope.deleteFournisseur($event);
+        }
+      }, function () {
+        //suppression annulée
+      });
+    };
   })
-  .controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvider, $mdDialog, commonCode) {
+  .controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvider, $mdDialog) {
     $scope.datasGammes = catalogueProvider.getGammes();
     $scope.datasModules = catalogueProvider.getModules();
     $scope.datasComposants = catalogueProvider.getComposants();
 
-    $scope.deleteSomething = function ($event, action) {
-      commonCode.showConfirm($event, action);
+    $scope.deleteGamme = function (numGamme) {
+      catalogueProvider.deleteGamme(gammes, numGamme);
     }
-    /// FAB 
-      $scope.addToCatalogue = function (type) {
-        console.log(type);
+
+    $scope.deleteModule = function (numModule) {
+      catalogueProvider.deleteModule(modules, numModule);
     }
+
+    $scope.deleteComposant = function (numComposant) {
+      catalogueProvider.deleteComposant(composants, numComposant);
+    }
+
+    $scope.showConfirm = function ($event, action) {
+      var confirm = $mdDialog.confirm()
+        .title('Etes-vous sur de vouloir supprimer cet élément?')
+        .ariaLabel('TutorialsPoint.com')
+        .targetEvent(event)
+        .ok('Oui')
+        .cancel('Non');
+      $mdDialog.show(confirm).then(function () {
+        if (action == "deleteGamme") {
+          $scope.deleteGamme($event);
+        }
+        else if (action == "deleteModule") {
+          $scope.deleteModule($event);
+        }
+        else if (action == "deleteComposant") {
+          $scope.deleteComposant($event);
+        }
+      }, function () {
+        $scope.status = 'You decided to keep your record.';
+      });
+    };
   })
   .controller('compteCtrl', function ($scope, $routeParams, userProvider, $mdDialog) {
     $scope.user = userProvider.getUser();
   })
   .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog) {
-    // Vérification du mode edition (activé ou non)
-    $scope.edit = $routeParams.edit;
     //Récupération des données
     $scope.devisData = devisProvider.getaDevis();
     $scope.clientData = userProvider.getClient();
@@ -134,24 +208,35 @@ app
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
     $scope.composants = catalogueProvider.getComposants();
-    $scope.addClientComment = false;
-    $scope.addCommercialComment = false;
+=======
+    $scope.deleteSomething = function($event, action) {
+        commonCode.showConfirm($event, action);
+    }
 
-    //Gestion des commentaires
-    $scope.clientComment = [];
-    $scope.commercialComment = [];
-    $scope.addComment = function (txt, target) {
-      if (target == 'client') {
-        $scope.clientComment.push({ 'id_row': new Date().getTime(), 'comment_txt': txt, 'comment_date': new Date().getTime() });
-        $scope.clientCommentary = null;
-        $scope.addClientComment = false;
-      } else {
-        $scope.commercialComment.push({ 'id_row': new Date().getTime(), 'comment_txt': txt, 'comment_date': new Date().getTime() });
-        $scope.commercialCommentary = null;
-        $scope.addCommercialComment = false;
-      }
-    };
-    // initialisation des choix (tableau)
+})
+.controller('catalogueCtrl',  function ($scope, $routeParams, catalogueProvider,$mdDialog, commonCode) {
+  $scope.datasGammes = catalogueProvider.getGammes();
+  $scope.datasModules = catalogueProvider.getModules();
+  $scope.datasComposants = catalogueProvider.getComposants();
+
+    $scope.deleteSomething = function($event, action) {
+        commonCode.showConfirm($event, action);
+    }
+})
+.controller('compteCtrl',  function ($scope, $routeParams, userProvider,$mdDialog) {
+  $scope.user=userProvider.getUser();
+})
+.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider,userProvider,catalogueProvider,$mdDialog) {
+  //Récupération des données
+  $scope.devisData=devisProvider.getaDevis();
+  $scope.clientData=userProvider.getClient();
+  $scope.comData=userProvider.getUser();
+  $scope.gammes=catalogueProvider.getGammes();
+  $scope.modules=catalogueProvider.getModules();
+  $scope.composants=catalogueProvider.getComposants();
+>>>>>>> 2324146b6f3b52ff5c5361b86bba2485bf5cc427
+
+    // initialisation des choix
     $scope.choixCatalogue = [];
     $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputNomComposant) {
       $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'nom_composant': inputNomComposant });

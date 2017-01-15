@@ -22,11 +22,28 @@
         </md-content>
       </md-tab>
     </md-tabs>
+       <!-- FAB button -->
+     <md-fab-speed-dial ng-cloak ng-open="show" class="md-fling md-fab md-fab-bottom-right" md-direction="up">
+    <md-fab-trigger>
+        <md-button class="md-fab md-primary">
+           <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+        </md-button>
+    </md-fab-trigger>
+
+    <md-fab-actions>
+        <md-button class="md-fab md-raised md-warn md-mini" ng-click="addToCatalogue('composant')">
+            <md-tooltip md-direction="left">Composant</md-tooltip>
+        </md-button>
+        <md-button class="md-fab md-raised md-warn md-mini " ng-click="addToCatalogue('module')">
+            <md-tooltip md-direction="left">Module</md-tooltip>
+        </md-button>
+        <md-button class="md-fab md-raised md-mini md-warn" ng-click="addToCatalogue('Gamme')">
+            <md-tooltip md-direction="left">Gamme</md-tooltip>
+        </md-button>
+    </md-fab-actions>
+</md-fab-speed-dial>
+
+  
   </md-content>
 </md-card>
 </div>
-
-<!--
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
--->
