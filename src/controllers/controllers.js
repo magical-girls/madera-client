@@ -107,6 +107,9 @@ app
     $scope.addNewDevis = function () {
         console.log("new devis");
     }
+     $scope.addNewFournisseur = function () {
+        console.log("new Fournisseur");
+    }
   })
   .controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvider, $mdDialog, commonCode) {
     $scope.datasGammes = catalogueProvider.getGammes();
@@ -120,11 +123,12 @@ app
       $scope.addToCatalogue = function (type) {
         console.log(type);
     }
+    
   })
   .controller('compteCtrl', function ($scope, $routeParams, userProvider, $mdDialog) {
     $scope.user = userProvider.getUser();
   })
-  .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog) {
+  .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog,$window) {
     // Vérification du mode edition (activé ou non)
     $scope.edit = $routeParams.edit;
     //Récupération des données
@@ -189,4 +193,8 @@ app
       }
       return resultMatchComposant;
     }
-  })
+    // Bouton retour
+    $scope.returnFunction=function() {
+         $window.history.back();
+     };
+  });
