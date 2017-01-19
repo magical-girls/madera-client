@@ -19,6 +19,10 @@ function ($routeProvider) {
     templateUrl: 'views/catalogue.html',
     controller: 'catalogueCtrl'
   })
+  .when('/editCatalogue/:action/:type/:param', {
+    templateUrl: 'views/editCatalogue.html',
+    controller: 'editCatalogueCtrl'
+  })
   .when('/compte', {
     templateUrl: 'views/compte.html',
     controller: 'compteCtrl'

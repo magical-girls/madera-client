@@ -12,8 +12,8 @@
           </thead>
           <tbody md-body>
             <tr md-row ng-repeat="gamme in datasGammes | orderBy:sortType:sortReverse | filter:searchText">
-              <td md-cell ng-click="goToGamme(data.id_gamme)">{{gamme.nom_gamme}}</td>
-              <td md-cell ng-click="goToGamme(data.id_gamme)">{{gamme.description_gamme}}</td>
+              <td md-cell ng-click="editCatalogue(data.id_gamme,gamme)">{{gamme.nom_gamme}}</td>
+              <td md-cell ng-click="editCatalogue(data.id_gamme,gamme)">{{gamme.description_gamme}}</td>
               <td md-cell>
                 <md-button class="md-secondary" ng-click="" aria-label="Edit">
                   <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>

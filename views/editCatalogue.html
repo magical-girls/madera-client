@@ -1,0 +1,38 @@
+<div ng-cloak="" ng-app="Madera">
+    <md-card>
+        <md-content>
+            <h2>{{title}}</h2>
+            <md-input-container class="md-block">
+                <label>Nom </label>
+                <input ng-disabled="edit=='false'" ng-model="nom" type="text">
+            </md-input-container>
+            <md-input-container flex class="md-block">
+                <label>Description</label>
+                <textarea ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
+            </md-input-container>
+            <h3>Choix de l'appartenance</h3>
+            <md-input-container flex>
+                <label>Gammes</label>
+                <md-select ng-model="gamme" ng-disabled="type!='module'">
+                    <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Modules</label>
+                <md-select ng-model="module" ng-disabled="type!='composant'">
+                    <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
+                </md-select>
+            </md-input-container>
+            <h3>Choix du fournisseur</h3>
+            <md-input-container flex>
+                <label>Fournisseur</label>
+                <md-select ng-model="fournisseur" ng-disabled="type!='composant'">
+                    <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseur ">{{ f.nom_fournisseur }}</md-option>
+                </md-select>
+            </md-input-container>
+            <h3>Ajout image de prévisualisation</h3>
+            <input id="fileInput" name="file" type="file" class="ng-hide" multiple>
+            <md-button id="uploadButton" class="md-raised md-primary"> Télécharger images </md-button>
+        </md-content>
+    </md-card>
+</div>

@@ -96,6 +96,7 @@ app
         $scope.datas = fournisseursProvider.getFournisseurs();
         $scope.labels = fournisseursProvider.getFournisseursLabels();
         $scope.displayFournisseurs = true;
+
         break;
       default:
     }
@@ -105,13 +106,13 @@ app
     }
     //FAB
     $scope.addNewDevis = function () {
-        console.log("new devis");
+      console.log("new devis");
     }
-     $scope.addNewFournisseur = function () {
-        console.log("new Fournisseur");
+    $scope.addNewFournisseur = function () {
+      console.log("new Fournisseur");
     }
   })
-  .controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvider, $mdDialog, commonCode) {
+  .controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvider, $mdDialog, commonCode, $location) {
     $scope.datasGammes = catalogueProvider.getGammes();
     $scope.datasModules = catalogueProvider.getModules();
     $scope.datasComposants = catalogueProvider.getComposants();
@@ -120,15 +121,18 @@ app
       commonCode.showConfirm($event, action);
     }
     /// FAB 
-      $scope.addToCatalogue = function (type) {
-        console.log(type);
+    $scope.addToCatalogue = function ($type) {
+      console.log($type);
+      $location.url("/editCatalogue/create/" + $type+"/"+null);
     }
-    
+    $scope.editCatalogue = function ($id,$type) {
+      $location.url("/editCatalogue/edit/"+$type +"/"+ $id);
+    }
   })
   .controller('compteCtrl', function ($scope, $routeParams, userProvider, $mdDialog) {
     $scope.user = userProvider.getUser();
   })
-  .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog,$window) {
+  .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog, $window) {
     // Vérification du mode edition (activé ou non)
     $scope.edit = $routeParams.edit;
     //Récupération des données
@@ -194,7 +198,31 @@ app
       return resultMatchComposant;
     }
     // Bouton retour
-    $scope.returnFunction=function() {
-         $window.history.back();
-     };
+    $scope.returnFunction = function () {
+      $window.history.back();
+    };
+  })
+  .controller('editCatalogueCtrl', function ($scope, $routeParams, devisProvider, fournisseursProvider, catalogueProvider, $mdDialog, $window) {
+    $scope.type = $routeParams.type;
+    $scope.param = $routeParams.param;
+    $scope.gammes = catalogueProvider.getGammes();
+    $scope.modules = catalogueProvider.getModules();
+    $scope.fournisseur=fournisseursProvider.getFournisseurs();
+    // si edit, récupérer les infos correspondantes à l'id
+    switch ($scope.type) {
+      case "gamme":
+      $scope.title="Gamme";
+        break;
+      case "module":
+      $scope.title="Module";
+
+        break;
+      case "composant":
+      $scope.title="Composant";
+
+        break;
+      default:
+        break;
+    }
+
   });
