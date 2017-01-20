@@ -11,20 +11,22 @@
                 <label>Description</label>
                 <textarea ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
             </md-input-container>
-            <h3>Choix de l'appartenance</h3>
-            <md-input-container flex>
-                <label>Gammes</label>
-                <md-select ng-model="gamme" ng-disabled="type!='module'">
-                    <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container flex>
-                <label>Modules</label>
-                <md-select ng-model="module" ng-disabled="type!='composant'">
-                    <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
-                </md-select>
-            </md-input-container>
-            <md-divider></md-divider>
+            <div ng-show="type!='gamme'">
+                <h3>Choix de l'appartenance</h3>
+                <md-input-container ng-show="type=='module'"flex>
+                    <label>Gammes</label>
+                    <md-select ng-model="gamme" ng-disabled="type!='module'">
+                        <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container ng-show="type=='composant'" flex>
+                    <label>Modules</label>
+                    <md-select ng-model="module" ng-disabled="type!='composant'">
+                        <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-divider></md-divider>
+            </div>
             <h3>Choix du fournisseur</h3>
             <md-input-container flex>
                 <label>Fournisseur</label>
