@@ -1,7 +1,8 @@
 <div ng-cloak="" ng-app="Madera">
     <md-card>
-        <md-content>
+        <md-card-content>
             <h2>{{title}}</h2>
+            <h3>Description générale</h3>
             <md-input-container class="md-block">
                 <label>Nom </label>
                 <input ng-disabled="edit=='false'" ng-model="nom" type="text">
@@ -23,6 +24,7 @@
                     <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
                 </md-select>
             </md-input-container>
+            <md-divider></md-divider>
             <h3>Choix du fournisseur</h3>
             <md-input-container flex>
                 <label>Fournisseur</label>
@@ -30,9 +32,31 @@
                     <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseur ">{{ f.nom_fournisseur }}</md-option>
                 </md-select>
             </md-input-container>
+            <md-divider></md-divider>
             <h3>Ajout image de prévisualisation</h3>
-            <input id="fileInput" name="file" type="file" class="ng-hide" multiple>
-            <md-button id="uploadButton" class="md-raised md-primary"> Télécharger images </md-button>
-        </md-content>
+            <choose-file layout="row" flex="25">
+                <input id="fileInput" type="file" class="ng-hide">
+                <md-input-container flex class="md-block">
+                    <label>Selectionnez votre image</label>
+                    <input type="text" ng-model="fileName" disabled>
+                    <!-- <div class="hint">Select your file</div> -->
+                </md-input-container>
+                <div>
+                    <input class="ng-hide" id="input-file-id" multiple type="file" />
+                    <label for="input-file-id" class="md-button md-raised md-primary">
+                        <md-icon md-svg-src="ressources/img/icons/ic_search_black_24px.svg"></md-icon>
+                    </label>
+                </div>
+                <div>
+                    <md-button id="uploadButton" class="md-button md-raised md-warn">
+                        <md-icon md-svg-src="ressources/img/icons/ic_file_download_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+            </choose-file>
+            <div layout="row" layout-xs="column" layout-align="center end">
+                <md-button class="md-raised">Enregistrer</md-button>
+                <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
+            </div>
+        </md-card-content>
     </md-card>
 </div>

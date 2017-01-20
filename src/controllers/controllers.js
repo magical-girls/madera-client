@@ -123,10 +123,10 @@ app
     /// FAB 
     $scope.addToCatalogue = function ($type) {
       console.log($type);
-      $location.url("/editCatalogue/create/" + $type+"/"+null);
+      $location.url("/editCatalogue/create/" + $type + "/" + null);
     }
-    $scope.editCatalogue = function ($id,$type) {
-      $location.url("/editCatalogue/edit/"+$type +"/"+ $id);
+    $scope.editCatalogue = function ($id, $type) {
+      $location.url("/editCatalogue/edit/" + $type + "/" + $id);
     }
   })
   .controller('compteCtrl', function ($scope, $routeParams, userProvider, $mdDialog) {
@@ -207,22 +207,24 @@ app
     $scope.param = $routeParams.param;
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
-    $scope.fournisseur=fournisseursProvider.getFournisseurs();
+    $scope.fournisseur = fournisseursProvider.getFournisseurs();
     // si edit, récupérer les infos correspondantes à l'id
     switch ($scope.type) {
       case "gamme":
-      $scope.title="Gamme";
+        $scope.title = "Gamme";
         break;
       case "module":
-      $scope.title="Module";
+        $scope.title = "Module";
 
         break;
       case "composant":
-      $scope.title="Composant";
+        $scope.title = "Composant";
 
         break;
       default:
         break;
     }
-
+    $scope.returnFunction = function () {
+      $window.history.back();
+    };
   });
