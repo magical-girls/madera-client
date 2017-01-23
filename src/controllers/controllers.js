@@ -87,7 +87,7 @@ app
         }
 
         $scope.addNewDevis = function () {
-          $location.url("/devis/" + null + "/" +true);
+          $location.url("/devis/new/" +true);
         }
 
         $scope.deleteDevis = function (numDevis) {
@@ -141,12 +141,13 @@ app
           $scope.addClientComment = false;
       $scope.addCommercialComment = false;
     //Récupération des données
-    if (null != id) { //si on edit, récupération des données du devis
-      console.log("id n'est pas null");
+    if ("new" != id) { //si on edit, récupération des données du devis
+      console.log("id n'est pas new :"+id);
+      
       $scope.devisData = devisProvider.getaDevis();
       $scope.clientData = userProvider.getClient();
     }else{
-      console.log("id est null");
+      console.log("id est new: "+id);
     }
     $scope.comData = userProvider.getUser();
     $scope.gammes = catalogueProvider.getGammes();
