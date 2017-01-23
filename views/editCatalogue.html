@@ -9,19 +9,19 @@
             </md-input-container>
             <md-input-container flex class="md-block">
                 <label>Description</label>
-                <textarea ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
+                <textarea ng-disabled="edit=='false'" ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
             </md-input-container>
             <div ng-show="type!='gamme'">
                 <h3>Choix de l'appartenance</h3>
                 <md-input-container ng-show="type=='module'"flex>
                     <label>Gammes</label>
-                    <md-select ng-model="gamme" ng-disabled="type!='module'">
+                    <md-select ng-model="gamme" ng-disabled="type!='module' || edit=='false'">
                         <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container ng-show="type=='composant'" flex>
                     <label>Modules</label>
-                    <md-select ng-model="module" ng-disabled="type!='composant'">
+                    <md-select ng-model="module" ng-disabled="type!='composant' || edit=='false'">
                         <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
                     </md-select>
                 </md-input-container>
@@ -30,7 +30,7 @@
             <h3>Choix du fournisseur</h3>
             <md-input-container flex>
                 <label>Fournisseur</label>
-                <md-select ng-model="fournisseur" ng-disabled="type!='composant'">
+                <md-select ng-model="fournisseur" ng-disabled="edit=='false'" ng-disabled="type!='composant'">
                     <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseur ">{{ f.nom_fournisseur }}</md-option>
                 </md-select>
             </md-input-container>
@@ -44,13 +44,13 @@
                     <!-- <div class="hint">Select your file</div> -->
                 </md-input-container>
                 <div>
-                    <input class="ng-hide" id="input-file-id" multiple type="file" />
+                    <input class="ng-hide" id="input-file-id" ng-disabled="edit=='false'" multiple type="file" />
                     <label for="input-file-id" class="md-button md-raised md-primary">
                         <md-icon md-svg-src="ressources/img/icons/ic_search_black_24px.svg"></md-icon>
                     </label>
                 </div>
                 <div>
-                    <md-button id="uploadButton" class="md-button md-raised md-warn">
+                    <md-button id="uploadButton" ng-disabled="edit=='false'" class="md-button md-raised md-warn">
                         <md-icon md-svg-src="ressources/img/icons/ic_file_download_black_24px.svg"></md-icon>
                     </md-button>
                 </div>

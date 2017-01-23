@@ -87,7 +87,7 @@ app
         }
 
         $scope.addNewDevis = function () {
-          $location.url("/devis/new/" +true);
+          $location.url("/devis/new/" + true);
         }
 
         $scope.deleteDevis = function (numDevis) {
@@ -124,11 +124,10 @@ app
     }
     /// FAB 
     $scope.addToCatalogue = function ($type) {
-      $location.url("/editCatalogue/create/" + $type + "/" + null);
+      $location.url("/editCatalogue/true/" + $type + "/" + "new");
     }
-    $scope.editCatalogue = function ($type, $id) {
-      console.log("type= " + $type + ", id = " + $id);
-      $location.url("/editCatalogue/edit/" + $type + "/" + $id);
+    $scope.editCatalogue = function ($type, $id, $edit) {
+      $location.url("/editCatalogue/" + $edit + "/" + $type + "/" + $id);
     }
   })
   .controller('compteCtrl', function ($scope, $routeParams, userProvider, $mdDialog) {
@@ -138,16 +137,16 @@ app
     // Vérification du mode edition (activé ou non)
     $scope.edit = $routeParams.edit;
     var id = $routeParams.id;
-          $scope.addClientComment = false;
-      $scope.addCommercialComment = false;
+    $scope.addClientComment = false;
+    $scope.addCommercialComment = false;
     //Récupération des données
     if ("new" != id) { //si on edit, récupération des données du devis
-      console.log("id n'est pas new :"+id);
-      
+      console.log("id n'est pas new :" + id);
+
       $scope.devisData = devisProvider.getaDevis();
       $scope.clientData = userProvider.getClient();
-    }else{
-      console.log("id est new: "+id);
+    } else {
+      console.log("id est new: " + id);
     }
     $scope.comData = userProvider.getUser();
     $scope.gammes = catalogueProvider.getGammes();
@@ -213,6 +212,7 @@ app
   .controller('editCatalogueCtrl', function ($scope, $routeParams, devisProvider, fournisseursProvider, catalogueProvider, $mdDialog, $window) {
     $scope.type = $routeParams.type;
     $scope.id = $routeParams.id;
+    $scope.edit = $routeParams.edit;
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
     $scope.fournisseur = fournisseursProvider.getFournisseurs();
