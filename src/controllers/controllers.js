@@ -86,6 +86,10 @@ app
           $location.url("/devis/" + $id + "/" + $edit);
         }
 
+        $scope.addNewDevis = function () {
+          $location.url("/devis/" + null + "/" +true);
+        }
+
         $scope.deleteDevis = function (numDevis) {
           devisProvider.deleteDevis(devis, numDevis);
         }
@@ -105,9 +109,7 @@ app
       commonCode.showConfirm($event, action);
     }
     //FAB
-    $scope.addNewDevis = function () {
-      console.log("new devis");
-    }
+
     $scope.addNewFournisseur = function () {
       console.log("new Fournisseur");
     }
@@ -122,10 +124,10 @@ app
     }
     /// FAB 
     $scope.addToCatalogue = function ($type) {
-      console.log($type);
       $location.url("/editCatalogue/create/" + $type + "/" + null);
     }
     $scope.editCatalogue = function ($id, $type) {
+      console.log("type= " + $type + ", id = " + $id);
       $location.url("/editCatalogue/edit/" + $type + "/" + $id);
     }
   })
@@ -135,16 +137,21 @@ app
   .controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog, $window) {
     // Vérification du mode edition (activé ou non)
     $scope.edit = $routeParams.edit;
+    var id = $routeParams.id;
+          $scope.addClientComment = false;
+      $scope.addCommercialComment = false;
     //Récupération des données
-    $scope.devisData = devisProvider.getaDevis();
-    $scope.clientData = userProvider.getClient();
+    if (null != id) { //si on edit, récupération des données du devis
+      console.log("id n'est pas null");
+      $scope.devisData = devisProvider.getaDevis();
+      $scope.clientData = userProvider.getClient();
+    }else{
+      console.log("id est null");
+    }
     $scope.comData = userProvider.getUser();
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
     $scope.composants = catalogueProvider.getComposants();
-    $scope.addClientComment = false;
-    $scope.addCommercialComment = false;
-
     //Gestion des commentaires
     $scope.clientComment = [];
     $scope.commercialComment = [];

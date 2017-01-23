@@ -14,6 +14,7 @@ app.service('commonCode', function (devisProvider, fournisseursProvider, $mdDial
         return result;
     };
 
+    // Supprimer un élément
     this.deleteSomething = function(inputId, action) {
 
         var result = null;
@@ -68,7 +69,7 @@ app.service('commonCode', function (devisProvider, fournisseursProvider, $mdDial
 
         return result;
     };
-
+    //Modal de confirmation
     this.showConfirm = function ($event, action) {
         console.log("debugtest" + action);
             var confirm = $mdDialog.confirm()
@@ -83,6 +84,6 @@ app.service('commonCode', function (devisProvider, fournisseursProvider, $mdDial
             }, function () {
                 this.status = 'You decided to keep your record.';
             });
+    
     };
-
 })

@@ -27,7 +27,7 @@ function ($routeProvider) {
     templateUrl: 'views/compte.html',
     controller: 'compteCtrl'
   })
-  .when('/devis/:param/:edit', {
+  .when('/devis/:id/:edit', {
     templateUrl: 'views/devis.html',
     controller: 'editDevisCtrl'
   })
