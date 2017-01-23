@@ -126,7 +126,7 @@ app
     $scope.addToCatalogue = function ($type) {
       $location.url("/editCatalogue/create/" + $type + "/" + null);
     }
-    $scope.editCatalogue = function ($id, $type) {
+    $scope.editCatalogue = function ($type, $id) {
       console.log("type= " + $type + ", id = " + $id);
       $location.url("/editCatalogue/edit/" + $type + "/" + $id);
     }
@@ -212,7 +212,7 @@ app
   })
   .controller('editCatalogueCtrl', function ($scope, $routeParams, devisProvider, fournisseursProvider, catalogueProvider, $mdDialog, $window) {
     $scope.type = $routeParams.type;
-    $scope.param = $routeParams.param;
+    $scope.id = $routeParams.id;
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
     $scope.fournisseur = fournisseursProvider.getFournisseurs();
