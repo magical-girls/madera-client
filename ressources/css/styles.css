@@ -3,10 +3,13 @@
       color: #1b9063;
 }
 
+
 .done-false {
       color: orangered;
 }
-
+th{
+  font-size: 15px !important;
+}
 table tbody tr:hover{
    background-color: rgba(158,158,158,0.2);
 }
