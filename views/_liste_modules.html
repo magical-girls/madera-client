@@ -12,11 +12,11 @@
         </thead>
         <tbody md-body>
           <tr md-row ng-repeat="module in datasModules | orderBy:sortType:sortReverse | filter:searchText">
-            <td md-cell ng-click="goToModule(data.id_module)">{{module.nom_module}}</td>
-            <td md-cell ng-click="goToModule(data.id_module)">{{module.description_module}}</td>
-            <td md-cell ng-click="goToModule(data.id_module)">{{module._id_gamme}}</td>
+            <td md-cell ng-click="editCatalogue('module',module.id_module, false)">{{module.nom_module}}</td>
+            <td md-cell ng-click="editCatalogue('module',module.id_module, false)">{{module.description_module}}</td>
+            <td md-cell ng-click="editCatalogue('module',module.id_module, false)">{{module._id_gamme}}</td>
             <td md-cell>
-              <md-button class="md-secondary" ng-click="" aria-label="Edit">
+              <md-button class="md-secondary" ng-click="editCatalogue('module',module.id_module, true)" aria-label="Edit">
                 <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
               </md-button>
               <md-button ng-click="deleteSomething(module.id_module, 'deleteModule')" aria-label="Delete">

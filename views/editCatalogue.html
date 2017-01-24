@@ -13,7 +13,7 @@
             </md-input-container>
             <div ng-show="type!='gamme'">
                 <h3>Choix de l'appartenance</h3>
-                <md-input-container ng-show="type=='module'"flex>
+                <md-input-container ng-show="type=='module'" flex>
                     <label>Gammes</label>
                     <md-select ng-model="gamme" ng-disabled="type!='module' || edit=='false'">
                         <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
@@ -27,14 +27,15 @@
                 </md-input-container>
                 <md-divider></md-divider>
             </div>
-            <h3>Choix du fournisseur</h3>
-            <md-input-container flex>
-                <label>Fournisseur</label>
-                <md-select ng-model="fournisseur" ng-disabled="edit=='false'" ng-disabled="type!='composant'">
-                    <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseur ">{{ f.nom_fournisseur }}</md-option>
-                </md-select>
-            </md-input-container>
-            <md-divider></md-divider>
+            <div ng-show="type=='composant'">
+                <h3>Choix du fournisseur</h3>
+                <md-input-container flex>
+                    <label>Fournisseur</label>
+                    <md-select ng-model="fournisseur" ng-disabled="edit=='false'" ng-disabled="type!='composant'">
+                        <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseur ">{{ f.nom_fournisseur }}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
             <h3>Ajout image de prévisualisation</h3>
             <choose-file layout="row" flex="25">
                 <input id="fileInput" type="file" class="ng-hide">

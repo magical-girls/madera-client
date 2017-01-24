@@ -12,11 +12,11 @@
         </thead>
         <tbody md-body>
           <tr md-row ng-repeat="composant in datasComposants | orderBy:sortType:sortReverse | filter:searchText">
-            <td md-cell ng-click="goToComposant(data.id_composant)">{{composant.nom_composant}}</td>
-            <td md-cell ng-click="goToComposant(data.id_composant)"> {{composant.description_composant}}</td>
-            <td md-cell ng-click="goToComposant(data.id_composant)">{{composant._id_module}}</td>
+            <td md-cell ng-click="editCatalogue('composant',composant.id_composant, false)">{{composant.nom_composant}}</td>
+            <td md-cell ng-click="editCatalogue('composant',composant.id_composant, false)"> {{composant.description_composant}}</td>
+            <td md-cell ng-click="editCatalogue('composant',composant.id_composant, false)">{{composant._id_module}}</td>
             <td md-cell>
-              <md-button class="md-secondary" ng-click="" aria-label="Edit">
+              <md-button class="md-secondary" ng-click="editCatalogue('composant',composant.id_composant, true)" aria-label="Edit">
                 <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
               </md-button>
               <md-button ng-click="deleteSomething(composant.id_composant, 'deleteComposant')" aria-label="Delete">
