@@ -54,7 +54,7 @@ var devis=  [{
   "id_devis":"5",
   "num_devis":"65",
   "nom_commercial":"Clara Binne",
-  "nom_client":"",
+  "nom_client":"Papyrus",
   "date_creation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"terminé"
@@ -62,8 +62,8 @@ var devis=  [{
 {
   "id_devis":"6",
   "num_devis":"16",
-  "nom_commercial":"Paul",
-  "nom_client":"Aroïde",
+  "nom_commercial":"Gérard Menvussa",
+  "nom_client":"Paul Aroïde",
   "date_creation":"02/02/2016",
   "date_modif":"03/01/2016",
   "etat":"refusé"

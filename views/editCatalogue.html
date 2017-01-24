@@ -2,68 +2,85 @@
     <md-card>
         <md-card-content>
             <h2>{{title}}</h2>
-            <h3>Description générale</h3>
-            <md-input-container class="md-block">
-                <label>Nom </label>
-                <input ng-disabled="edit=='false'" ng-model="nom" type="text">
-            </md-input-container>
-            <md-input-container flex class="md-block">
-                <label>Description</label>
-                <textarea ng-disabled="edit=='false'" ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
-            </md-input-container>
-            <md-input-container ng-show="type=='composant'" class="md-block">
-                <label>Prix</label>
-                <input ng-disabled="edit=='false'"  ng-model="Prix" type="number">
-            </md-input-container>
-            <div ng-show="type!='gamme'">
-                <h3>Choix de l'appartenance</h3>
-                <md-input-container ng-show="type=='module'" flex>
-                    <label>Gammes</label>
-                    <md-select ng-model="gamme" ng-disabled="type!='module' || edit=='false'">
-                        <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
-                    </md-select>
+            <form name="catalogueForm">
+                <h3>Description générale</h3>
+                <md-input-container class="md-block">
+                    <label>Nom *</label>
+                    <input ng-disabled="edit=='false'" required="" name="Nom" ng-model="nom" type="text">
+                    <div ng-messages="catalogueForm.Nom.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Vous devez obligatoirement entrer un nom.</div>
+                    </div>
                 </md-input-container>
-                <md-input-container ng-show="type=='composant'" flex>
-                    <label>Modules</label>
-                    <md-select ng-model="module" ng-disabled="type!='composant' || edit=='false'">
-                        <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
-                    </md-select>
-                </md-input-container>
-                <md-divider></md-divider>
-            </div>
-            <div ng-show="type=='composant'">
-                <h3>Choix du fournisseur</h3>
-                <md-input-container flex>
-                    <label>Fournisseur</label>
-                    <md-select ng-model="fournisseur" ng-disabled="edit=='false'" ng-disabled="type!='composant'">
-                        <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseurs ">{{ f.nom_fournisseur }}</md-option>
-                    </md-select>
-                </md-input-container>
-            </div>
-            <h3>Ajout image de prévisualisation</h3>
-            <choose-file layout="row" flex="25">
-                <input id="fileInput" type="file" class="ng-hide">
                 <md-input-container flex class="md-block">
-                    <label>Selectionnez votre image</label>
-                    <input type="text" ng-model="fileName" disabled>
-                    <!-- <div class="hint">Select your file</div> -->
+                    <label>Description</label>
+                    <textarea ng-disabled="edit=='false'" ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
                 </md-input-container>
-                <div>
-                    <input class="ng-hide" id="input-file-id" ng-disabled="edit=='false'" multiple type="file" />
-                    <label for="input-file-id" class="md-button md-raised md-primary">
+                <md-input-container ng-show="type=='composant'" class="md-block">
+                    <label>Prix *</label>
+                    <input ng-disabled="edit=='false'" required name="Prix" ng-model="prix" type="number">
+                    <div ng-messages="catalogueForm.Prix.$error" role="alert" multiple="">
+                        <div ng-message="required" class="my-message">Vous devez entrer un prix.</div>
+                        <div ng-message="pattern" class="my-message">Le prix n'est pas valide.</div>
+                    </div>
+                </md-input-container>
+                <div ng-show="type!='gamme'">
+                    <h3>Choix de l'appartenance</h3>
+                    <md-input-container ng-show="type=='module'" flex>
+                        <label>Gammes *</label>
+                        <md-select required ng-model="gamme" name="listGamme" ng-disabled="type!='module' || edit=='false'">
+                            <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
+                        </md-select>
+                        <div ng-messages="catalogueForm.listGamme.$error" role="alert">
+                            <div ng-message="required" class="my-message">Vous devez obligatoirement renseigner une gamme.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container ng-show="type=='composant'" flex>
+                        <label>Modules *</label>
+                        <md-select ng-model="module" required name="listModule" required ng-disabled="type!='composant' || edit=='false'">
+                            <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
+                        </md-select>
+                        <div ng-messages="catalogueForm.listModule.$error" role="alert">
+                            <div ng-message="required" class="my-message">Vous devez obligatoirement renseigner un module.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div ng-show="type=='composant'">
+                    <h3>Choix du fournisseur</h3>
+                    <md-input-container flex>
+                        <label>Fournisseur</label>
+                        <md-select ng-model="fournisseur" name="listFournisseur" required ng-disabled="edit=='false' || type!='composant'">
+                            <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseurs ">{{ f.nom_fournisseur }}</md-option>
+                        </md-select>
+                        <div ng-messages="catalogueForm.listFournisseur.$error" role="alert">
+                            <div ng-message="required" class="my-message">Vous devez obligatoirement renseigner un fournisseur.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <h3>Ajout image de prévisualisation</h3>
+                <choose-file layout="row" flex="25">
+                    <input id="fileInput" type="file" class="ng-hide">
+                    <md-input-container flex class="md-block">
+                        <label>Selectionnez votre image</label>
+                        <input type="text" ng-model="fileName" disabled>
+                        <!-- <div class="hint">Select your file</div> -->
+                    </md-input-container>
+                    <div>
+                        <input class="ng-hide" id="input-file-id" ng-disabled="edit=='false'" multiple type="file" />
+                        <label for="input-file-id" class="md-button md-raised md-primary">
                         <md-icon md-svg-src="ressources/img/icons/ic_search_black_24px.svg"></md-icon>
                     </label>
+                    </div>
+                    <div>
+                        <md-button id="uploadButton" ng-disabled="edit=='false'" class="md-button md-raised md-warn">
+                            <md-icon md-svg-src="ressources/img/icons/ic_file_download_black_24px.svg"></md-icon>
+                        </md-button>
+                    </div>
+                </choose-file>
+                <div layout="row" layout-xs="column" layout-align="center end">
+                    <md-button class="md-raised">Enregistrer</md-button>
+                    <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
                 </div>
-                <div>
-                    <md-button id="uploadButton" ng-disabled="edit=='false'" class="md-button md-raised md-warn">
-                        <md-icon md-svg-src="ressources/img/icons/ic_file_download_black_24px.svg"></md-icon>
-                    </md-button>
-                </div>
-            </choose-file>
-            <div layout="row" layout-xs="column" layout-align="center end">
-                <md-button class="md-raised">Enregistrer</md-button>
-                <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
-            </div>
+            </form>
         </md-card-content>
     </md-card>
 </div>
