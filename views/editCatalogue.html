@@ -11,6 +11,10 @@
                 <label>Description</label>
                 <textarea ng-disabled="edit=='false'" ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
             </md-input-container>
+            <md-input-container ng-show="type=='composant'" class="md-block">
+                <label>Prix</label>
+                <input ng-disabled="edit=='false'"  ng-model="Prix" type="number">
+            </md-input-container>
             <div ng-show="type!='gamme'">
                 <h3>Choix de l'appartenance</h3>
                 <md-input-container ng-show="type=='module'" flex>
@@ -32,7 +36,7 @@
                 <md-input-container flex>
                     <label>Fournisseur</label>
                     <md-select ng-model="fournisseur" ng-disabled="edit=='false'" ng-disabled="type!='composant'">
-                        <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseur ">{{ f.nom_fournisseur }}</md-option>
+                        <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseurs ">{{ f.nom_fournisseur }}</md-option>
                     </md-select>
                 </md-input-container>
             </div>

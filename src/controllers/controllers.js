@@ -215,7 +215,7 @@ app
     $scope.edit = $routeParams.edit;
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
-    $scope.fournisseur = fournisseursProvider.getFournisseurs();
+    $scope.fournisseurs = fournisseursProvider.getFournisseurs();
     // si edit, récupérer les infos correspondantes à l'id
     switch ($scope.type) {
       case "gamme":
