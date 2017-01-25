@@ -5,7 +5,7 @@
             <form name="catalogueForm">
                 <h3>Description générale</h3>
                 <md-input-container class="md-block">
-                    <label>Nom *</label>
+                    <label>Nom</label>
                     <input ng-disabled="edit=='false'" required="" name="Nom" ng-model="nom" type="text">
                     <div ng-messages="catalogueForm.Nom.$error" role="alert" multiple="">
                         <div ng-message="required" class="my-message">Vous devez obligatoirement entrer un nom.</div>
@@ -16,7 +16,7 @@
                     <textarea ng-disabled="edit=='false'" ng-model="itemDescription" rows="2" md-select-on-focus=""></textarea>
                 </md-input-container>
                 <md-input-container ng-show="type=='composant'" class="md-block">
-                    <label>Prix *</label>
+                    <label>Prix</label>
                     <input ng-disabled="edit=='false'" required name="Prix" ng-model="prix" type="number">
                     <div ng-messages="catalogueForm.Prix.$error" role="alert" multiple="">
                         <div ng-message="required" class="my-message">Vous devez entrer un prix.</div>
@@ -26,7 +26,7 @@
                 <div ng-show="type!='gamme'">
                     <h3>Choix de l'appartenance</h3>
                     <md-input-container ng-show="type=='module'" flex>
-                        <label>Gammes *</label>
+                        <label>Gammes</label>
                         <md-select required ng-model="gamme" name="listGamme" ng-disabled="type!='module' || edit=='false'">
                             <md-option ng-value="g.id_gamme" ng-repeat="g in gammes ">{{ g.nom_gamme }}</md-option>
                         </md-select>
@@ -35,7 +35,7 @@
                         </div>
                     </md-input-container>
                     <md-input-container ng-show="type=='composant'" flex>
-                        <label>Modules *</label>
+                        <label>Modules</label>
                         <md-select ng-model="module" required name="listModule" required ng-disabled="type!='composant' || edit=='false'">
                             <md-option ng-repeat="m in modules" ng-value="m.id_module">{{ m.nom_module }}</md-option>
                         </md-select>
