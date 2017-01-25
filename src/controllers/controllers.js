@@ -101,17 +101,19 @@ app
         $scope.labels = fournisseursProvider.getFournisseursLabels();
         $scope.displayFournisseurs = true;
 
+        $scope.goToFournisseur = function ($id, $edit) {
+          $location.url("/fournisseur/" + $id + "/" + $edit);
+        }
+
+        $scope.addNewFournisseur = function () {
+          $location.url("/fournisseur/new/" + true);
+        }
         break;
       default:
     }
 
     $scope.deleteSomething = function ($event, action) {
       commonCode.showConfirm($event, action);
-    }
-    //FAB
-
-    $scope.addNewFournisseur = function () {
-      console.log("new Fournisseur");
     }
   })
   .controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvider, $mdDialog, commonCode, $location) {
@@ -232,6 +234,14 @@ app
       default:
         break;
     }
+    $scope.returnFunction = function () {
+      $window.history.back();
+    };
+  })
+  .controller('editFournisseurCtrl', function ($scope, $routeParams, fournisseursProvider, catalogueProvider, $mdDialog, $window) {
+    $scope.edit = $routeParams.edit;
+    var id = $routeParams.id;
+
     $scope.returnFunction = function () {
       $window.history.back();
     };

@@ -13,12 +13,12 @@
         </thead>
         <tbody md-body>
           <tr md-row mdSelectId="data.id_fournisseur" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
-            <td md-cell ng-click="goToFounisseurs(data.id_fournisseur)">{{data.nom_fournisseur}}</td>
-            <td md-cell ng-click="goToFounisseurs(data.fournisseur)">{{data.description_fournisseur}}</td>
-            <td md-cell ng-click="goToFounisseurs(data.fournisseur)">{{data.tel_fournisseur}}</td>
-            <td md-cell ng-click="goToFounisseurs(data.fournisseur)">{{data.adresse_fournisseur}}</td>
+            <td md-cell ng-click="goToFournisseur(data.id_fournisseur,false)">{{data.nom_fournisseur}}</td>
+            <td md-cell ng-click="goToFournisseur(data.id_fournisseur,false)">{{data.description_fournisseur}}</td>
+            <td md-cell ng-click="goToFournisseur(data.id_fournisseur,false)">{{data.tel_fournisseur}}</td>
+            <td md-cell ng-click="goToFournisseur(data.id_fournisseur,false)">{{data.adresse_fournisseur}}</td>
             <td md-cell>
-              <md-button class="md-secondary" ng-click="" aria-label="Edit">
+              <md-button class="md-secondary" ng-click="goToFournisseur(data.fournisseur,true)" aria-label="Edit">
                 <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
               </md-button>
               <md-button ng-click="deleteSomething(data.id_fournisseur, 'deleteFournisseur')" aria-label="Delete">

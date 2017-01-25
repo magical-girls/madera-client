@@ -28,8 +28,12 @@ function ($routeProvider) {
     controller: 'compteCtrl'
   })
   .when('/devis/:id/:edit', {
-    templateUrl: 'views/devis.html',
+    templateUrl: 'views/editDevis.html',
     controller: 'editDevisCtrl'
+  })
+  .when('/fournisseur/:id/:edit', {
+    templateUrl: 'views/editFournisseur.html',
+    controller: 'editFournisseurCtrl'
   })
   .when('/signin', {
     templateUrl: 'views/signin.html',
