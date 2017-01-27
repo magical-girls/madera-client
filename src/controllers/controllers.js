@@ -242,6 +242,51 @@ app
     $scope.edit = $routeParams.edit;
     var id = $routeParams.id;
 
+    $scope.gammes = catalogueProvider.getGammes();
+    $scope.modules = catalogueProvider.getModules();
+    $scope.fournisseurs = fournisseursProvider.getFournisseurs();
+
+    // initialisation des choix (tableau)
+    $scope.choixCatalogue = [];
+    if (id != "new") {
+      $scope.choixCatalogue.push({ 'id_row': "1", 'nom_gamme': "Ecologique", 'nom_module': "Cloison", 'nom_composant': "paille" });
+      $scope.choixCatalogue.push({ 'id_row': "2", 'nom_gamme': "Ecologique", 'nom_module': "Sol", 'nom_composant': "carton" });
+    }
+    $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputNomComposant) {
+      $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'nom_composant': inputNomComposant });
+    };
+    // Supprimer des éléments de la liste des choix
+    $scope.removeChoixCatalogueRow = function (inputIdRow) {
+      var index;
+      for (var i in $scope.choixCatalogue) {
+        var id_row = $scope.choixCatalogue[i].id_row;
+        if (id_row == inputIdRow) {
+          index = i;
+          break;
+        }
+      }
+      ///////todo : mettre dans le code commun
+       $scope.getMatchModule = function (inputId, inputIdGamme) {
+      var resultMatchModule = false;
+      for (var i = 0; i < inputIdGamme.length; i++) {
+        if (inputIdGamme[i] == inputId) {
+          resultMatchModule = true
+        }
+      }
+      return resultMatchModule;
+    }
+    //Récupérer les composants correspondants au module
+    $scope.getMatchComposant = function (inputId, inputIdComposant) {
+      var resultMatchComposant = false;
+      for (var i = 0; i < inputIdComposant.length; i++) {
+        if (inputIdComposant[i] == inputId) {
+          resultMatchComposant = true
+        }
+      }
+      return resultMatchComposant;
+    }
+      $scope.choixCatalogue.splice(index, 1);
+    };
     $scope.returnFunction = function () {
       $window.history.back();
     };

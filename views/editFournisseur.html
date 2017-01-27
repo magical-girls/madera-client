@@ -31,12 +31,67 @@
                     <label>Description</label>
                     <textarea ng-disabled="edit=='false'" ng-model="fournisseurDescription" rows="2" md-select-on-focus=""></textarea>
                 </md-input-container>
+
                 <h3>Produits</h3>
-                <div layout="row" layout-xs="column" layout-align="center end">
-                    <md-button class="md-raised">Enregistrer</md-button>
-                    <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column><span>#</span></th>
+                                <th md-column><span>Gamme</span></th>
+                                <th md-column><span>Module</span></th>
+                                <th md-column><span>Composant</span></th>
+                                <th md-column></th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row ng-repeat="choix in choixCatalogue">
+                                <td md-cell>{{$index+1}}</td>
+                                <td md-cell>{{choix.nom_gamme}}</td>
+                                <td md-cell>{{choix.nom_module}}</td>
+                                <td md-cell>{{choix.nom_composant}}</td>
+                                <td md-cell>
+                                    <md-button class="md-secondary" ng-click="removeChoixCatalogueRow(choix.id_row)" aria-label="Delete">
+                                        <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
+                                    </md-button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+
+                <h3>Ajouter des composants</h3>
+                <div layout="row">
+                    <md-input-container flex>
+                        <label>Gammes</label>
+                        <md-select ng-model="gamme" ng-disabled="edit=='false'">
+                            <md-option ng-value="g.id_gamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom_gamme }}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Modules</label>
+                        <md-select ng-model="module" ng-disabled="edit=='false'">
+                            <md-option ng-repeat="m in modules" ng-value="m.id_module" ng-if="getMatchModule(gamme,m._id_gamme)" ng-click="composant=null">{{ m.nom_module }}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Composants</label>
+                        <md-select ng-model="composant" ng-disabled="edit=='false'">
+                            <md-option ng-value="c.id_composant" ng-repeat="c in composants " ng-if="getMatchComposant(module,c._id_module)">{{ c.nom_composant }}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="10">
+                        <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, composant)" ng-disabled="gamme == undefined || module == undefined || composant == undefined"
+                            aria-label="Add">
+                            <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+                        </md-button>
+                    </md-input-container>
                 </div>
             </form>
+            <div layout="row" layout-xs="column" layout-align="center end">
+                <md-button class="md-raised">Enregistrer</md-button>
+                <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
+            </div>
         </md-card-content>
     </md-card>
 </div>
