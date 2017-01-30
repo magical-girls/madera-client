@@ -1,7 +1,7 @@
 'use strict';
 app
 .config(function($mdThemingProvider) {
-  var customBlueMap = 		$mdThemingProvider.extendPalette('orange', {
+  var customBlueMap = 		$mdThemingProvider.extendPalette('blue', {
     'contrastDefaultColor': 'light',
     'contrastDarkColors': ['50'],
     '50': 'ffffff'
@@ -12,7 +12,7 @@ app
       'default': '500',
       'hue-1': '50'
     })
-    .accentPalette('pink');
+    .accentPalette('green');
   $mdThemingProvider.theme('input', 'default')
         .primaryPalette('grey')
 })

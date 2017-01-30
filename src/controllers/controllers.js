@@ -267,6 +267,7 @@ app
       }
       ///////todo : mettre dans le code commun
        $scope.getMatchModule = function (inputId, inputIdGamme) {
+         console.log("match module");
       var resultMatchModule = false;
       for (var i = 0; i < inputIdGamme.length; i++) {
         if (inputIdGamme[i] == inputId) {
