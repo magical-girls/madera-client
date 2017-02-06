@@ -65,7 +65,7 @@
                     <md-input-container flex>
                         <label>Gammes</label>
                         <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                            <md-option ng-value="g.id_gamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom_gamme }}</md-option>
+                            <md-option ng-repeat="g in gammes" ng-value="g.id_gamme" ng-click="module=null;composant=null">{{ g.nom_gamme }}</md-option>
                         </md-select>
                     </md-input-container>
                     <md-input-container flex>
@@ -77,7 +77,7 @@
                     <md-input-container flex>
                         <label>Composants</label>
                         <md-select ng-model="composant" ng-disabled="edit=='false'">
-                            <md-option ng-value="c.id_composant" ng-repeat="c in composants " ng-if="getMatchComposant(module,c._id_module)">{{ c.nom_composant }}</md-option>
+                            <md-option ng-repeat="c in composants" ng-value="c.id_composant" ng-if="getMatchComposant(module,c._id_module)">{{ c.nom_composant }}</md-option>
                         </md-select>
                     </md-input-container>
                     <md-input-container flex="10">

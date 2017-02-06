@@ -9,10 +9,10 @@ app
 
     /*$scope.authentification = authentification.validate('');
     console.log($scope.authentification);*/
-    
+
 
     // authentificationReadInHeader
-    $scope.$watch(function(){return authentification.validate()}, function(){
+    $scope.$watch(function () { return authentification.validate() }, function () {
       $scope.authentification = authentification.validate();
       console.log($scope.authentification);
     });
@@ -20,7 +20,7 @@ app
     $scope.selectedIndex = 0;
     $scope.$watch('selectedIndex', function (current, old) {
 
-      if ($scope.authentification == false){
+      if ($scope.authentification == false) {
         $location.url("/signin");
       } else {
         switch (current) {
@@ -38,72 +38,38 @@ app
             break;
         }
       }
-      
-      /*switch (current) {
-        case 0:
-          $location.url("/signin");
-          break;
-        case 1:
-          $location.url("/accueil");
-          break;
-        case 2:
-          $location.url("/liste/devis");
-          break;
-        case 3:
-          $location.url("/catalogue");
-          break;
-        case 4:
-          $location.url("/liste/fournisseurs");
-          break;
-      }*/
-
     });
 
-    $scope.setToken = function(){
-        authentification.setToken();
-        $scope.readToken = authentification.readToken();
+    $scope.setToken = function () {
+      authentification.setToken();
+      $scope.readToken = authentification.readToken();
     };
 
-    $scope.deleteToken = function(){
-        console.log("delete");
-        authentification.deleteToken();
-        $scope.readToken = authentification.readToken();
+    $scope.deleteToken = function () {
+      console.log("delete");
+      authentification.deleteToken();
+      $scope.readToken = authentification.readToken();
+      $location.url("/signin");
     };
 
   })
   /////////////////////// Signin controller  //////////////////////////////////////////////////
-  .controller("indexCtrl", function ($scope, $rootScope, $location, $window) {
-    /*console.log("index ctrl");
-    //$window.sessionStorage.setItem("connected", false);
-    $rootScope.connected = true;
-    console.log( $rootScope.connected);
-    if ($rootScope.connected == false) {
-      console.log("dans le if");
-      $location.url("/signin");
-    }*/
+  .controller("indexCtrl", function ($scope) {
+
   })
   /////////////////////// Sign in controller  /////////////////////////////////////////////////
   .controller('signinCtrl', function ($scope, $rootScope, $location, $window, authentification) {
-    /* $scope.checkUser = function () {
-       if ($scope.login == "user" && $scope.pass == "pass") {
-         //$window.sessionStorage.setItem("connected", true);
-         $rootScope.connected=true;
-         console.log( $rootScope.connected);
-         $location.url("/accueil");
-       }
-     }*/
-
-    $scope.setToken = function(){
-        authentification.setToken();
-        $scope.readToken = authentification.readToken();
+    $scope.setToken = function () {
+      authentification.setToken();
+      $scope.readToken = authentification.readToken();
     };
   })
   /////////////////////// Accueil controller //////////////////////////////////////////////////
-  .controller('accueilCtrl', function ($scope, authentification,sharedProperties) {
+  .controller('accueilCtrl', function ($scope, authentification, sharedProperties) {
     $scope.authentification = authentification.validate('');
-   sharedProperties.getPropertyFromJson().then(function(d){
-    $scope.jsonFromHttpget = d;
-  });
+    sharedProperties.getPropertyFromJson().then(function (d) {
+      $scope.jsonFromHttpget = d;
+    });
   })
   /////////////////////// liste controller  ///////////////////////////////////////////////////
   .controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, fournisseursProvider, $mdDialog, commonCode) {
@@ -295,6 +261,8 @@ app
 
     $scope.gammes = catalogueProvider.getGammes();
     $scope.modules = catalogueProvider.getModules();
+    $scope.composants = catalogueProvider.getComposants();
+
     $scope.fournisseurs = fournisseursProvider.getFournisseurs();
 
     // initialisation des choix (tableau)
@@ -316,10 +284,10 @@ app
           break;
         }
       }
+      $scope.choixCatalogue.splice(index, 1);
     }
-      ///////todo : mettre dans le code commun
-       $scope.getMatchModule = function (inputId, inputIdGamme) {
-         console.log("match module");
+    ///////todo : mettre dans le code commun
+  $scope.getMatchModule = function (inputId, inputIdGamme) {
       var resultMatchModule = false;
       for (var i = 0; i < inputIdGamme.length; i++) {
         if (inputIdGamme[i] == inputId) {
@@ -329,17 +297,17 @@ app
       return resultMatchModule;
     }
     //Récupérer les composants correspondants au module
-    $scope.getMatchComposant = function (inputId, inputIdComposant) {
-               console.log("match composant");
+    $scope.getMatchComposant = function (inputId, inputIdModule) {
+      console.log("input id = "+inputId)
+
       var resultMatchComposant = false;
-      for (var i = 0; i < inputIdComposant.length; i++) {
-        if (inputIdComposant[i] == inputId) {
+      for (var i = 0; i < inputIdModule.length; i++) {
+        if (inputIdModule[i] == inputId) {
           resultMatchComposant = true
         }
       }
       return resultMatchComposant;
     }
-  
     $scope.returnFunction = function () {
       $window.history.back();
     };

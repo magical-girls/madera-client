@@ -171,7 +171,7 @@
                 <!--md-maxlength="50"-->
               </md-input-container>
               <md-input-container class="md-block">
-                <md-button class="md-raised" ng-click="addComment(clientCommentary,'client')" ng-disabled="edit=='false'">
+                <md-button class="md-raised" aria-label="add_client_comment" ng-click="addComment(clientCommentary,'client')" ng-disabled="edit=='false'">
                   <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
                 </md-button>
               </md-input-container>
@@ -206,7 +206,7 @@
                 <textarea ng-model="commercialCommentary" rows="2" md-select-on-focus=""></textarea>
               </md-input-container>
               <md-input-container class="md-block">
-                <md-button class="md-raised" ng-click="addComment(commercialCommentary,'commercial')" ng-disabled="edit=='false'">
+                <md-button class="md-raised" aria-label="add_commercial_comment" ng-click="addComment(commercialCommentary,'commercial')" ng-disabled="edit=='false'">
                   <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
                 </md-button>
               </md-input-container>
