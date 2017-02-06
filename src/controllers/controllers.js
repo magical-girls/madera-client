@@ -5,28 +5,69 @@
 app
   /////////////////////// tabs controller  ///////////////////////////////////////////////////
   //Pour rediriger vers les bonnes routes
-  .controller('tabCtrl', function ($scope, $location, $log) {
+  .controller('tabCtrl', function ($scope, $location, $log, authentification) {
+
+    /*$scope.authentification = authentification.validate('');
+    console.log($scope.authentification);*/
+
+    // authentificationReadInHeader
+    $scope.$watch(function(){return authentification.validate()}, function(){
+      $scope.authentification = authentification.validate();
+    });
+
     $scope.selectedIndex = 0;
     $scope.$watch('selectedIndex', function (current, old) {
-      switch (current) {
+
+      if ($scope.authentification == false){
+        $location.url("/signin");
+      } else {
+        switch (current) {
+          case 0:
+            $location.url("/accueil");
+            break;
+          case 1:
+            $location.url("/liste/devis");
+            break;
+          case 2:
+            $location.url("/catalogue");
+            break;
+          case 3:
+            $location.url("/liste/fournisseurs");
+            break;
+        }
+      }
+      
+      /*switch (current) {
         case 0:
-          $location.url("/accueil");
+          $location.url("/signin");
           break;
         case 1:
-          $location.url("/liste/devis");
+          $location.url("/accueil");
           break;
         case 2:
-          $location.url("/catalogue");
+          $location.url("/liste/devis");
           break;
         case 3:
+          $location.url("/catalogue");
+          break;
+        case 4:
           $location.url("/liste/fournisseurs");
           break;
-      }
+      }*/
+
     });
-    $scope.showProfile = function (event) {
-      $location.url("/compte");
-      // TO DO ajouter en parametre identifiant user 
+
+    $scope.setToken = function(){
+        authentification.setToken();
+        $scope.readToken = authentification.readToken();
     };
+
+    $scope.deleteToken = function(){
+        console.log("delete");
+        authentification.deleteToken();
+        $scope.readToken = authentification.readToken();
+    };
+
   })
   /////////////////////// Signin controller  //////////////////////////////////////////////////
   .controller("indexCtrl", function ($scope, $rootScope, $location, $window) {
@@ -40,7 +81,7 @@ app
     }*/
   })
   /////////////////////// Sign in controller  /////////////////////////////////////////////////
-  .controller('signinCtrl', function ($scope, $rootScope, $location, $window) {
+  .controller('signinCtrl', function ($scope, $rootScope, $location, $window, authentification) {
     /* $scope.checkUser = function () {
        if ($scope.login == "user" && $scope.pass == "pass") {
          //$window.sessionStorage.setItem("connected", true);
@@ -49,10 +90,15 @@ app
          $location.url("/accueil");
        }
      }*/
+
+    $scope.setToken = function(){
+        authentification.setToken();
+        $scope.readToken = authentification.readToken();
+    };
   })
   /////////////////////// Accueil controller //////////////////////////////////////////////////
-  .controller('accueilCtrl', function ($scope) {
-
+  .controller('accueilCtrl', function ($scope, authentification) {
+    $scope.authentification = authentification.validate('');
   })
   /////////////////////// liste controller  ///////////////////////////////////////////////////
   .controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, fournisseursProvider, $mdDialog, commonCode) {
