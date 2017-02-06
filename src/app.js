@@ -1,1 +1,1 @@
-var app = angular.module('Madera', [ 'ngMessages','ngMaterial','ngRoute', 'ngMdIcons', 'md.data.table','ngStorage'])
+var app = angular.module('Madera', [ 'ngMessages','ngMaterial','ngRoute', 'md.data.table','ngStorage'])

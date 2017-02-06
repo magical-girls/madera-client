@@ -44,14 +44,17 @@ app
       authentification.setToken();
       $scope.readToken = authentification.readToken();
     };
-
+    
     $scope.deleteToken = function () {
       console.log("delete");
       authentification.deleteToken();
       $scope.readToken = authentification.readToken();
       $location.url("/signin");
     };
-
+    $scope.showProfile = function (event) {
+      $location.url("/compte");
+      // TO DO ajouter en parametre identifiant user 
+    };
   })
   /////////////////////// Signin controller  //////////////////////////////////////////////////
   .controller("indexCtrl", function ($scope) {
