@@ -19,7 +19,6 @@ app.factory('authentification', function($window, $http){
             return this.readToken() == null ? false : true;
         },
         validate: function(requiredRole){
-            console.log("Run validate");
             if (this.verrifyToken() == false){
                 if (requiredRole == 'admin'){
                     $window.location.href = 'index.html#!/view1';

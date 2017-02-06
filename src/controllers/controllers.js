@@ -9,10 +9,12 @@ app
 
     /*$scope.authentification = authentification.validate('');
     console.log($scope.authentification);*/
+    
 
     // authentificationReadInHeader
     $scope.$watch(function(){return authentification.validate()}, function(){
       $scope.authentification = authentification.validate();
+      console.log($scope.authentification);
     });
 
     $scope.selectedIndex = 0;
@@ -97,8 +99,11 @@ app
     };
   })
   /////////////////////// Accueil controller //////////////////////////////////////////////////
-  .controller('accueilCtrl', function ($scope, authentification) {
+  .controller('accueilCtrl', function ($scope, authentification,sharedProperties) {
     $scope.authentification = authentification.validate('');
+   sharedProperties.getPropertyFromJson().then(function(d){
+    $scope.jsonFromHttpget = d;
+  });
   })
   /////////////////////// liste controller  ///////////////////////////////////////////////////
   .controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, fournisseursProvider, $mdDialog, commonCode) {
@@ -311,6 +316,7 @@ app
           break;
         }
       }
+    }
       ///////todo : mettre dans le code commun
        $scope.getMatchModule = function (inputId, inputIdGamme) {
          console.log("match module");
@@ -324,6 +330,7 @@ app
     }
     //Récupérer les composants correspondants au module
     $scope.getMatchComposant = function (inputId, inputIdComposant) {
+               console.log("match composant");
       var resultMatchComposant = false;
       for (var i = 0; i < inputIdComposant.length; i++) {
         if (inputIdComposant[i] == inputId) {
@@ -332,8 +339,7 @@ app
       }
       return resultMatchComposant;
     }
-      $scope.choixCatalogue.splice(index, 1);
-    };
+  
     $scope.returnFunction = function () {
       $window.history.back();
     };
