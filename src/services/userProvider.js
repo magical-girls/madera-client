@@ -1,15 +1,5 @@
 'use strict';
-var user=
-  {
-    "id":"1",
-    "nom":"Simpson",
-    "prenom":"Homer",
-    "matricule":"12345",
-    "telephone":"0296375474",
-    "mail":"homer.simpson@gmail.com",
-    "pass":"motdepasse"
-    }
-;
+
 var client=
   {
     "id":"1",
@@ -18,10 +8,24 @@ var client=
     "telephone":"0296375474",
     "mail":"squall.lionheart@gmail.com"
   };
-app.service('userProvider', function(){
+app.service('userProvider', function($http, $window){
   this.getUser = function(){
-    return user;
-  }
+	 return  {
+		    async: function() {
+		    	return $http({
+				  method : 'GET',
+				  url : host + 'user',
+				  params : {
+					  'id' : $window.sessionStorage.getItem('matricule')
+				  },
+			  	  headers : {
+			  		'token' : $window.sessionStorage.getItem('token'),
+			  		'Content-type' : 'application/json; charset=UTF-8'
+			  	   }
+				  });
+				 } 
+		 }
+	 }
   this.getClient = function(){
     return client;
   }

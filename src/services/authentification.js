@@ -1,17 +1,37 @@
+const host = 'http://78.198.68.4:12345/maderaserveur/';
 app.factory('authentification', function($window, $http){
 
     return {
         readToken: function () {
-            return $window.localStorage.getItem('token');
+            return $window.sessionStorage.getItem('token');
         },
-        setToken: function() {
-            // Todo : Update to get jwt from webservice
-            var fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ';
-            $window.localStorage.setItem('token', fakeToken);
+        setToken: function(login, pass) {
+            $http({
+            	method : 'GET',
+            	url : host + 'login',
+            	params : {
+            		name : login,
+            		pwd : pass
+            		},
+            	headers: { 
+            		'Content-type' : 'application/json; charset=UTF-8'
+	        		}
+    	       })
+    	    .then(function(response) {
+    	    	$window.sessionStorage.setItem('token', response.headers()["token"]);
+    	    	$window.sessionStorage.setItem('login', response.data.login);
+    	    	$window.sessionStorage.setItem('matricule', response.data.matricule);
+    	    }, function(error) {
+    	    	if(response.status === 401){
+    	    		alert('Erreur d\'authentification')
+    	    	} else {
+    				alert('Erreur serveur');
+    			}
+    	    });
         },
         deleteToken: function() {
-            $window.localStorage.removeItem('token');
-        },
+            $window.sessionStorage.clear();
+            },
         verrifyToken: function(){
             // Todo : Update to check if token is available
             //var decoded = jwt_decode($window.localStorage.getItem('token'));
