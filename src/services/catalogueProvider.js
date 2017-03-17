@@ -1,48 +1,5 @@
 'use strict';
-var gammes=[
-  {
-      "id_gamme": "g1",
-      "nom_gamme": "gamme 1",
-      "description_gamme": "lorem ipsum"
-  },
-  {
-      "id_gamme": "g2",
-      "nom_gamme": "gamme 2",
-      "description_gamme": "lorem ipsum"
-  },
-  {
-      "id_gamme": "g3",
-      "nom_gamme": "gamme 3",
-      "description_gamme": "lorem ipsum"
-  }
-];
-var modules=[
-  {
-      "id_module": "m1",
-      "nom_module": "module 1",
-      "description_module": "lorem ipsum",
-      "_id_gamme": [
-          "g1"
-      ]
-  },
-  {
-      "id_module": "m2",
-      "nom_module": "module 2",
-      "description_module": "lorem ipsum",
-      "_id_gamme": [
-          "g3"
-      ]
-  },
-  {
-      "id_module": "m3",
-      "nom_module": "module 3",
-      "description_module": "lorem ipsum",
-      "_id_gamme": [
-          "g2",
-          "g3"
-      ]
-  }
-];
+
 var composants= [
     {
         "id_composant": "c1",
@@ -114,24 +71,117 @@ function getIndexComposantFromId(inputComposant, inputIdComposant){
   return result;
 }
 
-app.service('catalogueProvider', function(){
+app.service('catalogueProvider', function($http, $window){
   this.getGammes = function(){
-    return gammes;
+	  
+	  //url get gamme
+	  return  {
+		    async: function() {
+		    	return $http({
+				  method : 'GET',
+				  url : host + 'gamme',
+			  	  headers : {
+			  		'token' : $window.sessionStorage.getItem('token'),
+			  		'Content-type' : 'application/json; charset=UTF-8'
+			  	   }
+				  });
+				 } 
+		 }
+  }
+  this.getGammeById = function(id){
+	  return {
+		  async : function(){
+			  return $http({
+				  method : 'GET',
+				  url : host + 'gamme',
+				  params : {
+					  'id' : id
+				  },
+				  headers : {
+					'token' : $window.sessionStorage.getItem('token'),
+				  	'Content-type' : 'application/json; charset=UTF-8'
+				  }
+			  })
+		  }
+	  }
   }
   this.deleteGamme = function(inputGamme, inputNumGamme){
     inputGamme.splice(getIndexGammeFromId(inputGamme, inputNumGamme), 1);
   }
 
   this.getModules = function(){
-    return modules;
+	  
+	  //url get gamme
+	  return  {
+		    async: function() {
+		    	return $http({
+				  method : 'GET',
+				  url : host + 'module',
+			  	  headers : {
+			  		'token' : $window.sessionStorage.getItem('token'),
+			  		'Content-type' : 'application/json; charset=UTF-8'
+			  	   }
+				  });
+				 } 
+		 }
   }
+  
+  this.getModuleById = function(id){
+	  return {
+	  async : function(){
+		  return $http({
+			  method : 'GET',
+			  url : host + 'module',
+			  params : {
+				  'id' : id
+			  },
+			  headers : {
+				'token' : $window.sessionStorage.getItem('token'),
+			  	'Content-type' : 'application/json; charset=UTF-8'
+			  }
+		  })
+	  	}
+	  }
+  }
+  
   this.deleteModule = function(inputModule, inputNumModule){
     inputModule.splice(getIndexModuleFromId(inputModule, inputNumModule), 1);
   }
 
   this.getComposants = function(){
-    return composants;
+	  
+	  //url get gamme
+	  return  {
+		    async: function() {
+		    	return $http({
+				  method : 'GET',
+				  url : host + 'composant',
+			  	  headers : {
+			  		'token' : $window.sessionStorage.getItem('token'),
+			  		'Content-type' : 'application/json; charset=UTF-8'
+			  	   }
+				  });
+				 } 
+		 }
   }
+  
+  this.getComposantById = function(id){
+	  return {
+		  async : function(){
+			  return $http({
+				  method : 'GET',
+				  url : host + 'composant',
+				  params : {
+					  'id' : id
+				  },
+				  headers : {
+					'token' : $window.sessionStorage.getItem('token'),
+				  	'Content-type' : 'application/json; charset=UTF-8'
+				  }
+			  })
+		  	}
+		  }
+	  }
   this.deleteComposant = function(inputComposant, inputNumComposant){
     console.log(inputComposant);
     console.log("debugfromcatalogueprovider : " + inputNumComposant);

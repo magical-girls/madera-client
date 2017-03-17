@@ -1,5 +1,10 @@
 ///////////////////// Edit devis controller /////////////////////////
-app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider, catalogueProvider, $mdDialog, $window) {
+app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider,
+		catalogueProvider, $mdDialog, $window, $location, authentification) {
+	$scope.authentification = authentification.validate('');
+    if(!$scope.authentification){
+    	$location.url("/signin");
+    }
   // Vérification du mode edition (activé ou non)
   $scope.edit = $routeParams.edit;
   var id = $routeParams.id;

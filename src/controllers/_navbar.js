@@ -1,9 +1,11 @@
 /////////////////////// tabs controller  ///////////////////////////////////////////////////
 //Pour rediriger vers les bonnes routes
 
-app.controller('tabCtrl', function ($scope, $location, $log, authentification) {
+app.controller('tabCtrl', function ($scope, $location, $log, authentification, $window) {
     // authentificationReadInHeader
-    $scope.$watch(function () { return authentification.validate() }, function () {
+    $scope.$watch(function () { 
+    		return authentification.validate() 
+    	}, function () {
         $scope.authentification = authentification.validate();
         console.log($scope.authentification);
     });
@@ -31,10 +33,10 @@ app.controller('tabCtrl', function ($scope, $location, $log, authentification) {
         }
     });
 
-    $scope.setToken = function () {
-        authentification.setToken();
-        $scope.readToken = authentification.readToken();
-    };
+//    $scope.setToken = function () {
+//        authentification.setToken();
+//        $scope.readToken = authentification.readToken();
+//    };
 
     $scope.deleteToken = function () {
         console.log("delete");

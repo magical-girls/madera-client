@@ -1,5 +1,10 @@
  ///////////////////////////// Edit fournisseur controller ///////////////////////
- app.controller('editFournisseurCtrl', function ($scope, $routeParams, fournisseursProvider, catalogueProvider, $mdDialog, $window) {
+ app.controller('editFournisseurCtrl', function ($scope, $routeParams, fournisseursProvider,
+		 catalogueProvider, $mdDialog, $window, $location, authentification) {
+	 $scope.authentification = authentification.validate('');
+	    if(!$scope.authentification){
+	    	$location.url("/signin");
+	    }
     $scope.edit = $routeParams.edit;
     var id = $routeParams.id;
 

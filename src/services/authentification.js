@@ -6,12 +6,13 @@ app.factory('authentification', function($window, $http){
             return $window.sessionStorage.getItem('token');
         },
         setToken: function(login, pass) {
+        	
             $http({
             	method : 'GET',
             	url : host + 'login',
             	params : {
             		name : login,
-            		pwd : pass
+            		pwd : window.atob(pass)
             		},
             	headers: { 
             		'Content-type' : 'application/json; charset=UTF-8'
@@ -19,32 +20,34 @@ app.factory('authentification', function($window, $http){
     	       })
     	    .then(function(response) {
     	    	$window.sessionStorage.setItem('token', response.headers()["token"]);
-    	    	$window.sessionStorage.setItem('login', response.data.login);
-    	    	$window.sessionStorage.setItem('matricule', response.data.matricule);
+    	    	$window.sessionStorage.setItem('login', response.data.login.login);
+    	    	$window.sessionStorage.setItem('matricule', response.data.login.matriculeSalarie);
+    	    	$window.sessionStorage.setItem('nom', response.data.salarie.nom);
+    	    	$window.sessionStorage.setItem('prenom', response.data.salarie.prenom);
+    	    	return true;
     	    }, function(error) {
     	    	if(response.status === 401){
     	    		alert('Erreur d\'authentification')
     	    	} else {
     				alert('Erreur serveur');
     			}
+    	    	return false;
     	    });
+            
         },
         deleteToken: function() {
             $window.sessionStorage.clear();
             },
         verrifyToken: function(){
-            // Todo : Update to check if token is available
-            //var decoded = jwt_decode($window.localStorage.getItem('token'));
-            //console.log(decoded);
             return this.readToken() == null ? false : true;
         },
         validate: function(requiredRole){
             if (this.verrifyToken() == false){
                 if (requiredRole == 'admin'){
                     $window.location.href = 'index.html#!/view1';
-                }
+                } 
                 return false;
-            } 
+            }
             return true;
         }
     };  

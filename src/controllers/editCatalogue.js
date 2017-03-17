@@ -1,11 +1,45 @@
  ///////////////////// Edit catalogue controller /////////////////////////
-app .controller('editCatalogueCtrl', function ($scope, $routeParams, devisProvider, fournisseursProvider, catalogueProvider, $mdDialog, $window) {
+app .controller('editCatalogueCtrl', function ($scope, $routeParams, devisProvider, fournisseursProvider, 
+		catalogueProvider, $mdDialog, $window, $location, authentification, commonCode) {
+	$scope.authentification = authentification.validate('');
+    if(!$scope.authentification){
+    	$location.url("/signin");
+    }
     $scope.type = $routeParams.type;
     $scope.id = $routeParams.id;
     $scope.edit = $routeParams.edit;
-    $scope.gammes = catalogueProvider.getGammes();
-    $scope.modules = catalogueProvider.getModules();
+    
+    
+    
+    catalogueProvider.getGammeById($routeParams.id).async().then(function(response){
+    	$scope.nom = response.data.nom;
+    	$scope.commentaire = response.data.commentaire;
+    }, function(error){
+    	commonCode.alertErreur();
+    });
+    
+    
+    catalogueProvider.getModuleById($routeParams.id).async().then(function(response){
+    	$scope.nom = response.data.idReference;
+    	$scope.commentaire = response.data.commentaire;
+    	$scope.gammes = response.data.idGamme;
+    }, function(error){
+    	commonCode.alertErreur();
+    });
+    
+    catalogueProvider.getComposantById($routeParams.id).async().then(function(response){
+    	$scope.nom = response.data.nom;
+    	$scope.commentaire = response.data.commentaire;
+    	$scope.prix = response.data.prixHT;
+    	$scope.modules = response.data.idModule;
+    }, function(error){
+    	commonCode.alertErreur();
+    });
+    
     $scope.fournisseurs = fournisseursProvider.getFournisseurs();
+    
+    
+    
     // si edit, récupérer les infos correspondantes à l'id
     switch ($scope.type) {
       case "gamme":

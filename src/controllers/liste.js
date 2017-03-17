@@ -1,5 +1,11 @@
   /////////////////////// Lists controller  /////////////////////////////////////////////////
-app.controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, fournisseursProvider, $mdDialog, commonCode) {
+app.controller('listCtrl', function ($scope, $routeParams, $location, devisProvider, 
+		fournisseursProvider, $mdDialog, commonCode, authentification) {
+	
+	$scope.authentification = authentification.validate('');
+    if(!$scope.authentification){
+    	$location.url("/signin");
+    }
 
     var param = $routeParams.param; // on récupère la valeur passée dans l'url
     //initialisation des variables

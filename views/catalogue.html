@@ -30,15 +30,15 @@
           </md-button>
         </md-fab-trigger>
         <md-fab-actions>
-          <md-button class="md-fab md-raised md-accent md-mini" ng-click="addToCatalogue('composant')">
+          <md-button class="md-fab md-raised md-accent md-mini" ng-click="addToCatalogue('composant')" >
             <label>C</label>
             <md-tooltip md-direction="left">Composant</md-tooltip>
           </md-button>
-          <md-button class="md-fab md-raised md-accent md-mini " ng-click="addToCatalogue('module')">
+          <md-button class="md-fab md-raised md-accent md-mini " ng-click="addToCatalogue('module')"ng-disabled="edit=='false'">
              <label>M</label>
             <md-tooltip md-direction="left">Module</md-tooltip>
           </md-button>
-          <md-button class="md-fab md-raised md-mini md-accent" ng-click="addToCatalogue('gamme')">
+          <md-button class="md-fab md-raised md-mini md-accent" ng-click="addToCatalogue('gamme')"ng-disabled="edit=='false'">
              <label>G</label>
             <md-tooltip md-direction="left">Gamme</md-tooltip>
           </md-button>

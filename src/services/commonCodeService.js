@@ -3,7 +3,7 @@ app.service('commonCode', function (devisProvider, fournisseursProvider, $mdDial
 
     var that = this;
 
-    var allowedAction = ["deleteDevis", "deleteGamme", "deleteComposant", "deleteFournisseur", "deleteModule"];
+    var allowedAction = [/*"deleteDevis", "deleteGamme", "deleteComposant", "deleteFournisseur", "deleteModule"*/];
     this.isAllowedAction = function(inputAction){
         var result = false;
         for (var i = 0 ; i < allowedAction.length ; i++){
@@ -61,10 +61,12 @@ app.service('commonCode', function (devisProvider, fournisseursProvider, $mdDial
                 }
             } else {
                 console.log("showConfirm() - Valeur undefined détectée : inputId = " + inputId + " ; action = " + action);
+               
             }
 
         } else {
             console.log("showConfirm() - Illegal action : " + action);
+             showAlert();
         }
 
         return result;
@@ -86,4 +88,41 @@ app.service('commonCode', function (devisProvider, fournisseursProvider, $mdDial
             });
     
     };
+    
+    this.showForbidden = function(){
+    	showAlert();
+    }
+    
+    this.alertErreur = function(){
+    	showAlertErreur();
+    }
+    
+    function showAlert() {
+        alert = $mdDialog.alert({
+          title: 'INTERDICTION',
+          textContent: "Seul le Bureau d'Etude est autorisé à cette action",
+          ok: 'Fermer'
+        });
+
+        $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
+      }
+    
+    function showAlertErreur() {
+        alert = $mdDialog.alert({
+          title: 'Erreur',
+          textContent: "Une erreur est survenue",
+          ok: 'Fermer'
+        });
+
+        $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
+      }
+
 })
