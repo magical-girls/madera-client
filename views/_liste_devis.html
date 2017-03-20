@@ -1,3 +1,4 @@
+<meta charset="utf8">
 <div id="list" layout="column" ng-cloak>
   <md-table-container>
     <table md-table>
@@ -13,13 +14,13 @@
       </thead>
       <tbody md-body>
         <tr md-row mdSelectId="data.id_devis" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
-          <td md-cell ng-click="goToDevis(data.id_devis,false)">{{data.num_devis}}</td>
-          <td md-cell ng-click="goToDevis(data.id_devis,false)">{{data.nom_client}}</td>
-          <td md-cell ng-click="goToDevis(data.id_devis,false)">{{data.date_creation}}</td>
-          <td md-cell ng-click="goToDevis(data.id_devis,false)">{{data.date_modif}}</td>
-          <td md-cell ng-click="goToDevis(data.id_devis,false)">{{data.etat}}</td>
+          <td md-cell ng-click="goToDevis(data.reference,false)">{{data.reference}}</td>
+          <td md-cell ng-click="goToDevis(data.reference,false)">{{data.client}}</td>
+          <td md-cell ng-click="goToDevis(data.reference,false)">{{data.modif}}</td>
+          <td md-cell ng-click="goToDevis(data.reference,false)">{{data.creation}}</td>
+          <td md-cell ng-click="goToDevis(data.reference,false)">{{data.status}}</td>
           <td md-cell>
-            <md-button class="md-secondary" ng-click="goToDevis(data.id_devis,true)" aria-label="Edit">
+            <md-button class="md-secondary" ng-click="goToDevis(data.reference,true)" aria-label="Edit">
               <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
             </md-button>
             <md-button ng-click="deleteSomething(data.num_devis, 'deleteDevis')" aria-label="Delete">

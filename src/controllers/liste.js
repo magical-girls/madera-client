@@ -28,7 +28,13 @@ app.controller('listCtrl', function ($scope, $routeParams, $location, devisProvi
       case "devis":
         $scope.pageTitle = "Liste des devis";
         $scope.sortType = 'num_devis'; // tri sur le num_devis par defaut
-        $scope.datas = devisProvider.getDevis();
+        
+        devisProvider.getDevis().async().then(function(response){
+        	$scope.datas = response.data;
+        }, function(error){
+        	commonCode.alertErreur();
+        });
+        
         $scope.labels = devisProvider.getDevisLabels();
         $scope.displayDevis = true;
         //consulter page devis (id devis en parametre)

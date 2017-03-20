@@ -89,16 +89,43 @@ function getIndexDevisFromId(inputDevis, inputIdDevis){
   return result;
 }
 
-app.service('devisProvider', function(){
+app.service('devisProvider', function($http, $window, $routeParams){
   this.getDevis = function(){
-    return devis;
+	//url get devis
+	  return  {
+		    async: function() {
+		    	return $http({
+				  method : 'GET',
+				  url : host + 'devis',
+			  	  headers : {
+			  		'token' : $window.sessionStorage.getItem('token'),
+			  		'Content-type' : 'application/json; charset=UTF-8'
+			  	   }
+				  });
+				 } 
+		 }
   }
   this.deleteDevis = function(inputDevis, inputNumDevis){
     inputDevis.splice(getIndexDevisFromId(inputDevis, inputNumDevis), 1);
   }
 
-  this.getaDevis = function(){
-    return aDevis;
+  this.getaDevis = function(id){
+	//url get devis
+	  return  {
+		    async: function() {
+		    	return $http({
+				  method : 'GET',
+				  url : host + 'devis',
+				  params : {
+					  'id' : id
+				  },
+			  	  headers : {
+			  		'token' : $window.sessionStorage.getItem('token'),
+			  		'Content-type' : 'application/json; charset=UTF-8'
+			  	   }
+				  });
+				 } 
+		 }
   }
   this.getDevisLabels = function(){
     return devisLabel;

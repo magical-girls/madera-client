@@ -9,14 +9,14 @@
             <div layout-gt-xs="row" layout-xs="column">
               <md-input-container class="md-block">
                 <label>Prénom</label>
-                <input ng-disabled="edit=='false'" required name="clientPrenom" ng-model="clientData.prenom" type="text">
+                <input ng-disabled="edit=='false'" required name="clientPrenom" ng-model="devisData.client.prenom" type="text">
                 <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
                   <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le prénom du client.</div>
                 </div>
               </md-input-container>
               <md-input-container class="md-block">
                 <label>Nom</label>
-                <input ng-disabled="edit=='false'" required name="clientNom" ng-model="clientData.nom" type="text">
+                <input ng-disabled="edit=='false'" required name="clientNom" ng-model="devisData.client.nom" type="text">
                 <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
                   <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le nom du client.</div>
                 </div>
@@ -24,14 +24,14 @@
             </div>
             <md-input-container class="md-block">
               <label>Tel</label>
-              <input ng-disabled="edit=='false'" name="clientTel" required ng-model="clientData.telephone" type="text">
+              <input ng-disabled="edit=='false'" name="clientTel" required ng-model="devisData.client.tel" type="text">
               <div ng-messages="devisForm.clientTel.$error" role="alert" multiple="">
                 <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le n° de téléphone du client.</div>
               </div>
             </md-input-container>
             <md-input-container class="md-block">
               <label>E-mail</label>
-              <input ng-disabled="edit=='false'" ng-model="clientData.mail" type="text">
+              <input ng-disabled="edit=='false'" ng-model="devisData.client.mail" type="text">
             </md-input-container>
           </md-card-content>
         </md-card>
@@ -41,24 +41,24 @@
             <div layout-gt-xs="row" layout-xs="column">
               <md-input-container class="md-block">
                 <label>Prénom</label>
-                <input ng-disabled="edit=='false'" ng-model="comData.prenom" type="text">
+                <input ng-disabled="edit=='false'" ng-model="devisData.salarie.prenom" type="text">
               </md-input-container>
               <md-input-container class="md-block">
                 <label>Nom</label>
-                <input ng-disabled="edit=='false'" ng-model="comData.nom" type="text">
+                <input ng-disabled="edit=='false'" ng-model="devisData.salarie.nom" type="text">
               </md-input-container>
             </div>
             <md-input-container class="md-block">
               <label>Matricule</label>
-              <input ng-disabled="edit=='false'" ng-model="comData.matricule" type="text">
+              <input ng-disabled="edit=='false'" ng-model="devisData.salarie.matricule" type="text">
             </md-input-container>
             <md-input-container class="md-block">
               <label>Tel</label>
-              <input ng-disabled="edit=='false'" ng-model="comData.telephone" type="text">
+              <input ng-disabled="edit=='false'" ng-model="devisData.salarie.tel" type="text">
             </md-input-container>
             <md-input-container class="md-block">
               <label>E-mail</label>
-              <input ng-disabled="edit=='false'" ng-model="comData.mail" type="text">
+              <input ng-disabled="edit=='false'" ng-model="devisData.salarie.mail" type="text">
             </md-input-container>
           </md-card-content>
         </md-card>
@@ -71,12 +71,12 @@
           <h3>Informations</h3>
           <md-card-content>
             <div layout="row">
-              <p>Référence: {{devisData.num_devis}}</p>
+              <p>Référence: {{devisData.devis.reference}}</p>
               <p flex></p>
-              <p>Statut: {{devisData.etat}}</p>
+              <p>Statut: {{devisData.devis.status}}</p>
             </div>
-            <p>Date de création: {{devisData.date_modif}}</p>
-            <p>Dernière modification: {{devisData.date_modif}}</p>
+            <p>Date de création: {{devisData.devis.dateCreation}}</p>
+            <p>Dernière modification: {{devisData.devis.dateModif}}</p>
           </md-card-content>
           <md-divider></md-divider>
           <h3>Sélection des éléments</h3>
@@ -85,13 +85,13 @@
               <md-input-container flex>
                 <label>Gammes</label>
                 <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                  <md-option ng-value="g.id_gamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom_gamme }}</md-option>
+                  <md-option ng-value="g.idReferenceGamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom }}</md-option>
                 </md-select>
               </md-input-container>
               <md-input-container flex>
                 <label>Modules</label>
                 <md-select ng-model="module" ng-disabled="edit=='false'">
-                  <md-option ng-repeat="m in modules" ng-value="m.id_module" ng-if="getMatchModule(gamme,m._id_gamme)">{{ m.nom_module }}</md-option>
+                  <md-option ng-repeat="m in modules" ng-value="m.idReference" ng-if="getMatchModule(gamme,m.idReference)">{{ m.idReference }}</md-option>
                 </md-select>
               </md-input-container>
               <md-input-container flex="10">

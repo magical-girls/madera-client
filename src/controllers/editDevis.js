@@ -1,11 +1,12 @@
 ///////////////////// Edit devis controller /////////////////////////
 app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider,
-		catalogueProvider, $mdDialog, $window, $location, authentification) {
+		catalogueProvider, $mdDialog, $window, $location, authentification, commonCode) {
 	$scope.authentification = authentification.validate('');
     if(!$scope.authentification){
     	$location.url("/signin");
     }
   // Vérification du mode edition (activé ou non)
+    $scope.choixCatalogue = [];
   $scope.edit = $routeParams.edit;
   var id = $routeParams.id;
   $scope.addClientComment = false;
@@ -14,15 +15,32 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   if ("new" != id) { //si on edit, récupération des données du devis
     console.log("id n'est pas new :" + id);
 
-    $scope.devisData = devisProvider.getaDevis();
-    $scope.clientData = userProvider.getClient();
+    
+    
+    
+    
+    devisProvider.getaDevis(id).async().then(function(response){
+    	$scope.devisData = response.data;
+    	$scope.gammes = response.data.gamme;
+    	$scope.modules = response.data.lstModule;
+    	$scope.composants = response.data.lstComposant;
+        /** A FAIRE, liste des choix après modif serveur dépendance section pour tri */
+    	//$scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'longueur': inputLongueur, 'angle': inputAngle });
+        
+    	
+    }, function (error){
+    	commonCode.alertErreur();
+    });
+    
   } else {
     console.log("id est new: " + id);
+    $scope.comData = userProvider.getUser();
+    $scope.gammes = catalogueProvider.getGammes();//TODO
+    $scope.modules = catalogueProvider.getModules();//TODO
+    $scope.composants = catalogueProvider.getComposants();//TODO
+    
   }
-  $scope.comData = userProvider.getUser();
-  $scope.gammes = catalogueProvider.getGammes();
-  $scope.modules = catalogueProvider.getModules();
-  $scope.composants = catalogueProvider.getComposants();
+ 
   //Gestion des commentaires
   $scope.clientComment = [];
   $scope.commercialComment = [];
@@ -38,7 +56,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     }
   };
   // initialisation des choix (tableau)
-  $scope.choixCatalogue = [];
+  
   $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputLongueur, inputAngle) {
     $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'longueur': inputLongueur, 'angle': inputAngle });
   };

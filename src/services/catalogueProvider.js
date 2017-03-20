@@ -1,45 +1,5 @@
 'use strict';
 
-var composants= [
-    {
-        "id_composant": "c1",
-        "nom_composant": "composant 1",
-        "description_composant": "lorem ipsum",
-        "prix_composant_ht_euros" : "100",
-        "_id_module": [
-            "m1"
-        ]
-    },
-    {
-        "id_composant": "c2",
-        "nom_composant": "composant 2",
-        "description_composant": "lorem ipsum",
-        "prix_composant_ht_euros" : "200",
-        "_id_module": [
-            "m1"
-        ]
-    },
-    {
-        "id_composant": "c4",
-        "nom_composant": "composant 4",
-        "description_composant": "lorem ipsum",
-        "prix_composant_ht_euros" : "400",
-        "_id_module": [
-            "m2"
-        ]
-    },
-    {
-        "id_composant": "c3",
-        "nom_composant": "composant 3",
-        "description_composant": "lorem ipsum",
-        "prix_composant_ht_euros" : "300",
-        "_id_module": [
-            "m1",
-            "m2",
-            "m3"
-        ]
-    }
-];
 
 function getIndexGammeFromId(inputGamme, inputIdGamme){
   var result = null;
