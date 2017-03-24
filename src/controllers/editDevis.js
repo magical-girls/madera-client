@@ -13,11 +13,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   $scope.addCommercialComment = false;
   //Récupération des données
   if ("new" != id) { //si on edit, récupération des données du devis
-    console.log("id n'est pas new :" + id);
-
-    
-    
-    
+    console.log("id n'est pas new :" + id);   
     
     devisProvider.getaDevis(id).async().then(function(response){
     	$scope.devisData = response.data;

@@ -77,108 +77,97 @@
             </div>
             <p>Date de création: {{devisData.devis.dateCreation}}</p>
             <p>Dernière modification: {{devisData.devis.dateModif}}</p>
-          </md-card-content>
-          <md-divider></md-divider>
-          <h3>Sélection des éléments</h3>
-          <md-card-content>
-            <div layout="row">
-              <md-input-container flex>
-                <label>Gammes</label>
-                <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                  <md-option ng-value="g.idReferenceGamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom }}</md-option>
-                </md-select>
-              </md-input-container>
-              <md-input-container flex>
-                <label>Modules</label>
-                <md-select ng-model="module" ng-disabled="edit=='false'">
-                  <md-option ng-repeat="m in modules" ng-value="m.idReference" ng-if="getMatchModule(gamme,m.idReference)">{{ m.idReference }}</md-option>
-                </md-select>
-              </md-input-container>
-              <md-input-container flex="10">
-                <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, longueur,angle)" ng-disabled="gamme == undefined || module == undefined || longueur == undefined"
-                  aria-label="Add">
-                  <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
-                  </md-button>
-              </md-input-container>
-            </div>
-            <div layout="row">
-              <md-input-container class="md-block" flex>
-                <label>Section: </label>
-                <input ng-model="nbSection" ng-disabled="edit=='false'" ng-change="setNbAngle()" type="number">
-              </md-input-container>
-              <md-input-container class="md-block" flex>
-                <label>Longueur: (cm)</label>
-                <input ng-model="longueur" ng-disabled="edit=='false'" type="number">
-              </md-input-container>
-            </div>
-            <div>
-              <div ng-repeat="n in nbAngle" layout="row">
-                <h4>Section {{n}}</h4>
+
+            <div ng-hide="edit == 'false'">
+              <md-divider></md-divider>
+              <h3>Sélection des éléments</h3>
+
+              <div layout="row">
                 <md-input-container flex>
-                  <label>Angle</label>
-                  <md-select ng-model="typeAngle" ng-disabled="edit=='false'">
-                    <md-option ng-value="1">Entrant</md-option>
-                    <md-option ng-value="2">Sortant</md-option>
+                  <label>Gammes</label>
+                  <md-select ng-model="gamme" ng-disabled="edit=='false'">
+                    <md-option ng-value="g.idReferenceGamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom }}</md-option>
                   </md-select>
                 </md-input-container>
+                <md-input-container flex>
+                  <label>Modules</label>
+                  <md-select ng-model="module" ng-disabled="edit=='false'">
+                    <md-option ng-repeat="m in modules" ng-value="m.idReference" ng-if="getMatchModule(gamme,m.idReference)">{{ m.idReference }}</md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container flex="10">
+                  <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, longueur,angle)" ng-disabled="gamme == undefined || module == undefined || longueur == undefined"
+                    aria-label="Add">
+                    <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+                  </md-button>
+                </md-input-container>
+              </div>
+              <div layout="row">
                 <md-input-container class="md-block" flex>
-                  <label>degré de l'angle: </label>
-                  <input ng-model="degre" ng-disabled="edit=='false'" type="number">
+                  <label>Section: </label>
+                  <input ng-model="nbSection" ng-disabled="edit=='false'" ng-change="setNbAngle()" type="number">
                 </md-input-container>
                 <md-input-container class="md-block" flex>
                   <label>Longueur: (cm)</label>
                   <input ng-model="longueur" ng-disabled="edit=='false'" type="number">
                 </md-input-container>
               </div>
+              <div>
+                <div ng-repeat="n in nbAngle" layout="row">
+                  <h4>Section {{n}}</h4>
+                  <md-input-container flex>
+                    <label>Angle</label>
+                    <md-select ng-model="typeAngle" ng-disabled="edit=='false'">
+                      <md-option ng-value="1">Entrant</md-option>
+                      <md-option ng-value="2">Sortant</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex>
+                    <label>degré de l'angle: </label>
+                    <input ng-model="degre" ng-disabled="edit=='false'" type="number">
+                  </md-input-container>
+                  <md-input-container class="md-block" flex>
+                    <label>Longueur: (cm)</label>
+                    <input ng-model="longueur" ng-disabled="edit=='false'" type="number">
+                  </md-input-container>
+                </div>
+              </div>
             </div>
+            <md-divider></md-divider>
+            <h3>Vos choix</h3>
+            <md-table-container>
+              <table md-table>
+                <thead md-head>
+                  <tr md-row>
+                    <th md-column><span>#</span></th>
+                    <th md-column><span>Gamme</span></th>
+                    <th md-column><span>Module</span></th>
+                    <th md-column><span>Longueur</span></th>
+                    <th md-column><span>Angle</span></th>
+                    <th md-column></th>
+                  </tr>
+                </thead>
+                <tbody md-body>
+                  <tr md-row ng-repeat="choix in choixCatalogue">
+                    <td md-cell>{{$index+1}}</td>
+                    <td md-cell>{{choix.nom_gamme}}</td>
+                    <td md-cell>{{choix.nom_module}}</td>
+                    <td md-cell>{{choix.longueur}}</td>
+                    <td md-cell>{{choix.angle}}</td>
+                    <td md-cell>
+                      <md-button class="md-secondary" ng-click="removeChoixCatalogueRow(choix.id_row)" aria-label="Delete">
+                        <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
+                      </md-button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </md-table-container>
           </md-card-content>
-          <!--<md-input-container flex>
-                <label>Composants</label>
-                <md-select ng-model="composant" ng-disabled="edit=='false'">
-                  <md-option ng-value="c.id_composant" ng-repeat="c in composants " ng-if="getMatchComposant(module,c._id_module)">{{ c.nom_composant }}</md-option>
-                </md-select>
-              </md-input-container>
-              -->
-
-      </div>
-      </md-card-content>
-      <h4>Description</h4>
-      <md-card-content>
-      </md-card-content>
-      <md-divider></md-divider>
-      <h2>Vos choix</h2>
-      <md-card-content>
-        <md-table-container>
-          <table md-table>
-            <thead md-head>
-              <tr md-row>
-                <th md-column><span>#</span></th>
-                <th md-column><span>Gamme</span></th>
-                <th md-column><span>Module</span></th>
-                <th md-column><span>Longueur</span></th>
-                <th md-column><span>Angle</span></th>
-                <th md-column></th>
-              </tr>
-            </thead>
-            <tbody md-body>
-              <tr md-row ng-repeat="choix in choixCatalogue">
-                <td md-cell>{{$index+1}}</td>
-                <td md-cell>{{choix.nom_gamme}}</td>
-                <td md-cell>{{choix.nom_module}}</td>
-                <td md-cell>{{choix.longueur}}</td>
-                <td md-cell>{{choix.angle}}</td>
-                <td md-cell>
-                  <md-button class="md-secondary" ng-click="removeChoixCatalogueRow(choix.id_row)" aria-label="Delete">
-                    <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
-                  </md-button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </md-table-container>
         </md-card>
+      </div>
+    </md-content>
 </div>
-</md-content>
 <md-content class="md-padding">
   <div layout="row" layout-xs="column">
     <md-card flex flex-gt-xs="50">
@@ -218,7 +207,7 @@
       </md-card-actions>
     </md-card>
     <md-card flex>
-      <h2>Commentaire Commercial</h2>
+      <h2>Commentaire commercial</h2>
       <md-card-content>
         <md-table-container>
           <table md-table>
@@ -245,7 +234,7 @@
             <md-button class="md-raised" aria-label="add_commercial_comment" ng-click="addComment(commercialCommentary,'commercial')"
               ng-disabled="edit=='false'">
               <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
-              </md-button>
+            </md-button>
           </md-input-container>
         </div>
       </md-card-content>
@@ -254,7 +243,7 @@
       </md-card-actions>
     </md-card>
   </div>
-  <div layout="row" layout-xs="column" layout-align="center end">
+  <div layout="row"  layout-align="center end">
     <md-button class="md-raised">Enregistrer</md-button>
     <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
     <md-button class="md-raised">Supprimer</md-button>

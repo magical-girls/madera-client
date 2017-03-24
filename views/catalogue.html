@@ -1,49 +1,51 @@
 <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="Madera">
-  <md-card>
-    <md-content>
-      <md-tabs md-dynamic-height="" md-border-bottom="">
-        <md-tab label="Gammes" ng-click="showGammes();">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Gammes</h1>
-            <div ng-include="'./views/_liste_gammes.html'"></div>
-          </md-content>
-        </md-tab>
-        <md-tab label="Modules" ng-click="showModules();">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Modules</h1>
-            <div ng-include="'./views/_liste_modules.html'"></div>
+  <md-content class="md-padding">
+    <md-card>
+      <md-card-content>
+        <md-tabs md-dynamic-height="" md-border-bottom="">
+          <md-tab label="Gammes" ng-click="showGammes();">
+            <md-content class="md-padding">
+              <h1 class="md-display-2">Gammes</h1>
+              <div ng-include="'./views/_liste_gammes.html'"></div>
+            </md-content>
+          </md-tab>
+          <md-tab label="Modules" ng-click="showModules();">
+            <md-content class="md-padding">
+              <h1 class="md-display-2">Modules</h1>
+              <div ng-include="'./views/_liste_modules.html'"></div>
 
-          </md-content>
-        </md-tab>
-        <md-tab label="Composants" ng-click="showComposants();">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Composants</h1>
-            <div ng-include="'./views/_liste_composants.html'"></div>
-          </md-content>
-        </md-tab>
-      </md-tabs>
-      <!-- FAB button -->
-      <md-fab-speed-dial ng-cloak ng-open="show" class="md-fling md-fab md-fab-bottom-right" md-direction="up">
-        <md-fab-trigger>
-          <md-button class="md-fab md-primary" aria-label="create_item">
-            <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
-          </md-button>
-        </md-fab-trigger>
-        <md-fab-actions>
-          <md-button class="md-fab md-raised md-accent md-mini" ng-click="addToCatalogue('composant')" >
-            <label>C</label>
-            <md-tooltip md-direction="left">Composant</md-tooltip>
-          </md-button>
-          <md-button class="md-fab md-raised md-accent md-mini " ng-click="addToCatalogue('module')"ng-disabled="edit=='false'">
-             <label>M</label>
-            <md-tooltip md-direction="left">Module</md-tooltip>
-          </md-button>
-          <md-button class="md-fab md-raised md-mini md-accent" ng-click="addToCatalogue('gamme')"ng-disabled="edit=='false'">
-             <label>G</label>
-            <md-tooltip md-direction="left">Gamme</md-tooltip>
-          </md-button>
-        </md-fab-actions>
-      </md-fab-speed-dial>
-    </md-content>
-  </md-card>
+            </md-content>
+          </md-tab>
+          <md-tab label="Composants" ng-click="showComposants();">
+            <md-content class="md-padding">
+              <h1 class="md-display-2">Composants</h1>
+              <div ng-include="'./views/_liste_composants.html'"></div>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+        <!-- FAB button -->
+        <md-fab-speed-dial ng-cloak ng-open="show" class="md-fling md-fab md-fab-bottom-right" md-direction="up">
+          <md-fab-trigger>
+            <md-button class="md-fab md-primary" aria-label="create_item">
+              <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+            </md-button>
+          </md-fab-trigger>
+          <md-fab-actions>
+            <md-button class="md-fab md-raised md-accent md-mini" ng-click="addToCatalogue('composant')">
+              <label>C</label>
+              <md-tooltip md-direction="left">Composant</md-tooltip>
+            </md-button>
+            <md-button class="md-fab md-raised md-accent md-mini " ng-click="addToCatalogue('module')" ng-disabled="edit=='false'">
+              <label>M</label>
+              <md-tooltip md-direction="left">Module</md-tooltip>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini md-accent" ng-click="addToCatalogue('gamme')" ng-disabled="edit=='false'">
+              <label>G</label>
+              <md-tooltip md-direction="left">Gamme</md-tooltip>
+            </md-button>
+          </md-fab-actions>
+        </md-fab-speed-dial>
+      </md-card-content>
+    </md-card>
+  </md-content>
 </div>
