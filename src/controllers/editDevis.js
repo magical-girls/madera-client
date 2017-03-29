@@ -98,6 +98,30 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       $scope.nbAngle.push(i);
     }
   };
+  // sauver donnees du devis
+  $scope.saveDevis = function(){
+    // Récupérer les valeurs des segments
+    $scope.segmentData=[];
+    
+    devisProvider.saveDevis(
+      devisData.client.nom,
+      devisData.client.prenom,
+      null,
+      devisData.client.tel,
+      null,
+      null,
+      devisData.client.mail,
+      devisData.salarie.matricule,
+      devisData.devis.reference,
+      null,
+      0,
+      0,
+      gammes.idReferencesGamme,
+      modules.idReferencesGamme,
+      null
+      );
+      // récupération des données à finir
+  }
   // Bouton retour
   $scope.returnFunction = function () {
     $window.history.back();

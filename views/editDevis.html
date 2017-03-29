@@ -1,6 +1,5 @@
 <div ng-cloak ng-app="Madera">
   <form name="devisForm">
-
     <md-content class="md-padding">
       <div layout="row" layout-xs="column">
         <md-card flex flex-gt-xs="50">
@@ -86,7 +85,7 @@
                 <md-input-container flex>
                   <label>Gammes</label>
                   <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                    <md-option ng-value="g.idReferenceGamme" ng-repeat="g in gammes " ng-click="module=null;composant=null">{{ g.nom }}</md-option>
+                    <md-option ng-value="g.idReferenceGamme" ng-repeat="g in gammes " ng-click="module=null">{{ g.nom }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex>
@@ -109,7 +108,7 @@
                 </md-input-container>
                 <md-input-container class="md-block" flex>
                   <label>Longueur: (cm)</label>
-                  <input ng-model="longueur" ng-disabled="edit=='false'" type="number">
+                  <input ng-model="longueur" min="1" ng-disabled="edit=='false'" type="number">
                 </md-input-container>
               </div>
               <div>
@@ -117,18 +116,18 @@
                   <h4>Section {{n}}</h4>
                   <md-input-container flex>
                     <label>Angle</label>
-                    <md-select ng-model="typeAngle" ng-disabled="edit=='false'">
+                    <md-select ng-model="typeAngle" id="type_angle_{{n}}" ng-disabled="edit=='false'">
                       <md-option ng-value="1">Entrant</md-option>
                       <md-option ng-value="2">Sortant</md-option>
                     </md-select>
                   </md-input-container>
                   <md-input-container class="md-block" flex>
                     <label>degré de l'angle: </label>
-                    <input ng-model="degre" ng-disabled="edit=='false'" type="number">
+                    <input ng-model="degre" id="degres_{{n}}" ng-disabled="edit=='false'" type="number">
                   </md-input-container>
                   <md-input-container class="md-block" flex>
                     <label>Longueur: (cm)</label>
-                    <input ng-model="longueur" ng-disabled="edit=='false'" type="number">
+                    <input ng-model="longueur" id="longueur_{{n}}" ng-disabled="edit=='false'" type="number">
                   </md-input-container>
                 </div>
               </div>
@@ -244,9 +243,9 @@
     </md-card>
   </div>
   <div layout="row"  layout-align="center end">
-    <md-button class="md-raised">Enregistrer</md-button>
+    <md-button class="md-raised" ng-click="saveDevis()">Enregistrer</md-button>
     <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
-    <md-button class="md-raised">Supprimer</md-button>
+    <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
   </div>
 </md-content>
 </form>

@@ -1,5 +1,5 @@
 const host = 'http://78.198.68.4:12345/maderaserveur/';
-//const host = 'http://localhost:8080/maderaserveur/';
+//const host = 'http://localhost:80/maderaserveur/';
 
 app.factory('authentification', function($window, $http){
 

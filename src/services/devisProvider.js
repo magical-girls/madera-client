@@ -50,7 +50,7 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
     }
   }
   this.deleteDevis = function (inputDevis, inputNumDevis) {
-    inputDevis.splice(getIndexDevisFromId(inputDevis, inputNumDevis), 1);
+    //inputDevis.splice(getIndexDevisFromId(inputDevis, inputNumDevis), 1);
   }
 
   this.getaDevis = function (id) {
