@@ -85,13 +85,13 @@
                 <md-input-container flex>
                   <label>Gammes</label>
                   <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                    <md-option ng-value="g.idReferenceGamme" ng-repeat="g in gammes " ng-click="module=null">{{ g.nom }}</md-option>
+                    <md-option ng-value="g.reference_gamme" ng-repeat="g in gammes " ng-click="module=null">{{ g.nom_gamme }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex>
                   <label>Modules</label>
                   <md-select ng-model="module" ng-disabled="edit=='false'">
-                    <md-option ng-repeat="m in modules" ng-value="m.idReference" ng-if="getMatchModule(gamme,m.idReference)">{{ m.idReference }}</md-option>
+                    <md-option ng-repeat="m in modules" ng-value="m.referenceModule">{{ m.referenceModule }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex="10">
@@ -242,8 +242,9 @@
       </md-card-actions>
     </md-card>
   </div>
-  <div layout="row"  layout-align="center end">
-    <md-button class="md-raised" ng-click="saveDevis()">Enregistrer</md-button>
+  <div layout="row" layout-align="center end">
+    <md-button class="md-raised" ng-show="new == true" ng-click="createDevis()">Créer</md-button>
+    <md-button class="md-raised" ng-show="new == false" ng-click="saveDevis()">Enregistrer</md-button>
     <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
     <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
   </div>

@@ -75,50 +75,51 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
     return devisLabel;
   }
 
-  this.saveDevis = function (nomClient, prenomClient, naissanceClient, telClient, adresseClient, professionClient, mailClient, idMatriculeSalarie,
+  this.createDevis = function (nomClient, prenomClient, naissanceClient, telClient, adresseClient, professionClient, mailClient, idMatriculeSalarie,
     referenceDevis, motifDevis, margeComDevis, margeEntDevis, idReferenceGamme,idRefModule,commentaireModule,sectionLongeur,refModule, angleType, angleDegre,moduleA,moduleB) {
     //url get devis
     return {
       async: function () {
+        
         return $http({
           url: host + 'devis',
           method: "POST",
-          data: {
-            'nomClient': nomClient,
-            'prenomClient': prenomClient,
-            'naissanceClient': naissanceClient,
-            'telClient': telClient,
-            'adresseClient': adresseClient,
-            'professionClient': professionClient,
-            'mailClient': mailClient,
-            'idMatriculeSalarie': idMatriculeSalarie,
-            'referenceDevis': referenceDevis,
-            'motifDevis': motifDevis,
-            'margeComDevis': margeComDevis,
-            'margeEntDevis': margeEntDevis,
-            'idReferenceGamme': idReferenceGamme,
-            'lstModule':
+           data: {
+            "nomClient": nomClient,
+            "prenomClient": prenomClient,
+            "naissanceClient": naissanceClient,
+            "telClient": telClient,
+            "adresseClient": adresseClient,
+            "professionClient": professionClient,
+            "mailClient": mailClient,
+            "idMatriculeSalarie": idMatriculeSalarie,
+            "referenceDevis": referenceDevis,
+            "motifDevis": motifDevis,
+            "margeComDevis": margeComDevis,
+            "margeEntDevis": margeEntDevis,
+            "idReferenceGamme": idReferenceGamme,
+            "lstModule":
             [
               {
-                'idReference': idRefModule,
-                'commentaire': commentaireModule
+                "idReference": idRefModule,
+                "commentaire": commentaireModule
               }
             ],
-            'lstSection':
+            "lstSection":
             [
               {
-                'longueur': sectionLongeur,
-                'refModule': refModule
+                "longueur": sectionLongeur,
+                "refModule": refModule
               }
             ],
 
-            'lstAngle':
+            "lstAngle":
             [
               {
-                'type': angleType,
-                'degre': angleDegre,
-                'moduleA': moduleA,
-                'moduleB': moduleB
+                "type": angleType,
+                "degre": angleDegre,
+                "moduleA": moduleA,
+                "moduleB": moduleB
               }
             ]
           },
