@@ -1,6 +1,6 @@
 ///////////////////// Edit devis controller /////////////////////////
 app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider,
-  catalogueProvider, $mdDialog, $window, $location, authentification, commonCode) {
+  catalogueProvider, $mdDialog, $window, $location, authentification, commonCode, $interval) {
   $scope.authentification = authentification.validate('');
   if (!$scope.authentification) {
     $location.url("/signin");
@@ -105,7 +105,33 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       $scope.nbAngle.push(i);
     }
     console.log("max = " + $scope.nbSection)
+   
   };
+  $interval(function(){
+     console.log("typeAngle = " + $scope.typeAngle);
+     console.log("degre = " + $scope.degre);
+  }, 2000);
+
+
+$scope.test = function(id){
+  console.log("$index : " + id);
+  console.log("typeAngle : " + $scope.typeAngle);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // sauver donnees du devis
   $scope.createDevis = function () {
     // Récupérer les valeurs des segments

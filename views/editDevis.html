@@ -116,10 +116,11 @@
                   <h4>Section {{n}}</h4>
                   <md-input-container flex>
                     <label>Angle</label>
-                    <md-select ng-model="typeAngle" id="type_angle_{{n}}" ng-disabled="edit=='false'">
-                      <md-option ng-value="1">Entrant</md-option>
+                    <md-select ng-model="$parent.typeAngle[$index+1]" id="type_angle_{{n}}" ng-disabled="edit=='false'" ng-change="test($index)">
+                      <md-option ng-value="{{$index+1}}-1">Entrant</md-option>
                       <md-option ng-value="2">Sortant</md-option>
                     </md-select>
+                    {{typeAngle}}
                   </md-input-container>
                   <md-input-container class="md-block" flex>
                     <label>degré de l'angle: </label>
