@@ -85,13 +85,13 @@
                 <md-input-container flex>
                   <label>Gammes</label>
                   <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                    <md-option ng-value="g.reference_gamme" ng-repeat="g in gammes " ng-click="module=null">{{ g.nom_gamme }}</md-option>
+                    <md-option value="g.idReference" ng-repeat="g in datasGammes " ng-click="module=null">{{ g.nom }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex>
                   <label>Modules</label>
                   <md-select ng-model="module" ng-disabled="edit=='false'">
-                    <md-option ng-repeat="m in modules" ng-value="m.referenceModule">{{ m.referenceModule }}</md-option>
+                    <md-option ng-repeat="m in datasModules" value="m.idReference">{{ m.commentaire }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex="10">
@@ -104,32 +104,31 @@
               <div layout="row">
                 <md-input-container class="md-block" flex>
                   <label>Section: </label>
-                  <input ng-model="nbSection" ng-disabled="edit=='false'" ng-change="setNbAngle()" type="number">
-                </md-input-container>
-                <md-input-container class="md-block" flex>
-                  <label>Longueur: (cm)</label>
-                  <input ng-model="longueur" min="1" ng-disabled="edit=='false'" type="number">
+                  <input ng-model="nbSection" min="1" ng-disabled="edit=='false'" ng-change="setNbAngle()" type="number">
                 </md-input-container>
               </div>
               <div>
                 <div ng-repeat="n in nbAngle" layout="row">
-                  <h4>Section {{n}}</h4>
+                  <h4>Section {{n+1}}</h4>
                   <md-input-container flex>
+                    <md-input-container class="md-block" flex>
+                      <label>Longueur: (cm)</label>
+                      <input ng-model="$parent.longueur[$index+1]" min="0" ng-init="$parent.degre[$index+1]=0" ng-disabled="edit=='false'" type="number">
+                    </md-input-container>
+                    <div ng-hide="n <1">
                     <label>Angle</label>
-                    <md-select ng-model="$parent.typeAngle[$index+1]" id="type_angle_{{n}}" ng-disabled="edit=='false'" ng-change="test($index)">
-                      <md-option ng-value="{{$index+1}}-1">Entrant</md-option>
-                      <md-option ng-value="2">Sortant</md-option>
+                    <md-select ng-model="$parent.typeAngle[$index+1]" ng-init="$parent.typeAngle[$index+1]='none'" ng-disabled="edit=='false'" ng-change="test($index)">
+                      <md-option value="">-</md-option>
+                      <md-option value="Entrant">Entrant</md-option>
+                      <md-option value="Sortant">Sortant</md-option>
                     </md-select>
-                    {{typeAngle}}
                   </md-input-container>
                   <md-input-container class="md-block" flex>
                     <label>degré de l'angle: </label>
-                    <input ng-model="degre" id="degres_{{n}}" ng-disabled="edit=='false'" type="number">
+                    <input ng-model="$parent.degre[$index+1]" min="0" ng-init="$parent.degre[$index+1]=0" ng-disabled="edit=='false'" type="number">
                   </md-input-container>
-                  <md-input-container class="md-block" flex>
-                    <label>Longueur: (cm)</label>
-                    <input ng-model="longueur" id="longueur_{{n}}" ng-disabled="edit=='false'" type="number">
-                  </md-input-container>
+                </div>
+                <!-- {{longueur}} {{typeAngle}} {{degre}} -->
                 </div>
               </div>
             </div>
