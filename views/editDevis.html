@@ -78,6 +78,14 @@
             <p>Dernière modification: {{devisData.devis.dateModif}}</p>
 
             <div ng-hide="edit == 'false'">
+              <md-input-container class="md-block">
+                <label>Marge commercial</label>
+                <input ng-disabled="edit=='false'" ng-model="margeComDevis" type="number">
+              </md-input-container>
+              <md-input-container class="md-block">
+                <label>Marge entrprise</label>
+                <input ng-disabled="edit=='false'" ng-model="margeEntDevis" type="number">
+              </md-input-container>
               <md-divider></md-divider>
               <h3>Sélection des éléments</h3>
 
@@ -85,17 +93,19 @@
                 <md-input-container flex>
                   <label>Gammes</label>
                   <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                    <md-option value="g.idReference" ng-repeat="g in datasGammes " ng-click="module=null">{{ g.nom }}</md-option>
+                    <md-option value=""></md-option>
+                    <md-option value="g.idReference" ng-repeat="g in datasGammes track by g.idReference" >{{ g.nom }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex>
                   <label>Modules</label>
                   <md-select ng-model="module" ng-disabled="edit=='false'">
+                    <md-option value=""></md-option>
                     <md-option ng-repeat="m in datasModules" value="m.idReference">{{ m.commentaire }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex="10">
-                  <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, longueur,angle)" ng-disabled="gamme == undefined || module == undefined || longueur == undefined"
+                  <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, longueur,angle)" ng-disabled="gamme == undefined || module == undefined"
                     aria-label="Add">
                     <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
                   </md-button>
@@ -111,25 +121,26 @@
                 <div ng-repeat="n in nbAngle" layout="row">
                   <h4>Section {{n+1}}</h4>
                   <md-input-container flex>
-                    <md-input-container class="md-block" flex>
-                      <label>Longueur: (cm)</label>
-                      <input ng-model="$parent.longueur[$index+1]" min="0" ng-init="$parent.degre[$index+1]=0" ng-disabled="edit=='false'" type="number">
+                    <label>Longueur: (cm)</label>
+                    <input ng-model="$parent.longueur[$index+1]" min="0" ng-init="$parent.longueur[$index+1]=0" ng-disabled="edit=='false'" type="number">
+                  </md-input-container>
+                  <div flex ng-hide="n <1">
+                    <md-input-container>
+                      <label>Angle</label>
+                      <md-select ng-model="$parent.typeAngle[$index+1]" ng-init="$parent.typeAngle[$index+1]='none'" ng-disabled="edit=='false'"
+                        ng-change="test($index)">
+                        <md-option value="">-</md-option>
+                        <md-option value="Entrant">Entrant</md-option>
+                        <md-option value="Sortant">Sortant</md-option>
+                      </md-select>
                     </md-input-container>
-                    <div ng-hide="n <1">
-                    <label>Angle</label>
-                    <md-select ng-model="$parent.typeAngle[$index+1]" ng-init="$parent.typeAngle[$index+1]='none'" ng-disabled="edit=='false'" ng-change="test($index)">
-                      <md-option value="">-</md-option>
-                      <md-option value="Entrant">Entrant</md-option>
-                      <md-option value="Sortant">Sortant</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <md-input-container class="md-block" flex>
-                    <label>degré de l'angle: </label>
-                    <input ng-model="$parent.degre[$index+1]" min="0" ng-init="$parent.degre[$index+1]=0" ng-disabled="edit=='false'" type="number">
-                  </md-input-container>
+                    <md-input-container>
+                      <label>degré de l'angle: </label>
+                      <input ng-model="$parent.degre[$index+1]" min="0" ng-init="$parent.degre[$index+1]=0" ng-disabled="edit=='false'" type="number">
+                    </md-input-container>
+                  </div>
                 </div>
-                <!-- {{longueur}} {{typeAngle}} {{degre}} -->
-                </div>
+                {{longueur}} {{typeAngle}} {{degre}}
               </div>
             </div>
             <md-divider></md-divider>
