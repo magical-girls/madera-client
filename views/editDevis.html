@@ -92,28 +92,26 @@
               <div layout="row">
                 <md-input-container flex>
                   <label>Gammes</label>
-                  <md-select ng-model="gamme" ng-disabled="edit=='false'">
-                    <md-option value=""></md-option>
-                    <md-option value="g.idReference" ng-repeat="g in datasGammes track by g.idReference" >{{ g.nom }}</md-option>
+                  <md-select ng-model="gamme" ng-disabled="gammeIsDefined == 'true'">
+                    <md-option value="{{g.idReference}}" ng-repeat="g in datasGammes" >{{ g.nom }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex>
                   <label>Modules</label>
                   <md-select ng-model="module" ng-disabled="edit=='false'">
-                    <md-option value=""></md-option>
-                    <md-option ng-repeat="m in datasModules" value="m.idReference">{{ m.commentaire }}</md-option>
+                    <md-option ng-repeat="m in datasModules" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex="10">
-                  <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, longueur,angle)" ng-disabled="gamme == undefined || module == undefined"
+                  <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, longueur,typeAngle,degre)" ng-disabled="gamme == undefined || module == undefined"
                     aria-label="Add">
                     <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
                   </md-button>
                 </md-input-container>
               </div>
               <div layout="row">
-                <md-input-container class="md-block" flex>
-                  <label>Section: </label>
+                <md-input-container>
+                  <label>Nombre de section: </label>
                   <input ng-model="nbSection" min="1" ng-disabled="edit=='false'" ng-change="setNbAngle()" type="number">
                 </md-input-container>
               </div>
@@ -164,11 +162,11 @@
                     <td md-cell>{{choix.nom_module}}</td>
                     <td md-cell>{{choix.longueur}}</td>
                     <td md-cell>{{choix.angle}}</td>
-                    <td md-cell>
+                   <!-- <td md-cell>
                       <md-button class="md-secondary" ng-click="removeChoixCatalogueRow(choix.id_row)" aria-label="Delete">
                         <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
                       </md-button>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>

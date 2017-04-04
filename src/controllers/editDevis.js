@@ -15,7 +15,9 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   if ("new" != id) { 
     console.log("id n'est pas new :" + id);
     $scope.new = false;
+     $scope.gammeIsDefined=true;
     devisProvider.getaDevis(id).async().then(function (response) {
+     
       $scope.devisData = response.data;
       $scope.gammes = response.data.gamme;
       $scope.modules = response.data.lstModule;
@@ -35,14 +37,12 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   // Listes déroulantes - catalogueProvider    
     catalogueProvider.getGammes().async().then(function(response){
     	$scope.datasGammes = response.data;
-    	$routeParams.gammes = response.data;
     }, function(error){
     	commonCode.alertErreur();
     })
     
     catalogueProvider.getModules().async().then(function(response){
     	$scope.datasModules = response.data;
-    	$routeParams.modules = response.data;
     }, function(error){
     	commonCode.alertErreur();
     })
@@ -63,8 +63,8 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   };
   // initialisation des choix (tableau)
 
-  $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputLongueur, inputAngle) {
-    $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'longueur': inputLongueur, 'angle': inputAngle });
+  $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputLongueur, inputAngle, inputDegre) {
+    $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'longueur': inputLongueur, 'angle': inputAngle, 'degre': inputDegre });
   };
   // Supprimer des éléments de la liste des choix
   $scope.removeChoixCatalogueRow = function (inputIdRow) {
@@ -105,20 +105,9 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   };
   // debug
   $interval(function () {
-    console.log("typeAngle = " + $scope.typeAngle);
-    console.log("Longueur: " + $scope.longueur + " cm");
-    console.log("degre : " + $scope.degre + " °");
+    console.log("gamme = " + $scope.gamme);
+    
   }, 2000);
-
-
-  $scope.test = function (id) {
-    console.log("$index : " + id);
-    console.log("typeAngle : " + $scope.typeAngle);
-    console.log("Longueur: " + $scope.longueur + " cm");
-    console.log("degre : " + $scope.degre + " °");
-  }
-
-
 
 
   // créer un devis

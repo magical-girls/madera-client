@@ -13,6 +13,13 @@ th{
 table tbody tr:hover{
    background-color: rgba(158,158,158,0.2);
 }
+md-pagination-wrapper {
+    width:auto !important;
+}
+md-tab-item{
+  max-width:none !important;
+}
+
 .inputdemoIcons {
       .right-icon {
       position: absolute;
