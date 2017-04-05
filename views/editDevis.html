@@ -70,9 +70,21 @@
           <h3>Informations</h3>
           <md-card-content>
             <div layout="row">
-              <p>Référence: {{devisData.devis.reference}}</p>
+              <md-input-container class="md-block">
+                <label>Référence</label>
+                <input ng-disabled="edit=='false'" ng-model="devisData.devis.reference" type="text">
+              </md-input-container>
               <p flex></p>
-              <p>Statut: {{devisData.devis.status}}</p>
+              <!--<p>Statut: {{devisData.devis.status}}</p>-->
+              <md-input-container>
+                <label>Statut: </label>
+                <md-select ng-model="statut" ng-disabled="edit=='false'">
+                  <md-option ng-selected="devisData.devis.status=='Refusé'" value="-1">Refusé</md-option>
+                  <md-option ng-selected="devisData.devis.status=='En cours'" value="0">En cours</md-option>
+                  <md-option ng-selected="devisData.devis.status=='En attente'" value="1">En attente</md-option>
+                  <md-option ng-selected="devisData.devis.status=='Validé'" value="2">Validé</md-option>
+                </md-select>
+              </md-input-container>
             </div>
             <p>Date de création: {{devisData.devis.dateCreation}}</p>
             <p>Dernière modification: {{devisData.devis.dateModif}}</p>
@@ -88,12 +100,11 @@
               </md-input-container>
               <md-divider></md-divider>
               <h3>Sélection des éléments</h3>
-
               <div layout="row">
                 <md-input-container flex>
                   <label>Gammes</label>
-                  <md-select ng-model="gamme" ng-disabled="gammeIsDefined == 'true'">
-                    <md-option value="{{g.idReference}}" ng-repeat="g in datasGammes" >{{ g.nom }}</md-option>
+                  <md-select ng-model="gamme" ng-disabled="gammeIsDefined">
+                    <md-option ng-selected="g.idReference==selectedGammeId" value="{{g.idReference}}" ng-repeat="g in datasGammes">{{ g.nom }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex>
@@ -103,7 +114,7 @@
                   </md-select>
                 </md-input-container>
                 <md-input-container flex="10">
-                  <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, longueur,typeAngle,degre)" ng-disabled="gamme == undefined || module == undefined"
+                  <md-button class="md-secondary md-raised" ng-click="add(gamme, module, longueur,typeAngle,degre)" ng-disabled="gamme == undefined || module == undefined"
                     aria-label="Add">
                     <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
                   </md-button>
@@ -138,7 +149,7 @@
                     </md-input-container>
                   </div>
                 </div>
-                {{longueur}} {{typeAngle}} {{degre}}
+                <!--  sectionjson {{sectionJson}} <br> modulejson{{moduleJson}}<br> anglejson{{angleJson}}-->
               </div>
             </div>
             <md-divider></md-divider>
@@ -150,8 +161,10 @@
                     <th md-column><span>#</span></th>
                     <th md-column><span>Gamme</span></th>
                     <th md-column><span>Module</span></th>
+                    <th md-column><span>Section</span></th>
                     <th md-column><span>Longueur</span></th>
-                    <th md-column><span>Angle</span></th>
+                    <th md-column><span>Type d'angle</span></th>
+                    <th md-column><span>Degré</span></th>
                     <th md-column></th>
                   </tr>
                 </thead>
@@ -160,9 +173,11 @@
                     <td md-cell>{{$index+1}}</td>
                     <td md-cell>{{choix.nom_gamme}}</td>
                     <td md-cell>{{choix.nom_module}}</td>
+                    <td md-cell>n° {{choix.num_section}}</td>
                     <td md-cell>{{choix.longueur}}</td>
-                    <td md-cell>{{choix.angle}}</td>
-                   <!-- <td md-cell>
+                    <td md-cell>{{choix.type}}</td>
+                    <td md-cell>{{choix.degre}}</td>
+                    <!-- <td md-cell>
                       <md-button class="md-secondary" ng-click="removeChoixCatalogueRow(choix.id_row)" aria-label="Delete">
                         <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
                       </md-button>

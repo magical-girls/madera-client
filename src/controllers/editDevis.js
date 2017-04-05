@@ -11,19 +11,50 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   var id = $routeParams.id;
   $scope.addClientComment = false;
   $scope.addCommercialComment = false;
+  $scope.gammeIsDefined = false;
+  // Création des tableaux pour le post
+  $scope.sectionJson = [];
+  $scope.angleJson = [];
+  $scope.moduleJson = [];
+
   //si on edit, récupération des données du devis
-  if ("new" != id) { 
+  if ("new" != id) {
     console.log("id n'est pas new :" + id);
     $scope.new = false;
-     $scope.gammeIsDefined=true;
     devisProvider.getaDevis(id).async().then(function (response) {
-     
+
       $scope.devisData = response.data;
       $scope.gammes = response.data.gamme;
+      if ($scope.gammes.length != 0) {
+        $scope.gammeIsDefined = true;
+        $scope.selectedGammeId = $scope.gammes.idReference;
+      }
       $scope.modules = response.data.lstModule;
-      $scope.composants = response.data.lstComposant;
-      /** A FAIRE, liste des choix après modif serveur dépendance section pour tri */
-      //$scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'longueur': inputLongueur, 'angle': inputAngle });
+      console.log("selected = " + $scope.selectedGammeId);
+      // Création du tableau listant le contenu du devis
+      if ($scope.modules.length != 0) {
+        for (var i = 0; i < $scope.modules.length; i++) {
+          if ($scope.devisData.lstSection.length != 0) {
+            for (var j = 0; j < $scope.devisData.lstSection.length; j++) {
+              if ($scope.devisData.lstAngle.length != 0) { }
+              for (var k = 0; k < $scope.devisData.lstAngle.length; k++) {
+                if (($scope.devisData.lstAngle[k].moduleA == $scope.devisData.lstSection[j].refModule)
+                  || ($scope.devisData.lstAngle[k].moduleB == $scope.devisData.lstSection[j].refModule)) {
+                  $scope.choixCatalogue.push({
+                    'id_row': new Date().getTime(),
+                    'nom_gamme': $scope.gammes.nom,
+                    'nom_module': $scope.modules[i].commentaire,
+                    'num_section': j + 1,
+                    'longueur': $scope.devisData.lstSection[j].longueur,
+                    'type': $scope.devisData.lstAngle[k].type,
+                    'degre': $scope.devisData.lstAngle[k].degre
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
     }, function (error) {
       commonCode.alertErreur();
     });
@@ -32,20 +63,19 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     console.log("id est new: " + id);
     $scope.new = true;
     $scope.comData = userProvider.getUser();
-    //$scope.composants = catalogueProvider.getComposants();//TODO
   }
   // Listes déroulantes - catalogueProvider    
-    catalogueProvider.getGammes().async().then(function(response){
-    	$scope.datasGammes = response.data;
-    }, function(error){
-    	commonCode.alertErreur();
-    })
-    
-    catalogueProvider.getModules().async().then(function(response){
-    	$scope.datasModules = response.data;
-    }, function(error){
-    	commonCode.alertErreur();
-    })
+  catalogueProvider.getGammes().async().then(function (response) {
+    $scope.datasGammes = response.data;
+  }, function (error) {
+    commonCode.alertErreur();
+  })
+
+  catalogueProvider.getModules().async().then(function (response) {
+    $scope.datasModules = response.data;
+  }, function (error) {
+    commonCode.alertErreur();
+  })
 
   //Gestion des commentaires
   $scope.clientComment = [];
@@ -61,10 +91,54 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       $scope.addCommercialComment = false;
     }
   };
-  // initialisation des choix (tableau)
 
+  $scope.add = function (inputNomGamme, inputNomModule, inputLongueur, inputAngle, inputDegre) {
+
+    $scope.addChoixCatalogueRow(inputNomGamme, inputNomModule, inputLongueur, inputAngle, inputDegre);
+    $scope.addModuleJson(inputNomModule);
+    $scope.addSectionJson(inputNomModule, inputLongueur);
+    $scope.addAngleJson(inputNomModule, inputAngle, inputDegre);
+
+  }
+  // ajout des nouveaux choix pour affichage
   $scope.addChoixCatalogueRow = function (inputNomGamme, inputNomModule, inputLongueur, inputAngle, inputDegre) {
-    $scope.choixCatalogue.push({ 'id_row': new Date().getTime(), 'nom_gamme': inputNomGamme, 'nom_module': inputNomModule, 'longueur': inputLongueur, 'angle': inputAngle, 'degre': inputDegre });
+    for (var key in inputLongueur) {
+      $scope.choixCatalogue.push({
+        'id_row': new Date().getTime(),
+        'nom_gamme': $scope.gamme,
+        'nom_module': inputNomModule,
+        'num_section': key,
+        'longueur': inputLongueur[key],
+        'type': inputAngle[key],
+        'degre': inputDegre[key]
+      });
+    };
+  }
+  //lstModules
+  $scope.addModuleJson = function (inputNomModule) {
+    $scope.moduleJson.push({
+      "idReference": inputNomModule,
+    });
+  };
+  //lstSection
+  $scope.addSectionJson = function (inputNomModule, inputLongueur) {
+    for (var key in inputLongueur) {
+      $scope.sectionJson.push({
+        "longueur": inputLongueur[key],
+        "refModule": inputNomModule
+      });
+    }
+  };
+  //lstAngle
+  $scope.addAngleJson = function (inputNomModule, inputAngle, inputDegre) {
+    for (var key in inputAngle) {
+      $scope.angleJson.push({
+        "type": inputAngle[key],
+        "degre": inputDegre[key],
+        "moduleA": inputNomModule,
+        "moduleB": inputNomModule
+      });
+    }
   };
   // Supprimer des éléments de la liste des choix
   $scope.removeChoixCatalogueRow = function (inputIdRow) {
@@ -100,14 +174,11 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     for (var i = 0; i < max; i++) {
       $scope.nbAngle.push(i);
     }
-    console.log("max = " + $scope.nbSection)
-
   };
   // debug
-  $interval(function () {
-    console.log("gamme = " + $scope.gamme);
-    
-  }, 2000);
+  //$interval(function () {
+
+  //}, 2000);
 
 
   // créer un devis
@@ -125,18 +196,43 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       null,
       $scope.margeComDevis,
       $scope.margeEntDevis,
-      "G002",
-      "M002",
-      // $scope.gammes.idReferencesGamme,
-      // $scope.modules.idReferencesGamme,
-      null,
+      $scope.gammes.idReferences,
+      $scope.moduleJson,
+      // null, commentaire
       //lst section
-      $scope.longueur,
-      "M001",
-      $scope.typeAngle,
-      $scope.degre,
-      "M001",
-      "M002"
+      $scope.sectionJson,
+      $scope.angleJson
+
+    ).async().then(function (response) {
+      console.log("post ok");
+    }, function (error) {
+      commonCode.alertErreur();
+    });
+    // récupération des données à finir
+  }
+
+    // maj d'un devis
+  $scope.updateDevis = function () {
+    devisProvider.updateDevis(
+      $scope.devisData.client.nom,
+      $scope.devisData.client.prenom,
+      new Date(),
+      $scope.devisData.client.tel,
+      "adresseClient",
+      null,
+      $scope.devisData.client.mail,
+      $scope.devisData.salarie.matricule,
+      $scope.devisData.devis.reference,
+      null,
+      $scope.margeComDevis,
+      $scope.margeEntDevis,
+      $scope.gammes.idReferences,
+      $scope.moduleJson,
+      // null, commentaire
+      //lst section
+      $scope.sectionJson,
+      $scope.angleJson
+
     ).async().then(function (response) {
       console.log("post ok");
     }, function (error) {
