@@ -22,6 +22,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     console.log("id n'est pas new :" + id);
     $scope.new = false;
     devisProvider.getaDevis(id).async().then(function (response) {
+      //récupération données utilisateur
 
       $scope.devisData = response.data;
       $scope.gammes = response.data.gamme;
@@ -61,6 +62,11 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
 
   } else {
     console.log("id est new: " + id);
+    userProvider.getUser().async().then(function (response) {
+      $scope.user = response.data;
+    }, function (error) {
+      alert('Erreur de connexion');
+    });
     $scope.new = true;
     $scope.comData = userProvider.getUser();
   }
@@ -118,6 +124,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   $scope.addModuleJson = function (inputNomModule) {
     $scope.moduleJson.push({
       "idReference": inputNomModule,
+      "commentaire": null
     });
   };
   //lstSection
@@ -191,14 +198,14 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       "adresseClient",
       null,
       $scope.devisData.client.mail,
-      $scope.devisData.salarie.matricule,
+      $scope.matriculeCom,
       $scope.devisData.devis.reference,
       null,
+      $scope.statut,
       $scope.margeComDevis,
       $scope.margeEntDevis,
-      $scope.gammes.idReferences,
+      $scope.gamme,
       $scope.moduleJson,
-      // null, commentaire
       //lst section
       $scope.sectionJson,
       $scope.angleJson
@@ -211,7 +218,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     // récupération des données à finir
   }
 
-    // maj d'un devis
+  // maj d'un devis
   $scope.updateDevis = function () {
     devisProvider.updateDevis(
       $scope.devisData.client.nom,
@@ -228,7 +235,6 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       $scope.margeEntDevis,
       $scope.gammes.idReferences,
       $scope.moduleJson,
-      // null, commentaire
       //lst section
       $scope.sectionJson,
       $scope.angleJson

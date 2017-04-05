@@ -76,7 +76,7 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
   }
 
   this.createDevis = function (nomClient, prenomClient, naissanceClient, telClient, adresseClient, professionClient, mailClient, idMatriculeSalarie,
-    referenceDevis, motifDevis, margeComDevis, margeEntDevis, idReferenceGamme,listeModule,listeSection,listeAngle) {
+    referenceDevis, motifDevis, statut, margeComDevis, margeEntDevis, idReferenceGamme,listeModule,listeSection,listeAngle) {
     //url get devis
     return {
       async: function () {
@@ -95,6 +95,7 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
             "idMatriculeSalarie": idMatriculeSalarie,
             "referenceDevis": referenceDevis,
             "motifDevis": motifDevis,
+            "status": statut,
             "margeComDevis": margeComDevis,
             "margeEntDevis": margeEntDevis,
             "idReferenceGamme": idReferenceGamme,

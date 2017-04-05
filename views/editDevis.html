@@ -8,14 +8,14 @@
             <div layout-gt-xs="row" layout-xs="column">
               <md-input-container class="md-block">
                 <label>Prénom</label>
-                <input ng-disabled="edit=='false'" required name="clientPrenom" ng-model="devisData.client.prenom" type="text">
+                <input ng-disabled="edit=='false'" required ng-model="devisData.client.prenom" type="text">
                 <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
                   <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le prénom du client.</div>
                 </div>
               </md-input-container>
               <md-input-container class="md-block">
                 <label>Nom</label>
-                <input ng-disabled="edit=='false'" required name="clientNom" ng-model="devisData.client.nom" type="text">
+                <input ng-disabled="edit=='false'" required ng-model="devisData.client.nom" type="text">
                 <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
                   <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le nom du client.</div>
                 </div>
@@ -23,7 +23,7 @@
             </div>
             <md-input-container class="md-block">
               <label>Tel</label>
-              <input ng-disabled="edit=='false'" name="clientTel" required ng-model="devisData.client.tel" type="text">
+              <input ng-disabled="edit=='false'" required ng-model="devisData.client.tel" type="text">
               <div ng-messages="devisForm.clientTel.$error" role="alert" multiple="">
                 <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le n° de téléphone du client.</div>
               </div>
@@ -37,27 +37,48 @@
         <md-card flex>
           <md-card-content>
             <h2>Commercial</h2>
+            {{user.prenom}} 
             <div layout-gt-xs="row" layout-xs="column">
-              <md-input-container class="md-block">
+              <md-input-container ng-show="new == false" class="md-block">
                 <label>Prénom</label>
-                <input ng-disabled="edit=='false'" ng-model="devisData.salarie.prenom" type="text">
+                <input ng-disabled="edit=='false'"  ng-model="devisData.salarie.prenom" type="text">
               </md-input-container>
-              <md-input-container class="md-block">
+              <md-input-container ng-show="new == true" class="md-block">
+                <label>Prénom</label>
+                <input ng-disabled="edit=='false'"  ng-model="user.prenom" type="text">
+              </md-input-container>
+              <md-input-container class="md-block"  ng-show="new == false">
                 <label>Nom</label>
                 <input ng-disabled="edit=='false'" ng-model="devisData.salarie.nom" type="text">
               </md-input-container>
+               <md-input-container class="md-block" ng-show="new == true">
+                <label>Nom</label>
+                <input ng-disabled="edit=='false'"  ng-model="user.nom" type="text">
+              </md-input-container>
             </div>
-            <md-input-container class="md-block">
+            <md-input-container class="md-block" ng-show="new == false">
               <label>Matricule</label>
-              <input ng-disabled="edit=='false'" ng-model="devisData.salarie.matricule" type="text">
+              <input ng-disabled="edit=='false'"  ng-model="devisData.salarie.matricule" type="text">
             </md-input-container>
-            <md-input-container class="md-block">
+            <md-input-container class="md-block" ng-show="new == true">
+              <label>Matricule</label>
+              <input ng-disabled="edit=='false'"  ng-model="user.idMatricule" type="text">
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="new == false" >
               <label>Tel</label>
               <input ng-disabled="edit=='false'" ng-model="devisData.salarie.tel" type="text">
             </md-input-container>
-            <md-input-container class="md-block">
+            <md-input-container class="md-block" ng-show="new == true">
+              <label>Tel</label>
+              <input ng-disabled="edit=='false'"  ng-model="user.tel" type="text">
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="new == false" >
               <label>E-mail</label>
               <input ng-disabled="edit=='false'" ng-model="devisData.salarie.mail" type="text">
+            </md-input-container>
+            <md-input-container class="md-block" ng-show="new == true">
+              <label>E-mail</label>
+              <input ng-disabled="edit=='false'"  ng-model="user.mail" type="text">
             </md-input-container>
           </md-card-content>
         </md-card>
@@ -268,7 +289,7 @@
   </div>
   <div layout="row" layout-align="center end">
     <md-button class="md-raised" ng-show="new == true" ng-click="createDevis()">Créer</md-button>
-    <md-button class="md-raised" ng-show="new == false" ng-click="saveDevis()">Enregistrer</md-button>
+    <md-button class="md-raised" ng-show="new == false" ng-click="updateDevis()">Enregistrer</md-button>
     <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
     <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
   </div>
