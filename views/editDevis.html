@@ -37,48 +37,27 @@
         <md-card flex>
           <md-card-content>
             <h2>Commercial</h2>
-            {{user.prenom}} 
             <div layout-gt-xs="row" layout-xs="column">
-              <md-input-container ng-show="new == false" class="md-block">
+              <md-input-container class="md-block">
                 <label>Prénom</label>
-                <input ng-disabled="edit=='false'"  ng-model="devisData.salarie.prenom" type="text">
+                <input ng-disabled="edit=='false'" ng-model="user.prenom" type="text">
               </md-input-container>
-              <md-input-container ng-show="new == true" class="md-block">
-                <label>Prénom</label>
-                <input ng-disabled="edit=='false'"  ng-model="user.prenom" type="text">
-              </md-input-container>
-              <md-input-container class="md-block"  ng-show="new == false">
-                <label>Nom</label>
-                <input ng-disabled="edit=='false'" ng-model="devisData.salarie.nom" type="text">
-              </md-input-container>
-               <md-input-container class="md-block" ng-show="new == true">
-                <label>Nom</label>
-                <input ng-disabled="edit=='false'"  ng-model="user.nom" type="text">
-              </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Nom</label>
+                  <input ng-disabled="edit=='false'" ng-model="user.nom" type="text">
+                </md-input-container>
             </div>
-            <md-input-container class="md-block" ng-show="new == false">
+            <md-input-container class="md-block">
               <label>Matricule</label>
-              <input ng-disabled="edit=='false'"  ng-model="devisData.salarie.matricule" type="text">
+              <input ng-disabled="edit=='false'" ng-model="user.idMatricule" type="text">
             </md-input-container>
-            <md-input-container class="md-block" ng-show="new == true">
-              <label>Matricule</label>
-              <input ng-disabled="edit=='false'"  ng-model="user.idMatricule" type="text">
-            </md-input-container>
-            <md-input-container class="md-block" ng-show="new == false" >
+            <md-input-container class="md-block">
               <label>Tel</label>
-              <input ng-disabled="edit=='false'" ng-model="devisData.salarie.tel" type="text">
+              <input ng-disabled="edit=='false'" ng-model="user.tel" type="text">
             </md-input-container>
-            <md-input-container class="md-block" ng-show="new == true">
-              <label>Tel</label>
-              <input ng-disabled="edit=='false'"  ng-model="user.tel" type="text">
-            </md-input-container>
-            <md-input-container class="md-block" ng-show="new == false" >
+            <md-input-container class="md-block">
               <label>E-mail</label>
-              <input ng-disabled="edit=='false'" ng-model="devisData.salarie.mail" type="text">
-            </md-input-container>
-            <md-input-container class="md-block" ng-show="new == true">
-              <label>E-mail</label>
-              <input ng-disabled="edit=='false'"  ng-model="user.mail" type="text">
+              <input ng-disabled="edit=='false'" ng-model="user.mail" type="text">
             </md-input-container>
           </md-card-content>
         </md-card>
@@ -100,26 +79,16 @@
               <md-input-container>
                 <label>Statut: </label>
                 <md-select ng-model="statut" ng-disabled="edit=='false'">
-                  <md-option ng-selected="devisData.devis.status=='Refusé'" value="-1">Refusé</md-option>
-                  <md-option ng-selected="devisData.devis.status=='En cours'" value="0">En cours</md-option>
-                  <md-option ng-selected="devisData.devis.status=='En attente'" value="1">En attente</md-option>
-                  <md-option ng-selected="devisData.devis.status=='Validé'" value="2">Validé</md-option>
+                  <md-option ng-selected="devisData.devis.status=='Refusé'" value="Refusé">Refusé</md-option>
+                  <md-option ng-selected="devisData.devis.status=='En cours'" value="En cours">En cours</md-option>
+                  <md-option ng-selected="devisData.devis.status=='En attente'" value="En attente">En attente</md-option>
+                  <md-option ng-selected="devisData.devis.status=='Validé'" value="Validé">Validé</md-option>
                 </md-select>
               </md-input-container>
             </div>
             <p>Date de création: {{devisData.devis.dateCreation}}</p>
             <p>Dernière modification: {{devisData.devis.dateModif}}</p>
-
             <div ng-hide="edit == 'false'">
-              <md-input-container class="md-block">
-                <label>Marge commercial</label>
-                <input ng-disabled="edit=='false'" ng-model="margeComDevis" type="number">
-              </md-input-container>
-              <md-input-container class="md-block">
-                <label>Marge entrprise</label>
-                <input ng-disabled="edit=='false'" ng-model="margeEntDevis" type="number">
-              </md-input-container>
-              <md-divider></md-divider>
               <h3>Sélection des éléments</h3>
               <div layout="row">
                 <md-input-container flex>
@@ -157,8 +126,7 @@
                   <div flex ng-hide="n <1">
                     <md-input-container>
                       <label>Angle</label>
-                      <md-select ng-model="$parent.typeAngle[$index+1]" ng-init="$parent.typeAngle[$index+1]='none'" ng-disabled="edit=='false'"
-                        ng-change="test($index)">
+                      <md-select ng-model="$parent.typeAngle[$index+1]" ng-init="$parent.typeAngle[$index+1]=''" ng-disabled="edit=='false'" ng-change="test($index)">
                         <md-option value="">-</md-option>
                         <md-option value="Entrant">Entrant</md-option>
                         <md-option value="Sortant">Sortant</md-option>
@@ -207,6 +175,30 @@
                 </tbody>
               </table>
             </md-table-container>
+            <div layout="row">
+              <md-input-container flex>
+                <label>Marge commercial</label>
+                <input ng-disabled="edit=='false'" min="0" ng-change="updatePrices()" ng-init="margeComDevis = 0" ng-model="margeComDevis"
+                  type="number">
+              </md-input-container>
+              <md-input-container flex>
+                <label>Marge entreprise</label>
+                <input ng-disabled="edit=='false'" min="0" ng-change="updatePrices()" ng-init="margeEntDevis = 0" ng-model="margeEntDevis"
+                  type="number">
+              </md-input-container>
+              <md-divider></md-divider>
+            </div>
+            <div layout="row">
+              <md-input-container flex>
+                <label>Prix HT</label>
+                <input ng-disabled="disable" ng-model="prixHT" type="number">
+              </md-input-container>
+              <md-input-container flex>
+                <label>Prix TTC</label>
+                <input ng-disabled="disable" ng-model="prixTTC" type="number">
+              </md-input-container>
+              <md-divider></md-divider>
+            </div>
           </md-card-content>
         </md-card>
       </div>
@@ -288,8 +280,7 @@
     </md-card>
   </div>
   <div layout="row" layout-align="center end">
-    <md-button class="md-raised" ng-show="new == true" ng-click="createDevis()">Créer</md-button>
-    <md-button class="md-raised" ng-show="new == false" ng-click="updateDevis()">Enregistrer</md-button>
+    <md-button class="md-raised" ng-click="createDevis()">Enregistrer</md-button>
     <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
     <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
   </div>

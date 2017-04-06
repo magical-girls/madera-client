@@ -76,7 +76,7 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
   }
 
   this.createDevis = function (nomClient, prenomClient, naissanceClient, telClient, adresseClient, professionClient, mailClient, idMatriculeSalarie,
-    referenceDevis, motifDevis, statut, margeComDevis, margeEntDevis, idReferenceGamme,listeModule,listeSection,listeAngle) {
+    referenceDevis, motifDevis, margeComDevis, margeEntDevis, idReferenceGamme,listeModule,listeSection,listeAngle) {
     //url get devis
     return {
       async: function () {
@@ -95,34 +95,12 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
             "idMatriculeSalarie": idMatriculeSalarie,
             "referenceDevis": referenceDevis,
             "motifDevis": motifDevis,
-            "status": statut,
             "margeComDevis": margeComDevis,
             "margeEntDevis": margeEntDevis,
             "idReferenceGamme": idReferenceGamme,
             "lstModule":listeModule,
-           /* [
-              {
-                "idReference": idRefModule,
-                "commentaire": commentaireModule
-              }
-            ],*/
             "lstSection": listeSection,
-            /*[
-              {
-                "longueur": sectionLongeur,
-                "refModule": refModule
-              }
-            ],*/
-
             "lstAngle":listeAngle
-            /*[
-              {
-                "type": angleType,
-                "degre": angleDegre,
-                "moduleA": moduleA,
-                "moduleB": moduleB
-              }
-            ]*/
           },
           headers: {
             'token': $window.sessionStorage.getItem('token'),
