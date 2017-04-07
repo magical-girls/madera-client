@@ -3,23 +3,23 @@
 var devisLabel = [
   {
     "name": "N° devis",
-    "value": "num_devis"
+    "value": "data.reference"
   },
   {
     "name": "Client",
-    "value": "nom_client"
+    "value": "data.client"
   },
   {
     "name": "Création",
-    "value": "date_creation"
+    "value": "data.creation"
   },
   {
     "name": "Dernière modification",
-    "value": "date_modif"
+    "value": "data.modif"
   },
   {
     "name": "Etat",
-    "value": "etat"
+    "value": "data.status"
   }
 ];
 

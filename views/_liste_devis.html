@@ -16,8 +16,8 @@
         <tr md-row mdSelectId="data.id_devis" ng-repeat="data in datas | orderBy:sortType:sortReverse | filter:searchText">
           <td md-cell ng-click="goToDevis(data.reference,false)">{{data.reference}}</td>
           <td md-cell ng-click="goToDevis(data.reference,false)">{{data.client}}</td>
-          <td md-cell ng-click="goToDevis(data.reference,false)">{{data.modif}}</td>
           <td md-cell ng-click="goToDevis(data.reference,false)">{{data.creation}}</td>
+          <td md-cell ng-click="goToDevis(data.reference,false)">{{data.modif}}</td>
           <td md-cell ng-click="goToDevis(data.reference,false)">{{data.status}}</td>
           <td md-cell>
             <md-button class="md-secondary" ng-click="goToDevis(data.reference,true)" aria-label="Edit">

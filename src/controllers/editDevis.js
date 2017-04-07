@@ -24,6 +24,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   }, function (error) {
     alert('Erreur de connexion');
   });
+
   //si on edit, récupération des données du devis
   if ("new" != id) {
     console.log("id n'est pas new :" + id);
@@ -37,8 +38,22 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
         $scope.gammeIsDefined = true;
         $scope.selectedGammeId = $scope.gammes.idReference;
       }
+
       $scope.modules = response.data.lstModule;
       $scope.composants = response.data.lstComposant;
+
+      for (var i = 0; i < $scope.modules.length; i++) {
+        $scope.moduleJson.push($scope.modules[i]);
+      }
+      for (var i = 0; i < $scope.devisData.lstSection.length; i++) {
+        $scope.sectionJson.push($scope.devisData.lstSection[i]);
+      }
+      for (var i = 0; i < $scope.devisData.lstAngle.length; i++) {
+        $scope.angleJson.push($scope.devisData.lstAngle[i]);
+      }
+
+
+      // Prix du devis
       for (var i = 0; i < $scope.composants.length; i++) {
         prixToutComposantHT += $scope.composants[i].prixHT;
         $scope.prixHT = prixToutComposantHT;
@@ -232,9 +247,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
 
     ).async().then(function (response) {
       console.log("post ok");
-      $scope.sectionJson = [];
-      $scope.angleJson = [];
-      $scope.moduleJson = [];
+       $window.history.back();
     }, function (error) {
       commonCode.alertErreur();
     });
