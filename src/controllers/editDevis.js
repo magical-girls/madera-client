@@ -207,7 +207,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   };
 
   $scope.updatePrices = function () {
-    $scope.prixHT = prixToutComposantHT + $scope.margeComDevis + $scope.margeEntDevis;
+    $scope.prixHT = prixToutComposantHT +(1+($scope.margeComDevis/100)) + (1+($scope.margeEntDevis/100));
     $scope.prixTTC = $scope.prixHT * 1.2;
   }
   // debug
@@ -247,11 +247,25 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
 
     ).async().then(function (response) {
       console.log("post ok");
-       $window.history.back();
+      $window.history.back();
     }, function (error) {
       commonCode.alertErreur();
     });
     // récupération des données à finir
+  }
+
+  // Delete devis
+
+  $scope.deleteDevis = function () {
+    var jsonDel={"reference":$scope.devisData.devis.reference};
+    devisProvider.deleteDevis(
+    angular.toJson(jsonDel)
+    ).async().then(function (response) {
+      console.log("delete ok");
+      $window.history.back();
+    }, function (error) {
+      commonCode.alertErreur();
+    });
   }
   // Bouton retour
   $scope.returnFunction = function () {

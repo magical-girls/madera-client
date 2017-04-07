@@ -2,24 +2,25 @@
 // pour filtre dans select
 var devisLabel = [
   {
-    "name": "N° devis",
-    "value": "data.reference"
+    "name": "Référence",
+    "value": "reference"
   },
   {
     "name": "Client",
-    "value": "data.client"
+    "value": "client"
   },
+
   {
     "name": "Création",
-    "value": "data.creation"
+    "value": "creation"
   },
   {
     "name": "Dernière modification",
-    "value": "data.modif"
+    "value": "modif"
   },
   {
     "name": "Etat",
-    "value": "data.status"
+    "value": "status"
   }
 ];
 
@@ -49,9 +50,6 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
       }
     }
   }
-  this.deleteDevis = function (inputDevis, inputNumDevis) {
-    //inputDevis.splice(getIndexDevisFromId(inputDevis, inputNumDevis), 1);
-  }
 
   this.getaDevis = function (id) {
     //url get devis
@@ -74,17 +72,33 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
   this.getDevisLabels = function () {
     return devisLabel;
   }
-
+  this.deleteDevis = function (refDevis) {
+    return {
+      async: function () {
+        return $http({
+          url: host + 'devis',
+          method: "DELETE",
+          data:
+          refDevis
+          ,
+          headers: {
+            'token': $window.sessionStorage.getItem('token'),
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+        });
+      }
+    }
+  }
   this.createDevis = function (nomClient, prenomClient, naissanceClient, telClient, adresseClient, professionClient, mailClient, idMatriculeSalarie,
-    referenceDevis, motifDevis, margeComDevis, margeEntDevis, idReferenceGamme,listeModule,listeSection,listeAngle) {
+    referenceDevis, motifDevis, margeComDevis, margeEntDevis, idReferenceGamme, listeModule, listeSection, listeAngle) {
     //url get devis
     return {
       async: function () {
-        
+
         return $http({
           url: host + 'devis',
           method: "POST",
-           data: {
+          data: {
             "nomClient": nomClient,
             "prenomClient": prenomClient,
             "naissanceClient": naissanceClient,
@@ -98,9 +112,9 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
             "margeComDevis": margeComDevis,
             "margeEntDevis": margeEntDevis,
             "idReferenceGamme": idReferenceGamme,
-            "lstModule":listeModule,
+            "lstModule": listeModule,
             "lstSection": listeSection,
-            "lstAngle":listeAngle
+            "lstAngle": listeAngle
           },
           headers: {
             'token': $window.sessionStorage.getItem('token'),

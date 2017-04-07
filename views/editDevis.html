@@ -9,9 +9,6 @@
           <md-icon md-svg-src="ressources/img/icons/ic_mail_black_24px.svg"></md-icon>
         </md-button>
       </div>
-      {{moduleJson}}<br>
-      {{angleJson}}<br>
-      {{sectionJson}}
       <div layout="row" layout-xs="column">
         <md-card flex flex-gt-xs="50">
           <md-card-content>
@@ -189,12 +186,12 @@
             <div layout="row">
               <md-input-container flex>
                 <label>Marge commercial</label>
-                <input ng-disabled="edit=='false'" min="0" ng-change="updatePrices()" ng-init="margeComDevis = 0" ng-model="margeComDevis"
+                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeComDevis = 10" ng-model="margeComDevis"
                   type="number">
               </md-input-container>
               <md-input-container flex>
                 <label>Marge entreprise</label>
-                <input ng-disabled="edit=='false'" min="0" ng-change="updatePrices()" ng-init="margeEntDevis = 0" ng-model="margeEntDevis"
+                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeEntDevis = 10" ng-model="margeEntDevis"
                   type="number">
               </md-input-container>
               <md-divider></md-divider>
