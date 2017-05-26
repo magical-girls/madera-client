@@ -183,17 +183,6 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     $scope.choixCatalogue.splice(index, 1);
   };
 
-  //Récupérer les modules correspondants à la gamme
-  $scope.getMatchModule = function (inputId, inputIdGamme) {
-    var resultMatchModule = false;
-    for (var i = 0; i < inputIdGamme.length; i++) {
-      if (inputIdGamme[i] == inputId) {
-        resultMatchModule = true
-      }
-    }
-    return resultMatchModule;
-  }
-
   // Gestion du nombre d'angles
   $scope.nbIteration = {};
   $scope.nbAngle = [];
