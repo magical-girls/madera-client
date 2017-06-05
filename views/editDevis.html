@@ -101,14 +101,14 @@
               <div layout="row">
                 <md-input-container flex>
                   <label>Gammes</label>
-                  <md-select ng-model="gamme" ng-disabled="gammeIsDefined">
+                  <md-select ng-model="gamme" ng-disabled="gammeIsDefined" >
                     <md-option ng-selected="g.idReference==selectedGammeId" value="{{g.idReference}}" ng-repeat="g in datasGammes">{{ g.nom }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex>
                   <label>Modules</label>
                   <md-select ng-model="module" ng-disabled="edit=='false'">
-                    <md-option ng-repeat="m in datasModules" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
+                    <md-option ng-repeat="m in datasModules | filter: { idGamme: gamme }" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
                   </md-select>
                 </md-input-container>
                 <md-input-container flex="10">
@@ -183,6 +183,8 @@
                 </tbody>
               </table>
             </md-table-container>
+               <md-divider></md-divider>
+               <h3>Tarifs</h3>
             <div layout="row">
               <md-input-container flex>
                 <label>Marge commercial</label>
