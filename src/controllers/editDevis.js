@@ -59,6 +59,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
         $scope.prixHT = prixToutComposantHT;
       }
       $scope.prixTTC = $scope.prixHT * 1.2;
+
       // Création du tableau listant le contenu du devis
       if ($scope.modules.length != 0) {
         for (var i = 0; i < $scope.modules.length; i++) {
@@ -207,7 +208,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   };
 
   $scope.updatePrices = function () {
-    $scope.prixHT = prixToutComposantHT +(1+($scope.margeComDevis/100)) + (1+($scope.margeEntDevis/100));
+    $scope.prixHT = prixToutComposantHT + (1 + ($scope.margeComDevis / 100)) + (1 + ($scope.margeEntDevis / 100));
     $scope.prixTTC = $scope.prixHT * 1.2;
   }
   // debug
@@ -218,14 +219,14 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
 
   // créer un devis
   $scope.createDevis = function () {
-    var tailleRef = $scope.devisData.devis.reference.length;
+   /* var tailleRef = $scope.devisData.devis.reference.length;
     if ($scope.devisData.devis.reference.charAt(tailleRef - 2) == "v") {
       var version = $scope.devisData.devis.reference.substr(tailleRef - 1);
       version = parseInt(version) + 1;
       $scope.devisData.devis.reference = $scope.devisData.devis.reference.substring(0, tailleRef - 1) + version;
     } else {
-      $scope.devisData.devis.reference += "_v0";
-    }
+      $scope.devisData.devis.reference += "_v1";
+    }*/
     devisProvider.createDevis(
       $scope.devisData.client.nom,
       $scope.devisData.client.prenom,
@@ -251,15 +252,14 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     }, function (error) {
       commonCode.alertErreur();
     });
-    // récupération des données à finir
   }
 
   // Delete devis
 
   $scope.deleteDevis = function () {
-    var jsonDel={"reference":$scope.devisData.devis.reference};
+    var jsonDel = { "reference": $scope.devisData.devis.reference };
     devisProvider.deleteDevis(
-    angular.toJson(jsonDel)
+      angular.toJson(jsonDel)
     ).async().then(function (response) {
       console.log("delete ok");
       $window.history.back();
@@ -267,6 +267,17 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       commonCode.alertErreur();
     });
   }
+
+  // envoi email
+  $scope.sendEmail = function () {
+    devisProvider.sendEmail(
+     $scope.devisData.devis.reference
+    ).async().then(function (response) {
+      console.log("send email ok");
+    }, function (error) {
+    });
+  }
+
   // Bouton retour
   $scope.returnFunction = function () {
     $window.history.back();

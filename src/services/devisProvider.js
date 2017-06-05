@@ -69,6 +69,24 @@ app.service('devisProvider', function ($http, $window, $routeParams) {
       }
     }
   }
+  this.sendEmail = function (id) {
+    //url get devis
+    return {
+      async: function () {
+        return $http({
+          method: 'GET',
+          url: host + 'mail',
+          params: {
+            'id': id
+          },
+          headers: {
+            'token': $window.sessionStorage.getItem('token'),
+            'Content-type': 'application/json; charset=UTF-8'
+          }
+        });
+      }
+    }
+  }
   this.getDevisLabels = function () {
     return devisLabel;
   }
