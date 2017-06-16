@@ -16,9 +16,11 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
   $scope.prixHT = 0;
   $scope.disable = true;
   // Création des tableaux pour le post
-  $scope.sectionJson = [];
-  $scope.angleJson = [];
-  $scope.moduleJson = [];
+      console.log("hey");
+
+   $scope.sectionJson = [];
+   $scope.angleJson = [];
+   $scope.moduleJson = [];
   userProvider.getUser().async().then(function (response) {
     $scope.user = response.data;
   }, function (error) {
@@ -43,13 +45,13 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
       $scope.composants = response.data.lstComposant;
 
       for (var i = 0; i < $scope.modules.length; i++) {
-        $scope.moduleJson.push($scope.modules[i]);
+       // $scope.moduleJsonOld.push($scope.modules[i]);
       }
       for (var i = 0; i < $scope.devisData.lstSection.length; i++) {
-        $scope.sectionJson.push($scope.devisData.lstSection[i]);
+        //$scope.sectionJsonOld.push($scope.devisData.lstSection[i]);
       }
       for (var i = 0; i < $scope.devisData.lstAngle.length; i++) {
-        $scope.angleJson.push($scope.devisData.lstAngle[i]);
+        //$scope.angleJsonOld.push($scope.devisData.lstAngle[i]);
       }
 
 
