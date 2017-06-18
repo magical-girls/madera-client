@@ -1,299 +1,320 @@
 <div ng-cloak ng-app="Madera">
-  <form name="devisForm">
-    <md-content class="md-padding">
-      <div layout="row"><span flex></span>
-        <md-button aria-label="imprimer" ng-click="">
-          <md-icon md-svg-src="ressources/img/icons/ic_local_printshop_black_24px.svg"></md-icon>
-        </md-button>
-        <md-button aria-label="mail" ng-click="sendEmail();">
-          <md-icon md-svg-src="ressources/img/icons/ic_mail_black_24px.svg"></md-icon>
-        </md-button>
-      </div>
-      <div layout="row" layout-xs="column">
-        <md-card flex flex-gt-xs="50">
-          <md-card-content>
-            <h2>Client</h2>
-            <div layout-gt-xs="row" layout-xs="column">
-              <md-input-container class="md-block">
-                <label>Prénom</label>
-                <input ng-disabled="edit=='false'" required ng-model="devisData.client.prenom" type="text">
-                <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
-                  <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le prénom du client.</div>
-                </div>
-              </md-input-container>
-              <md-input-container class="md-block">
-                <label>Nom</label>
-                <input ng-disabled="edit=='false'" required ng-model="devisData.client.nom" type="text">
-                <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
-                  <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le nom du client.</div>
-                </div>
-              </md-input-container>
+    <form name="devisForm">
+        <md-content class="md-padding">
+            <div layout="row"><span flex></span>
+                <md-button aria-label="imprimer" ng-click="">
+                    <md-icon md-svg-src="ressources/img/icons/ic_local_printshop_black_24px.svg"></md-icon>
+                </md-button>
+                <md-button aria-label="mail" ng-click="sendEmail()">
+                    <md-icon md-svg-src="ressources/img/icons/ic_mail_black_24px.svg"></md-icon>
+                </md-button>
             </div>
-            <md-input-container class="md-block">
-              <label>Tel</label>
-              <input ng-disabled="edit=='false'" required ng-model="devisData.client.tel" type="text">
-              <div ng-messages="devisForm.clientTel.$error" role="alert" multiple="">
-                <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le n° de téléphone du client.</div>
-              </div>
-            </md-input-container>
-            <md-input-container class="md-block">
-              <label>E-mail</label>
-              <input ng-disabled="edit=='false'" ng-model="devisData.client.mail" type="text">
-            </md-input-container>
-          </md-card-content>
-        </md-card>
-        <md-card flex>
-          <md-card-content>
-            <h2>Commercial</h2>
-            <div layout-gt-xs="row" layout-xs="column">
-              <md-input-container class="md-block">
-                <label>Prénom</label>
-                <input ng-disabled="edit=='false'" ng-model="user.prenom" type="text">
-              </md-input-container>
-              <md-input-container class="md-block">
-                <label>Nom</label>
-                <input ng-disabled="edit=='false'" ng-model="user.nom" type="text">
-              </md-input-container>
+            <div layout="row" layout-xs="column">
+                <md-card flex flex-gt-xs="50">
+                    <md-card-content>
+                        <h2>Client</h2>
+                        <div layout-gt-xs="row" layout-xs="column">
+                            <md-input-container class="md-block">
+                                <label>Prénom</label>
+                                <input ng-disabled="edit=='false'" required ng-model="devisData.client.prenom" type="text">
+                                <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
+                                    <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le prénom du client.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Nom</label>
+                                <input ng-disabled="edit=='false'" required ng-model="devisData.client.nom" type="text">
+                                <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
+                                    <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le nom du client.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <md-input-container class="md-block">
+                            <label>Tel</label>
+                            <input ng-disabled="edit=='false'" required ng-model="devisData.client.tel" type="text">
+                            <div ng-messages="devisForm.clientTel.$error" role="alert" multiple="">
+                                <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le n° de téléphone du client.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>E-mail</label>
+                            <input ng-disabled="edit=='false'" ng-model="devisData.client.mail" type="text">
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
+                <md-card flex>
+                    <md-card-content>
+                        <h2>Commercial</h2>
+                        <div layout-gt-xs="row" layout-xs="column">
+                            <md-input-container class="md-block">
+                                <label>Prénom</label>
+                                <input ng-disabled="edit=='false'" ng-model="user.prenom" type="text">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Nom</label>
+                                <input ng-disabled="edit=='false'" ng-model="user.nom" type="text">
+                            </md-input-container>
+                        </div>
+                        <md-input-container class="md-block">
+                            <label>Matricule</label>
+                            <input ng-disabled="edit=='false'" ng-model="user.idMatricule" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Tel</label>
+                            <input ng-disabled="edit=='false'" ng-model="user.tel" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>E-mail</label>
+                            <input ng-disabled="edit=='false'" ng-model="user.mail" type="text">
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
             </div>
-            <md-input-container class="md-block">
-              <label>Matricule</label>
-              <input ng-disabled="edit=='false'" ng-model="user.idMatricule" type="text">
-            </md-input-container>
-            <md-input-container class="md-block">
-              <label>Tel</label>
-              <input ng-disabled="edit=='false'" ng-model="user.tel" type="text">
-            </md-input-container>
-            <md-input-container class="md-block">
-              <label>E-mail</label>
-              <input ng-disabled="edit=='false'" ng-model="user.mail" type="text">
-            </md-input-container>
-          </md-card-content>
-        </md-card>
-      </div>
-    </md-content>
-    <md-content class="md-padding">
-      <div layout="column">
-        <md-card flex>
-          <h2>Devis</h2>
-          <h3>Informations</h3>
-          <md-card-content>
-            <div layout="row">
-              <md-input-container class="md-block">
-                <label>Référence</label>
-                <input ng-disabled="edit=='false'" ng-model="devisData.devis.reference" type="text">
-              </md-input-container>
-              <p flex></p>
-              <!--<p>Statut: {{devisData.devis.status}}</p>-->
-              <md-input-container>
-                <label>Statut: </label>
-                <md-select ng-model="statut" ng-disabled="edit=='false'">
-                  <md-option ng-selected="devisData.devis.status=='Refusé'" value="Refusé">Refusé</md-option>
-                  <md-option ng-selected="devisData.devis.status=='En cours'" value="En cours">En cours</md-option>
-                  <md-option ng-selected="devisData.devis.status=='En attente'" value="En attente">En attente</md-option>
-                  <md-option ng-selected="devisData.devis.status=='Validé'" value="Validé">Validé</md-option>
-                </md-select>
-              </md-input-container>
-            </div>
-            <p>Date de création: {{devisData.devis.dateCreation}}</p>
-            <p>Dernière modification: {{devisData.devis.dateModif}}</p>
-            <div ng-hide="edit == 'false'">
-              <h3>Sélection des éléments</h3>
-              <div layout="row">
-                <md-input-container flex>
-                  <label>Gammes</label>
-                  <md-select ng-model="gamme" ng-disabled="gammeIsDefined" >
-                    <md-option ng-selected="g.idReference==selectedGammeId" value="{{g.idReference}}" ng-repeat="g in datasGammes">{{ g.nom }}</md-option>
-                  </md-select>
-                </md-input-container>
-                <md-input-container flex>
-                  <label>Modules</label>
-                  <md-select ng-model="module" ng-disabled="edit=='false'">
-                    <md-option ng-repeat="m in datasModules | filter: { idGamme: gamme }" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
-                  </md-select>
-                </md-input-container>
-                <md-input-container flex="10">
-                  <md-button class="md-secondary md-raised" ng-click="add(gamme, module, longueur,typeAngle,degre)" ng-disabled="gamme == undefined || module == undefined"
-                    aria-label="Add">
-                    <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
-                  </md-button>
-                </md-input-container>
-              </div>
-              <div layout="row">
-                <md-input-container>
-                  <label>Nombre de section: </label>
-                  <input ng-model="nbSection" min="1" ng-disabled="edit=='false'" ng-change="setNbAngle()" type="number">
-                </md-input-container>
-              </div>
-              <div>
-                <div ng-repeat="n in nbAngle" layout="row">
-                  <h4>Section {{n+1}}</h4>
-                  <md-input-container flex>
-                    <label>Longueur: (cm)</label>
-                    <input ng-model="$parent.longueur[$index+1]" min="0" ng-init="$parent.longueur[$index+1]=0" ng-disabled="edit=='false'" type="number">
-                  </md-input-container>
-                  <div flex ng-hide="n <1">
-                    <md-input-container>
-                      <label>Angle</label>
-                      <md-select ng-model="$parent.typeAngle[$index+1]" ng-init="$parent.typeAngle[$index+1]=''" ng-disabled="edit=='false'" ng-change="test($index)">
-                        <md-option value="">-</md-option>
-                        <md-option value="Entrant">Entrant</md-option>
-                        <md-option value="Sortant">Sortant</md-option>
-                      </md-select>
-                    </md-input-container>
-                    <md-input-container>
-                      <label>degré de l'angle: </label>
-                      <input ng-model="$parent.degre[$index+1]" min="0" ng-init="$parent.degre[$index+1]=0" ng-disabled="edit=='false'" type="number">
-                    </md-input-container>
-                  </div>
-                </div>
-                <!--  sectionjson {{sectionJson}} <br> modulejson{{moduleJson}}<br> anglejson{{angleJson}}-->
-              </div>
-            </div>
-            <md-divider></md-divider>
-            <h3>Vos choix</h3>
-            <md-table-container>
-              <table md-table>
-                <thead md-head>
-                  <tr md-row>
-                    <th md-column><span>#</span></th>
-                    <th md-column><span>Gamme</span></th>
-                    <th md-column><span>Module</span></th>
-                    <th md-column><span>Section</span></th>
-                    <th md-column><span>Longueur</span></th>
-                    <th md-column><span>Type d'angle</span></th>
-                    <th md-column><span>Degré</span></th>
-                    <th md-column></th>
-                  </tr>
-                </thead>
-                <tbody md-body>
-                  <tr md-row ng-repeat="choix in choixCatalogue">
-                    <td md-cell>{{$index+1}}</td>
-                    <td md-cell>{{choix.nom_gamme}}</td>
-                    <td md-cell>{{choix.nom_module}}</td>
-                    <td md-cell>n° {{choix.num_section}}</td>
-                    <td md-cell>{{choix.longueur}}</td>
-                    <td md-cell>{{choix.type}}</td>
-                    <td md-cell>{{choix.degre}}</td>
-                    <!-- <td md-cell>
+        </md-content>
+        <md-content class="md-padding">
+            <div layout="column">
+                <md-card flex>
+                    <h2>Devis</h2>
+                    <h3>Informations</h3>
+                    <md-card-content>
+                        <div layout="row">
+                            <md-input-container class="md-block">
+                                <label>Référence</label>
+                                <input ng-disabled="edit=='false'" ng-model="devisData.devis.reference" type="text">
+                            </md-input-container>
+                            <p flex></p>
+                            <!--<p>Statut: {{devisData.devis.status}}</p>-->
+                            <md-input-container>
+                                <label>Statut: </label>
+                                <md-select ng-model="statut" ng-disabled="edit=='false'">
+                                    <md-option ng-selected="devisData.devis.status=='Refusé'" value="Refusé">Refusé</md-option>
+                                    <md-option ng-selected="devisData.devis.status=='En cours'" value="En cours">En cours</md-option>
+                                    <md-option ng-selected="devisData.devis.status=='En attente'" value="En attente">En attente</md-option>
+                                    <md-option ng-selected="devisData.devis.status=='Validé'" value="Validé">Validé</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <p>Date de création: {{devisData.devis.dateCreation}}</p>
+                        <p>Dernière modification: {{devisData.devis.dateModif}}</p>
+                        <div ng-hide="edit == 'false'">
+                            <h3>Sélection des éléments</h3>
+                            <div flex layout="row">
+                                <md-input-container flex>
+                                    <label>Gammes</label>
+                                    <md-select ng-model="gamme" ng-disabled="gammeIsDefined">
+                                        <md-option ng-selected="g.idReference==selectedGammeId" value="{{g.idReference}}" ng-repeat="g in datasGammes">{{ g.nom }}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div flex layout="row">
+                                <div flex layout="column">
+                                    <div flex layout="row">
+                                        <md-input-container flex>
+                                            <label>Modules</label>
+                                            <md-select ng-model="moduleA" ng-disabled="edit=='false'">
+                                                <md-option ng-repeat="m in datasModules | filter: { idGamme: gamme }" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>Type Section</label>
+                                            <md-select ng-model="sectionA" ng-disabled="edit=='false'">
+                                                <md-option value="1">Lissant</md-option>
+                                                <md-option value="2">Contrefort</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>Longueur</label>
+                                            <input ng-model="longueurA" min="0" type="number">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>Type Angle</label>
+                                            <md-select ng-model="typeAngle" ng-disabled="edit=='false'">
+                                                <md-option ng-selected="Aucun" value="0">Aucun</md-option>
+                                                <md-option value="Entrant">Entrant</md-option>
+                                                <md-option value="Sortant">Sortant</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div flex layout="row" ng-hide="typeAngle <1">
+                                        <md-input-container flex>
+                                            <label>Angle</label>
+                                            <input ng-model="degre" min="0" type="number">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>Modules</label>
+                                            <md-select ng-model="moduleB" ng-disabled="edit=='false'">
+                                                <md-option ng-repeat="m in datasModules | filter: { idGamme: gamme }" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>Type Section</label>
+                                            <md-select ng-model="sectionB" ng-disabled="edit=='false'">
+                                                <md-option value="1">Lissant</md-option>
+                                                <md-option value="2">Contrefort</md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>Longueur</label>
+                                            <input ng-model="longueurB" min="0" type="number">
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div layout-align="center">
+                                    <md-input-container>
+                                        <md-button class="md-secondary md-raised" ng-click="add()" ng-disabled="gamme == undefined || moduleA == undefined" aria-label="Add">
+                                            <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+                                        </md-button>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Vos choix</h3>
+                        <md-table-container>
+                            <table md-table>
+                                <thead md-head>
+                                    <tr md-row>
+                                        <th md-column><span>#</span></th>
+                                        <th md-column><span>Gamme</span></th>
+                                        <th md-column><span>Module A</span></th>
+                                        <th md-column><span>Section</span></th>
+                                        <th md-column><span>Longueur</span></th>
+                                        <th md-column><span>Type d'angle</span></th>
+                                        <th md-column><span>Degré</span></th>
+                                        <th md-column><span>Module B</span></th>
+                                        <th md-column><span>Section</span></th>
+                                        <th md-column><span>Longueur</span></th>
+                                        <th md-column></th>
+                                    </tr>
+                                </thead>
+                                <tbody md-body>
+                                    <tr md-row ng-repeat="choix in choixCatalogue">
+                                        <td md-cell>{{$index+1}}</td>
+                                        <td md-cell>{{choix.nom_gamme}}</td>
+                                        <td md-cell>{{choix.moduleA}}</td>
+                                        <td md-cell>{{choix.sectionA}}</td>
+                                        <td md-cell>{{choix.longueurA}}</td>
+                                        <td md-cell>{{choix.type}}</td>
+                                        <td md-cell>{{choix.degre}}</td>
+                                        <td md-cell>{{choix.moduleB}}</td>
+                                        <td md-cell>{{choix.sectionB}}</td>
+                                        <td md-cell>{{choix.longueurB}}</td>
+                                        <!-- <td md-cell>
                       <md-button class="md-secondary" ng-click="removeChoixCatalogueRow(choix.id_row)" aria-label="Delete">
                         <md-icon md-svg-src="ressources/img/icons/ic_delete_black_24px.svg"></md-icon>
                       </md-button>
                     </td> -->
-                  </tr>
-                </tbody>
-              </table>
-            </md-table-container>
-               <md-divider></md-divider>
-               <h3>Tarifs</h3>
-            <div layout="row">
-              <md-input-container flex>
-                <label>Marge commercial</label>
-                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeComDevis = 10" ng-model="margeComDevis"
-                  type="number">
-              </md-input-container>
-              <md-input-container flex>
-                <label>Marge entreprise</label>
-                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeEntDevis = 10" ng-model="margeEntDevis"
-                  type="number">
-              </md-input-container>
-              <md-divider></md-divider>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                        <md-divider></md-divider>
+                        <h3>Tarifs</h3>
+                        <div layout="row">
+                            <md-input-container flex>
+                                <label>Marge commercial</label>
+                                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeComDevis = 10" ng-model="margeComDevis" type="number">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Marge entreprise</label>
+                                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeEntDevis = 10" ng-model="margeEntDevis" type="number">
+                            </md-input-container>
+                            <md-divider></md-divider>
+                        </div>
+                        <div layout="row">
+                            <md-input-container flex>
+                                <label>Prix HT</label>
+                                <input ng-disabled="disable" ng-model="prixHT" type="number">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Prix TTC</label>
+                                <input ng-disabled="disable" ng-model="prixTTC" type="number">
+                            </md-input-container>
+                            <md-divider></md-divider>
+                        </div>
+                    </md-card-content>
+                </md-card>
             </div>
-            <div layout="row">
-              <md-input-container flex>
-                <label>Prix HT</label>
-                <input ng-disabled="disable" ng-model="prixHT" type="number">
-              </md-input-container>
-              <md-input-container flex>
-                <label>Prix TTC</label>
-                <input ng-disabled="disable" ng-model="prixTTC" type="number">
-              </md-input-container>
-              <md-divider></md-divider>
-            </div>
-          </md-card-content>
-        </md-card>
-      </div>
-    </md-content>
+        </md-content>
 </div>
 <md-content class="md-padding">
-  <div layout="row" layout-xs="column">
-    <md-card flex flex-gt-xs="50">
-      <h2>Commentaire client</h2>
-      <md-card-content>
-        <md-table-container>
-          <table md-table>
-            <thead md-head>
-              <tr md-row>
-                <th md-column><span>Date</span></th>
-                <th md-column><span>Commentaires</span></th>
-              </tr>
-            </thead>
-            <tbody md-body>
-              <tr md-row ng-repeat="comment in clientComment">
-                <td md-cell>{{comment.comment_date | date:'dd/MM/yyyy HH:mm'}}</td>
-                <td md-cell>{{comment.comment_txt}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </md-table-container>
-        <div layout="row" ng-show="addClientComment==true">
-          <md-input-container flex class="md-block">
-            <label>Tapez votre commentaire</label>
-            <textarea ng-model="clientCommentary" rows="2" md-select-on-focus=""></textarea>
-            <!--md-maxlength="50"-->
-          </md-input-container>
-          <md-input-container class="md-block">
-            <md-button class="md-raised" aria-label="add_client_comment" ng-click="addComment(clientCommentary,'client')" ng-disabled="edit=='false'">
-              <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
-            </md-button>
-          </md-input-container>
-        </div>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-raised" ng-disabled="edit=='false'" ng-click="addClientComment=true">Ajouter un commentaire</md-button>
-      </md-card-actions>
-    </md-card>
-    <md-card flex>
-      <h2>Commentaire commercial</h2>
-      <md-card-content>
-        <md-table-container>
-          <table md-table>
-            <thead md-head>
-              <tr md-row>
-                <th md-column><span>Date</span></th>
-                <th md-column><span>Commentaires</span></th>
-              </tr>
-            </thead>
-            <tbody md-body>
-              <tr md-row ng-repeat="comment in commercialComment">
-                <td md-cell>{{comment.comment_date | date:'dd/MM/yyyy HH:mm'}}</td>
-                <td md-cell>{{comment.comment_txt}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </md-table-container>
-        <div layout="row" ng-show="addCommercialComment==true">
-          <md-input-container flex class="md-block">
-            <label>Tapez votre commentaire</label>
-            <textarea ng-model="commercialCommentary" rows="2" md-select-on-focus=""></textarea>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <md-button class="md-raised" aria-label="add_commercial_comment" ng-click="addComment(commercialCommentary,'commercial')"
-              ng-disabled="edit=='false'">
-              <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
-            </md-button>
-          </md-input-container>
-        </div>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-raised" ng-disabled="edit=='false'" ng-click="addCommercialComment=true">Ajouter un commentaire</md-button>
-      </md-card-actions>
-    </md-card>
-  </div>
-  <div layout="row" layout-align="center end">
-    <md-button class="md-raised" ng-click="createDevis()">Enregistrer</md-button>
-    <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
-    <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
-  </div>
+    <div layout="row" layout-xs="column">
+        <md-card flex flex-gt-xs="50">
+            <h2>Commentaire client</h2>
+            <md-card-content>
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column><span>Date</span></th>
+                                <th md-column><span>Commentaires</span></th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row ng-repeat="comment in clientComment">
+                                <td md-cell>{{comment.comment_date | date:'dd/MM/yyyy HH:mm'}}</td>
+                                <td md-cell>{{comment.comment_txt}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <div layout="row" ng-show="addClientComment==true">
+                    <md-input-container flex class="md-block">
+                        <label>Tapez votre commentaire</label>
+                        <textarea ng-model="clientCommentary" rows="2" md-select-on-focus=""></textarea>
+                        <!--md-maxlength="50"-->
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-button class="md-raised" aria-label="add_client_comment" ng-click="addComment(clientCommentary,'client')" ng-disabled="edit=='false'">
+                            <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+                        </md-button>
+                    </md-input-container>
+                </div>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised" ng-disabled="edit=='false'" ng-click="addClientComment=true">Ajouter un commentaire</md-button>
+            </md-card-actions>
+        </md-card>
+        <md-card flex>
+            <h2>Commentaire commercial</h2>
+            <md-card-content>
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column><span>Date</span></th>
+                                <th md-column><span>Commentaires</span></th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row ng-repeat="comment in commercialComment">
+                                <td md-cell>{{comment.comment_date | date:'dd/MM/yyyy HH:mm'}}</td>
+                                <td md-cell>{{comment.comment_txt}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <div layout="row" ng-show="addCommercialComment==true">
+                    <md-input-container flex class="md-block">
+                        <label>Tapez votre commentaire</label>
+                        <textarea ng-model="commercialCommentary" rows="2" md-select-on-focus=""></textarea>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-button class="md-raised" aria-label="add_commercial_comment" ng-click="addComment(commercialCommentary,'commercial')" ng-disabled="edit=='false'">
+                            <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
+                        </md-button>
+                    </md-input-container>
+                </div>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised" ng-disabled="edit=='false'" ng-click="addCommercialComment=true">Ajouter un commentaire</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+    <div layout="row" layout-align="center end">
+        <md-button class="md-raised" ng-click="createDevis()">Enregistrer</md-button>
+        <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
+        <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
+    </div>
 </md-content>
 </form>
 </div>
