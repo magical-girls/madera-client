@@ -309,7 +309,8 @@
                 </md-card>
             </div>
             <div layout="row" layout-align="center end">
-                <md-button class="md-raised" ng-click="createDevis()">Enregistrer</md-button>
+                <md-button class="md-raised" ng-show="new == true" ng-click="createDevis()">Créer</md-button>
+                <md-button class="md-raised" ng-show="new == false" ng-click="updateDevis()">Enregistrer</md-button>
                 <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
                 <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
             </div>

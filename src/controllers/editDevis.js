@@ -16,8 +16,6 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     $scope.prixHT = 0;
     $scope.disable = true;
     // Création des tableaux pour le post
-    $scope.sectionJson = [];
-    $scope.angleJson = [];
     $scope.moduleJson = [];
     userProvider.getUser().async().then(function(response) {
         $scope.user = response.data;
@@ -131,32 +129,27 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     }
 
     //lstModules
-    $scope.addModuleJson = function(inputNomModule) {
-        $scope.moduleJson.push({
-            "idReference": inputNomModule,
-            "commentaire": null
-        });
-    };
-    //lstSection
-    $scope.addSectionJson = function(inputNomModule, inputLongueur) {
+    $scope.addModuleJson = function(inputNomModule, inputLongueur) {
         for (var key in inputLongueur) {
             $scope.sectionJson.push({
-                "longueur": inputLongueur[key],
-                "refModule": inputNomModule
+                "idChoixModule": null,
+                "moduleA": {
+                    "id": $scope.moduleA,
+                    "section": $scope.sectionA,
+                    "longueur": $scope.longueurA
+                },
+                "idChoixModule": null,
+                "moduleB": {
+                    "id": $scope.moduleB,
+                    "section": $scope.sectionB,
+                    "longueur": $scope.longueurB
+                },
+                "typeAngle": $scope.typeAngle,
+                "Angle": $scope.Angle
             });
         }
     };
-    //lstAngle
-    $scope.addAngleJson = function(inputNomModule, inputAngle, inputDegre) {
-        for (var key in inputAngle) {
-            $scope.angleJson.push({
-                "type": inputAngle[key],
-                "degre": inputDegre[key],
-                "moduleA": inputNomModule,
-                "moduleB": inputNomModule
-            });
-        }
-    };
+
     // Supprimer des éléments de la liste des choix
     $scope.removeChoixCatalogueRow = function(inputIdRow) {
         var index;
@@ -171,11 +164,11 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     };
 
     $scope.updatePrices = function() {
-            $scope.prixHT = prixToutComposantHT + (1 + ($scope.margeComDevis / 100)) + (1 + ($scope.margeEntDevis / 100));
-            $scope.prixTTC = $scope.prixHT * 1.2;
-        }
-        // debug
-        //$interval(function () {
+        $scope.prixHT = prixToutComposantHT + (1 + ($scope.margeComDevis / 100)) + (1 + ($scope.margeEntDevis / 100));
+        $scope.prixTTC = $scope.prixHT * 1.2;
+    };
+    // debug
+    //$interval(function () {
 
     //}, 2000);
 
@@ -204,17 +197,38 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
             $scope.margeComDevis,
             $scope.margeEntDevis,
             $scope.gamme,
-            $scope.moduleJson,
-            $scope.sectionJson,
-            $scope.angleJson
-
+            $scope.moduleJson
         ).async().then(function(response) {
             console.log("post ok");
             $window.history.back();
         }, function(error) {
             commonCode.alertErreur();
         });
-    }
+    };
+    //update devis
+    $scope.updateDevis = function() {
+        devisProvider.updateDevis(
+            $scope.devisData.client.nom,
+            $scope.devisData.client.prenom,
+            new Date(),
+            $scope.devisData.client.tel,
+            "adresseClient",
+            null,
+            $scope.devisData.client.mail,
+            $scope.user.idMatricule,
+            $scope.devisData.devis.reference,
+            null,
+            $scope.margeComDevis,
+            $scope.margeEntDevis,
+            $scope.gamme,
+            $scope.moduleJson
+        ).async().then(function(response) {
+            console.log("post ok");
+            $window.history.back();
+        }, function(error) {
+            commonCode.alertErreur();
+        });
+    };
 
     // Delete devis
 
@@ -228,7 +242,7 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         }, function(error) {
             commonCode.alertErreur();
         });
-    }
+    };
 
     // envoi email
     $scope.sendEmail = function() {
