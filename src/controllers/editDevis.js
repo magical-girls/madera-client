@@ -16,6 +16,8 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     $scope.prixHT = 0;
     $scope.disable = true;
     // Création des tableaux pour le post
+      console.log("hey");
+
     $scope.sectionJson = [];
     $scope.angleJson = [];
     $scope.moduleJson = [];

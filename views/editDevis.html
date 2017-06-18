@@ -125,6 +125,10 @@
                                         <md-input-container flex>
                                             <label>Longueur</label>
                                             <input ng-model="longueurA" min="0" type="number">
+                        <md-option ng-selected="true" value="0">Aucun</md-option>
+                        <md-option value="1">Entrant</md-option>
+                        <md-option value="2">Sortant</md-option>
+                      </md-select>
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>Type Angle</label>
@@ -132,6 +136,8 @@
                                                 <md-option ng-selected="Aucun" value="0">Aucun</md-option>
                                                 <md-option value="Entrant">Entrant</md-option>
                                                 <md-option value="Sortant">Sortant</md-option>
+                      <md-select ng-model="moduleB" ng-disabled="edit=='false'">
+                        <md-option ng-repeat="m in datasModules | filter: { idGamme: gamme }" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
                                             </md-select>
                                         </md-input-container>
                                     </div>
@@ -166,6 +172,7 @@
                                         </md-button>
                                     </md-input-container>
                                 </div>
+                </div>
                             </div>
                         </div>
                         <h3>Vos choix</h3>
@@ -235,6 +242,34 @@
                 </md-card>
             </div>
         </md-content>
+            <div layout="row">
+              <md-input-container flex>
+                <label>Marge commercial</label>
+                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeComDevis = 10" ng-model="margeComDevis"
+                  type="number">
+              </md-input-container>
+              <md-input-container flex>
+                <label>Marge entreprise</label>
+                <input ng-disabled="edit=='false'" min="10" ng-change="updatePrices()" ng-init="margeEntDevis = 10" ng-model="margeEntDevis"
+                  type="number">
+              </md-input-container>
+              <md-divider></md-divider>
+            </div>
+            <div layout="row">
+              <md-input-container flex>
+                <label>Prix HT</label>
+                <input ng-disabled="disable" ng-model="prixHT" type="number">
+              </md-input-container>
+              <md-input-container flex>
+                <label>Prix TTC</label>
+                <input ng-disabled="disable" ng-model="prixTTC" type="number">
+              </md-input-container>
+              <md-divider></md-divider>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
+    </md-content>
 </div>
 <md-content class="md-padding">
     <div layout="row" layout-xs="column">
