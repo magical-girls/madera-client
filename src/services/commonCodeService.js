@@ -98,6 +98,7 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
             .ok('Oui')
             .cancel('Non');
         $mdDialog.show(confirm).then(function() {
+            console.log('Mail sended.');
             devisProvider.sendEmail(
                 idDevis
             ).async().then(function(response) {
