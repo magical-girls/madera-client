@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row ng-repeat="composant in datasComposants | orderBy:sortType:sortReverse | filter:searchText">
+        <tr md-row ng-repeat="composant in datasComposants">
           <td md-cell ng-click="editCatalogue('composant',composant.idReference, false)">{{composant.nom}}</td>
           <td md-cell ng-click="editCatalogue('composant',composant.idReference, false)"> {{composant.commentaire}}</td>
           <td md-cell ng-click="editCatalogue('composant',composant.idReference, false)">{{composant.idModule}}</td>

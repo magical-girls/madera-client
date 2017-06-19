@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row ng-repeat="module in datasModules | orderBy:sortType:sortReverse | filter:searchText">
+        <tr md-row ng-repeat="module in datasModules">
           <td md-cell ng-click="editCatalogue('module',module.idReference, false)">{{module.idReference}}</td>
           <td md-cell ng-click="editCatalogue('module',module.idReference, false)">{{module.commentaire}}</td>
           <td md-cell ng-click="editCatalogue('module',module.idReference, false)">{{module.idGamme}}</td>

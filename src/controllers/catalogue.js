@@ -29,7 +29,7 @@ app.controller('catalogueCtrl', function ($scope, $routeParams, catalogueProvide
 
     $scope.deleteSomething = function ($event, action) {
     	if($routeParams.edit){
-    		commonCode.showConfirm($event, action);
+    		commonCode.showConfirmDel($event, action);
     	} else {
     		commonCode.showForbidden();
     	}

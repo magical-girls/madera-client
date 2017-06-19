@@ -60,12 +60,12 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
                         break;
                 }
             } else {
-                console.log("showConfirm() - Valeur undefined détectée : inputId = " + inputId + " ; action = " + action);
+                console.log("showConfirmDel() - Valeur undefined détectée : inputId = " + inputId + " ; action = " + action);
 
             }
 
         } else {
-            console.log("showConfirm() - Illegal action : " + action);
+            console.log("showConfirmDel() - Illegal action : " + action);
             showAlert();
         }
 
@@ -84,13 +84,13 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
             //$scope.status = 'Record deleted successfully!';
             that.deleteSomething($event, action)
         }, function() {
-            this.status = 'You decided to keep your record.';
+            console.log('You decided to keep your record.');
         });
 
     };
 
     this.showConfirmEmail = function($event, idDevis) {
-        console.log("idDevis = " + idDevis);
+        //console.log("idDevis = " + idDevis);
         var confirm = $mdDialog.confirm()
             .title('Etes-vous sur de vouloir envoyer un e-mail?')
             .ariaLabel('TutorialsPoint.com')

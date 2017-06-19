@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row ng-repeat="gammeData in datasGammes | orderBy:sortType:sortReverse | filter:searchText">
+        <tr md-row ng-repeat="gammeData in datasGammes">
           <td md-cell ng-click="editCatalogue('gamme',gammeData.idReference, false)">{{gammeData.nom}}</td>
           <td md-cell ng-click="editCatalogue('gamme',gammeData.idReference, false)">{{gammeData.commentaire}}</td>
           <td md-cell>

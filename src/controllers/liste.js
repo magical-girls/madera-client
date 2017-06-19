@@ -69,6 +69,6 @@ app.controller('listCtrl', function ($scope, $routeParams, $location, devisProvi
     }
 
     $scope.deleteSomething = function ($event, action) {
-      commonCode.showConfirm($event, action);
+      commonCode.showConfirmDel($event, action);
     }
   })

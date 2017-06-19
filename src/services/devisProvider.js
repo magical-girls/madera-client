@@ -127,7 +127,7 @@ app.service('devisProvider', function($http, $window, $routeParams) {
                         "margeComDevis": margeComDevis,
                         "margeEntDevis": margeEntDevis,
                         "idReferenceGamme": idReferenceGamme,
-                        "lstModule": listeModule,
+                        "modules": listeModule,
                     },
                     headers: {
                         'token': $window.sessionStorage.getItem('token'),
@@ -160,7 +160,7 @@ app.service('devisProvider', function($http, $window, $routeParams) {
                         "margeComDevis": margeComDevis,
                         "margeEntDevis": margeEntDevis,
                         "idReferenceGamme": idReferenceGamme,
-                        "lstModule": listeModule,
+                        "modules": listeModule,
                     },
                     headers: {
                         'token': $window.sessionStorage.getItem('token'),
