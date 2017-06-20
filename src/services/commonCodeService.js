@@ -1,10 +1,10 @@
 'use strict';
-app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialog) {
+app.service('commonCode', function (devisProvider, fournisseursProvider, $mdDialog) {
 
     var that = this;
 
-    var allowedAction = [ /*"deleteDevis", "deleteGamme", "deleteComposant", "deleteFournisseur", "deleteModule"*/ ];
-    this.isAllowedAction = function(inputAction) {
+    var allowedAction = [ /*"deleteDevis", "deleteGamme", "deleteComposant", "deleteFournisseur", "deleteModule"*/];
+    this.isAllowedAction = function (inputAction) {
         var result = false;
         for (var i = 0; i < allowedAction.length; i++) {
             if (inputAction == allowedAction[i]) {
@@ -15,7 +15,7 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
     };
 
     // Supprimer un élément
-    this.deleteSomething = function(inputId, action) {
+    this.deleteSomething = function (inputId, action) {
 
         var result = null;
 
@@ -72,7 +72,7 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
         return result;
     };
     //Modal de confirmation
-    this.showConfirmDel = function($event, action) {
+    this.showConfirmDel = function ($event, action) {
         console.log("debugtest" + action);
         var confirm = $mdDialog.confirm()
             .title('Etes-vous sur de vouloir supprimer cet élément?')
@@ -80,16 +80,16 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
             .targetEvent(event)
             .ok('Oui')
             .cancel('Non');
-        $mdDialog.show(confirm).then(function() {
+        $mdDialog.show(confirm).then(function () {
             //$scope.status = 'Record deleted successfully!';
             that.deleteSomething($event, action)
-        }, function() {
+        }, function () {
             console.log('You decided to keep your record.');
         });
 
     };
 
-    this.showConfirmEmail = function($event, idDevis) {
+    this.showConfirmEmail = function ($event, idDevis) {
         //console.log("idDevis = " + idDevis);
         var confirm = $mdDialog.confirm()
             .title('Etes-vous sur de vouloir envoyer un e-mail?')
@@ -97,29 +97,32 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
             .targetEvent(event)
             .ok('Oui')
             .cancel('Non');
-        $mdDialog.show(confirm).then(function() {
+        $mdDialog.show(confirm).then(function () {
             console.log('Mail sended.');
             devisProvider.sendEmail(
                 idDevis
-            ).async().then(function(response) {
+            ).async().then(function (response) {
                 console.log("send email ok");
-            }, function(error) {
+            }, function (error) {
                 console.log("send email failed");
             })
-        }, function() {
+        }, function () {
             console.log('Mail not sended.');
         });
 
     };
 
-    this.showForbidden = function() {
+    this.showForbidden = function () {
         showAlert();
     }
 
-    this.alertErreur = function() {
+    this.alertErreur = function () {
         showAlertErreur();
     }
 
+    this.showAlertFieldsEmpty = function () {
+        showAlertFieldsEmpty();
+    }
     function showAlert() {
         alert = $mdDialog.alert({
             title: 'INTERDICTION',
@@ -129,7 +132,7 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
 
         $mdDialog
             .show(alert)
-            .finally(function() {
+            .finally(function () {
                 alert = undefined;
             });
     }
@@ -143,9 +146,22 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
 
         $mdDialog
             .show(alert)
-            .finally(function() {
+            .finally(function () {
                 alert = undefined;
             });
     }
 
+    function showAlertFieldsEmpty() {
+        alert = $mdDialog.alert({
+            title: 'Erreur',
+            textContent: "Veuillez remplir les champs",
+            ok: 'Fermer'
+        });
+
+        $mdDialog
+            .show(alert)
+            .finally(function () {
+                alert = undefined;
+            });
+    }
 })
