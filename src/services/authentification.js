@@ -14,7 +14,7 @@ app.factory('authentification', function($window, $http){
             	url : host + 'login',
             	params : {
             		name : login,
-            		pwd : window.atob(pass)
+					pwd : window.btoa(unescape(encodeURIComponent( pass )))
             		},
             	headers: { 
             		'Content-type' : 'application/json; charset=UTF-8'
@@ -28,7 +28,7 @@ app.factory('authentification', function($window, $http){
     	    	$window.sessionStorage.setItem('prenom', response.data.salarie.prenom);
     	    	return true;
     	    }, function(error) {
-    	    	if(response.status === 401){
+    	    	if(error.status === 401){
     	    		alert('Erreur d\'authentification')
     	    	} else {
     				alert('Erreur serveur');
