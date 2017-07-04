@@ -1,5 +1,5 @@
 ///////////////////// Edit devis controller /////////////////////////
-app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, userProvider,
+app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, userProvider,
     catalogueProvider, $mdDialog, $window, $location, authentification, commonCode, $interval) {
     $scope.authentification = authentification.validate('');
     if (!$scope.authentification) {
@@ -7,7 +7,6 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     }
     // Vérification du mode edition (activé ou non)
     $scope.choixCatalogue = [];
-    getCatalogue();
     $scope.edit = $routeParams.edit;
     var id = $routeParams.id;
     var prixToutComposantHT = 0;
@@ -18,10 +17,9 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     $scope.disable = true;
     // Création des tableaux pour le post
     $scope.moduleJson = [];
-
-    userProvider.getUser().async().then(function (response) {
+    userProvider.getUser().async().then(function(response) {
         $scope.user = response.data;
-    }, function (error) {
+    }, function(error) {
         alert('Erreur de connexion');
     });
 
@@ -29,19 +27,19 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     if ("new" != id) {
         console.log("id n'est pas new :" + id);
         $scope.new = false;
-        devisProvider.getaDevis(id).async().then(function (response) {
+        devisProvider.getaDevis(id).async().then(function(response) {
             //récupération données utilisateur
 
             $scope.devisData = response.data;
             $scope.gammes = response.data.gamme;
+            $scope.client = response.data.client;
             if ($scope.gammes.length != 0) {
                 $scope.gammeIsDefined = true;
                 $scope.selectedGammeId = $scope.gammes.idReference;
             }
 
             $scope.modules = response.data.modules;
-            $scope.composants = response.data.lstComposant;
-
+            $scope.composants = response.data.composants;
             // Prix du devis
             for (var i = 0; i < $scope.composants.length; i++) {
                 prixToutComposantHT += $scope.composants[i].prixHT;
@@ -50,29 +48,23 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
             $scope.prixTTC = $scope.prixHT * 1.2;
 
             // Création du tableau listant le contenu du devis
-
             if ($scope.modules.length != 0) {
-                catalogueProvider.getModules().async().then(function (response) {
-                    $scope.datasModules = response.data;
-                    for (var i = 0; i < $scope.modules.length; i++) {
-                        $scope.choixCatalogue.push({
-                            'id_row': new Date().getTime(),
-                            'nom_gamme': $scope.gammes.nom,
-                            'moduleA': getModuleName($scope.modules[i].moduleA.id),
-                            'sectionA': $scope.modules[i].moduleA.section,
-                            'longueurA': $scope.modules[i].moduleA.longueur,
-                            'moduleB': getModuleName($scope.modules[i].moduleB.id),
-                            'sectionB': $scope.modules[i].moduleB.section,
-                            'longueurB': $scope.modules[i].moduleB.longueur,
-                            'type': $scope.modules[i].typeAngle,
-                            'degre': $scope.modules[i].Angle
-                        });
-                    }
-                }, function (error) {
-                    commonCode.alertErreur();
-                })
+                for (var i = 0; i < $scope.modules.length; i++) {
+                    $scope.choixCatalogue.push({
+                        'id_row': new Date().getTime(),
+                        'nom_gamme': $scope.gammes.nom,
+                        'moduleA': $scope.modules[i].moduleA.id,
+                        'sectionA': $scope.modules[i].moduleA.section,
+                        'longueurA': $scope.modules[i].moduleA.longueur,
+                        'moduleB': $scope.modules[i].moduleB.id,
+                        'sectionB': $scope.modules[i].moduleB.section,
+                        'longueurB': $scope.modules[i].moduleB.longueur,
+                        'type': $scope.modules[i].typeAngle,
+                        'degre': $scope.modules[i].angle
+                    });
+                }
             }
-        }, function (error) {
+        }, function(error) {
             commonCode.alertErreur();
         });
 
@@ -81,12 +73,23 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
         $scope.new = true;
         $scope.comData = userProvider.getUser();
     }
+    // Listes déroulantes - catalogueProvider    
+    catalogueProvider.getGammes().async().then(function(response) {
+        $scope.datasGammes = response.data;
+    }, function(error) {
+        commonCode.alertErreur();
+    })
 
+    catalogueProvider.getModules().async().then(function(response) {
+        $scope.datasModules = response.data;
+    }, function(error) {
+        commonCode.alertErreur();
+    })
 
     //Gestion des commentaires
     $scope.clientComment = [];
     $scope.commercialComment = [];
-    $scope.addComment = function (txt, target) {
+    $scope.addComment = function(txt, target) {
         if (target == 'client') {
             $scope.clientComment.push({ 'id_row': new Date().getTime(), 'comment_txt': txt, 'comment_date': new Date().getTime() });
             $scope.clientCommentary = null;
@@ -98,23 +101,23 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
         }
     };
 
-    $scope.add = function () {
+    $scope.add = function() {
 
-        $scope.addChoixCatalogueRow();
-        $scope.addModuleJson();
-        $scope.updatePrices();
+            $scope.addChoixCatalogueRow();
+            $scope.addModuleJson();
+            $scope.updatePrices();
 
-    }
-    // ajout des nouveaux choix pour affichage
+        }
+        // ajout des nouveaux choix pour affichage
 
-    $scope.addChoixCatalogueRow = function () {
+    $scope.addChoixCatalogueRow = function() {
         $scope.choixCatalogue.push({
             'id_row': new Date().getTime(),
-            'nom_gamme': $scope.gammes.nom,
-            'moduleA': getModuleName($scope.moduleA),
+            'nom_gamme': $scope.gammes,
+            'moduleA': $scope.moduleA,
             'sectionA': $scope.sectionA,
             'longueurA': $scope.longueurA,
-            'moduleB': getModuleName($scope.moduleB),
+            'moduleB': $scope.moduleB,
             'sectionB': $scope.sectionB,
             'longueurB': $scope.longueurB,
             'type': $scope.typeAngle,
@@ -123,7 +126,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     }
 
     //lstModules
-    $scope.addModuleJson = function () {
+    $scope.addModuleJson = function() {
         $scope.moduleJson.push({
             "idChoixModule": null,
             "moduleA": {
@@ -143,7 +146,7 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
     };
 
     // Supprimer des éléments de la liste des choix
-    $scope.removeChoixCatalogueRow = function (inputIdRow) {
+    $scope.removeChoixCatalogueRow = function(inputIdRow) {
         var index;
         for (var i in $scope.choixCatalogue) {
             var id_row = $scope.choixCatalogue[i].id_row;
@@ -155,30 +158,36 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
         $scope.choixCatalogue.splice(index, 1);
     };
 
-    $scope.updatePrices = function () {
+    $scope.updatePrices = function() {
         $scope.prixHT = prixToutComposantHT + (1 + ($scope.margeComDevis / 100)) + (1 + ($scope.margeEntDevis / 100));
         $scope.prixTTC = $scope.prixHT * 1.2;
     };
-    // debug
-    //$interval(function () {
 
-    //}, 2000);
-
+    // Fonction pour controller le form et déterminer si création ou update
+    $scope.mySubmit = function() {
+        if (devisForm.$valid) {
+            // si update
+            if ("new" != id) {
+                console.log("update devis");
+                updateDevis();
+            }
+            //sinon création
+            else {
+                console.log("create devis");
+                createDevis()
+            }
+        } else {
+            console.log("devis non valide");
+            commonCode.showAlertFieldsEmpty();
+        }
+    }
 
     // créer un devis
-    $scope.createDevis = function () {
-        /* var tailleRef = $scope.devisData.devis.reference.length;
-         if ($scope.devisData.devis.reference.charAt(tailleRef - 2) == "v") {
-           var version = $scope.devisData.devis.reference.substr(tailleRef - 1);
-           version = parseInt(version) + 1;
-           $scope.devisData.devis.reference = $scope.devisData.devis.reference.substring(0, tailleRef - 1) + version;
-         } else {
-           $scope.devisData.devis.reference += "_v1";
-         }*/
+    createDevis = function() {
         devisProvider.createDevis(
             $scope.devisData.client.nom,
             $scope.devisData.client.prenom,
-            new Date(),
+            "09-07-2002",
             $scope.devisData.client.tel,
             "adresseClient",
             null,
@@ -190,95 +199,58 @@ app.controller('editDevisCtrl', function ($scope, $routeParams, devisProvider, u
             $scope.margeEntDevis,
             $scope.gamme,
             $scope.moduleJson
-        ).async().then(function (response) {
-            console.log("post ok");
+        ).async().then(function(response) {
+            console.log("post create ok");
             $window.history.back();
-        }, function (error) {
+        }, function(error) {
             commonCode.alertErreur();
         });
     };
+
     //update devis
-    $scope.updateDevis = function () {
+    updateDevis = function() {
         devisProvider.updateDevis(
-            $scope.devisData.client.nom,
-            $scope.devisData.client.prenom,
-            new Date(),
-            $scope.devisData.client.tel,
-            "adresseClient",
-            null,
-            $scope.devisData.client.mail,
-            $scope.user.idMatricule,
-            $scope.devisData.devis.reference,
-            null,
-            $scope.margeComDevis,
-            $scope.margeEntDevis,
+            $scope.client,
+            $scope.devisData.devis,
             $scope.gamme,
             $scope.moduleJson
-        ).async().then(function (response) {
-            console.log("post ok");
+        ).async().then(function(response) {
+            console.log("post put ok");
             $window.history.back();
-        }, function (error) {
+        }, function(error) {
             commonCode.alertErreur();
         });
     };
 
     // Delete devis
 
-    $scope.deleteDevis = function () {
+    $scope.deleteDevis = function() {
         var jsonDel = { "reference": $scope.devisData.devis.reference };
         devisProvider.deleteDevis(
             angular.toJson(jsonDel)
-        ).async().then(function (response) {
+        ).async().then(function(response) {
             console.log("delete ok");
             $window.history.back();
-        }, function (error) {
+        }, function(error) {
             commonCode.alertErreur();
         });
     };
 
     // envoi email
-    $scope.sendEmail = function () {
+    $scope.sendEmail = function() {
         commonCode.showConfirmEmail("", $scope.devisData.devis.reference);
     }
-    $scope.sendEmailNoAlert = function () {
-        devisProvider.sendEmail(
-            $scope.devisData.devis.reference
-        ).async().then(function (response) {
-            console.log("send email ok");
-        }, function (error) {
-            console.log("send email failed");
-        })
-    }
-    // Bouton retour
-    $scope.returnFunction = function () {
+    $scope.sendEmailNoAlert = function() {
+            devisProvider.sendEmail(
+                $scope.devisData.devis.reference
+            ).async().then(function(response) {
+                console.log("send email ok");
+            }, function(error) {
+                console.log("send email failed");
+            })
+        }
+        // Bouton retour
+    $scope.returnFunction = function() {
         $window.history.back();
     };
-    // Listes déroulantes - catalogueProvider    
-    function getCatalogue() {
-        catalogueProvider.getGammes().async().then(function (response) {
-            $scope.datasGammes = response.data;
-        }, function (error) {
-            commonCode.alertErreur();
-        })
-
-        catalogueProvider.getModules().async().then(function (response) {
-            $scope.datasModules = response.data;
-        }, function (error) {
-            commonCode.alertErreur();
-        })
-    }
-
-    function getModuleName(moduleID) {
-        moduleName = "";
-        if (!angular.isUndefined(moduleID)) {
-            for (i = 0; i < $scope.datasModules.length; i++) {
-                console.log("moduleID = " + moduleID + " current id = " + $scope.datasModules[i].idReference);
-                if (moduleID == $scope.datasModules[i].idReference) {
-                    moduleName = $scope.datasModules[i].commentaire;
-                    break;
-                }
-            }
-        }
-        return moduleName;
-    }
 })

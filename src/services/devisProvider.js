@@ -137,8 +137,7 @@ app.service('devisProvider', function($http, $window, $routeParams) {
             }
         }
     }
-    this.updateDevis = function(nomClient, prenomClient, naissanceClient, telClient, adresseClient, professionClient, mailClient, idMatriculeSalarie,
-        referenceDevis, motifDevis, margeComDevis, margeEntDevis, idReferenceGamme, listeModule) {
+    this.updateDevis = function(client, devis, gamme, modules) {
         //url get devis
         return {
             async: function() {
@@ -147,20 +146,14 @@ app.service('devisProvider', function($http, $window, $routeParams) {
                     url: host + 'devis',
                     method: "PUT",
                     data: {
-                        "nomClient": nomClient,
-                        "prenomClient": prenomClient,
-                        "naissanceClient": naissanceClient,
-                        "telClient": telClient,
-                        "adresseClient": adresseClient,
-                        "professionClient": professionClient,
-                        "mailClient": mailClient,
-                        "idMatriculeSalarie": idMatriculeSalarie,
-                        "referenceDevis": referenceDevis,
-                        "motifDevis": motifDevis,
-                        "margeComDevis": margeComDevis,
-                        "margeEntDevis": margeEntDevis,
-                        "idReferenceGamme": idReferenceGamme,
-                        "modules": listeModule,
+                        "client": client,
+                        "devis": devis,
+                        "gamme": {
+                            "idReference": gamme,
+                            "nom": null,
+                            "commentaire": null
+                        },
+                        "modules": modules
                     },
                     headers: {
                         'token': $window.sessionStorage.getItem('token'),

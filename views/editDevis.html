@@ -1,5 +1,5 @@
 <div ng-cloak ng-app="Madera">
-    <form name="devisForm">
+    <form name="devisForm" novalidate ng-submit="mySubmit()">
         <md-content class="md-padding">
             <div layout="row"><span flex></span>
                 <md-button aria-label="imprimer" ng-click="">
@@ -16,29 +16,33 @@
                         <div layout-gt-xs="row" layout-xs="column">
                             <md-input-container class="md-block">
                                 <label>Prénom</label>
-                                <input ng-disabled="edit=='false'" required ng-model="devisData.client.prenom" type="text">
-                                <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
-                                    <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le prénom du client.</div>
+                                <input ng-disabled="edit=='false'" name="clientPrenom" required ng-model="devisData.client.prenom" type="text">
+                                <div md-auto-hide="false" ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
+                                    <div ng-message="required" class="my-message">Prénom du client obligatoire.</div>
                                 </div>
                             </md-input-container>
                             <md-input-container class="md-block">
                                 <label>Nom</label>
-                                <input ng-disabled="edit=='false'" required ng-model="devisData.client.nom" type="text">
-                                <div ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
-                                    <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le nom du client.</div>
+                                <input ng-disabled="edit=='false'" name="clientNom" required ng-model="devisData.client.nom" type="text">
+                                <div md-auto-hide="false" ng-messages="devisForm.clientNom.$error" role="alert" multiple="">
+                                    <div ng-message="required" class="my-message">Nom du client obligatoire.</div>
                                 </div>
                             </md-input-container>
                         </div>
                         <md-input-container class="md-block">
                             <label>Tel</label>
-                            <input ng-disabled="edit=='false'" required ng-model="devisData.client.tel" type="text">
+                            <input ng-disabled="edit=='false'" required name="clientTel" ng-model="devisData.client.tel" type="text">
                             <div ng-messages="devisForm.clientTel.$error" role="alert" multiple="">
-                                <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le n° de téléphone du client.</div>
+                                <div ng-message="required" class="my-message">Téléphone du client obligatoire.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>E-mail</label>
-                            <input ng-disabled="edit=='false'" ng-model="devisData.client.mail" type="text">
+                            <input ng-disabled="edit=='false'" required name="clientMail" ng-model="devisData.client.mail" type="email">
+                            <div ng-messages="devisForm.clientMail.$error" role="alert" multiple="">
+                                <div ng-message="required" class="my-message">Email du client obligatoire.</div>
+                                <div ng-message="email">Adresse non valide</div>
+                            </div>
                         </md-input-container>
                     </md-card-content>
                 </md-card>
@@ -80,18 +84,24 @@
                         <div layout="row">
                             <md-input-container class="md-block">
                                 <label>Référence</label>
-                                <input ng-disabled="edit=='false'" ng-model="devisData.devis.reference" type="text">
+                                <input ng-disabled="edit=='false'" required name="ref" ng-model="devisData.devis.reference" type="text">
+                                <div ng-messages="devisForm.ref.$error" role="alert" multiple="">
+                                    <div ng-message="required" class="my-message">Référence obligatoire.</div>
+                                </div>
                             </md-input-container>
                             <p flex></p>
                             <!--<p>Statut: {{devisData.devis.status}}</p>-->
                             <md-input-container>
                                 <label>Statut: </label>
-                                <md-select ng-model="statut" ng-disabled="edit=='false'">
+                                <md-select ng-model="statut" name="statut" required ng-disabled="edit=='false'">
                                     <md-option ng-selected="devisData.devis.status=='Refusé'" value="Refusé">Refusé</md-option>
                                     <md-option ng-selected="devisData.devis.status=='En cours'" value="En cours">En cours</md-option>
                                     <md-option ng-selected="devisData.devis.status=='En attente'" value="En attente">En attente</md-option>
                                     <md-option ng-selected="devisData.devis.status=='Validé'" value="Validé">Validé</md-option>
                                 </md-select>
+                                <div ng-messages="devisForm.statut.$error" role="alert" multiple="">
+                                    <div ng-message="required" class="my-message">Statut obligatoire.</div>
+                                </div>
                             </md-input-container>
                         </div>
                         <p>Date de création: {{devisData.devis.dateCreation}}</p>
@@ -101,9 +111,12 @@
                             <div flex layout="row">
                                 <md-input-container flex>
                                     <label>Gammes</label>
-                                    <md-select ng-model="gamme" ng-disabled="gammeIsDefined">
+                                    <md-select ng-model="gamme" name="gamme" required ng-disabled="gammeIsDefined">
                                         <md-option ng-selected="g.idReference==selectedGammeId" value="{{g.idReference}}" ng-repeat="g in datasGammes">{{ g.nom }}</md-option>
                                     </md-select>
+                                    <div ng-messages="devisForm.gamme.$error" role="alert" multiple="">
+                                        <div ng-message="required" class="my-message">Gamme obligatoire.</div>
+                                    </div>
                                 </md-input-container>
                             </div>
                             <div flex layout="row">
@@ -118,8 +131,8 @@
                                         <md-input-container flex>
                                             <label>Type Section</label>
                                             <md-select ng-model="sectionA" ng-disabled="edit=='false'">
-                                                <md-option value="1">Lissant</md-option>
-                                                <md-option value="2">Contrefort</md-option>
+                                                <md-option value="Lisses">Lissant</md-option>
+                                                <md-option value="Contreforts">Contrefort</md-option>
                                             </md-select>
                                         </md-input-container>
                                         <md-input-container flex>
@@ -148,8 +161,8 @@
                                         <md-input-container flex>
                                             <label>Type Section</label>
                                             <md-select ng-model="sectionB" ng-disabled="edit=='false'">
-                                                <md-option value="1">Lissant</md-option>
-                                                <md-option value="2">Contrefort</md-option>
+                                                <md-option value="Lisses">Lissant</md-option>
+                                                <md-option value="Contreforts">Contrefort</md-option>
                                             </md-select>
                                         </md-input-container>
                                         <md-input-container flex>
@@ -309,8 +322,8 @@
                 </md-card>
             </div>
             <div layout="row" layout-align="center end">
-                <md-button class="md-raised" ng-show="new == true" ng-click="createDevis()">Créer</md-button>
-                <md-button class="md-raised" ng-show="new == false" ng-click="updateDevis()">Enregistrer</md-button>
+                <md-button class="md-raised" type="submit">Valider</md-button>
+                <!--<md-button class="md-raised" type="submit" ng-show="new == false" ng-click="updateDevis()">Enregistrer</md-button>-->
                 <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
                 <md-button class="md-raised" ng-click="deleteDevis()">Supprimer</md-button>
             </div>

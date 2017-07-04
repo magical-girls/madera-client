@@ -1,23 +1,31 @@
-<div ng-controller="signinCtrl" layout="column" layout-padding="" ng-cloak="" ng-app="Madera">
-  <md-card>
-    <h2>Connexion</h2>
-  <br>
-  <md-content class="md-padding" >
-    <div layout-align="center end" flex-sm="66" flex-offset-sm="33" flex-md="66" flex-offset-md="33">
-      <md-input-container class="md-icon-float md-block">
-        <label>Login</label>
-        <md-icon md-svg-src="ressources/img/icons/ic_person_black_24px.svg" class="name"></md-icon>
-        <input ng-model="login" type="text" required>
-      </md-input-container>
-      <md-input-container class="md-icon-float md-block">
-        <label>Mot de passe</label>
-        <md-icon md-svg-src="ressources/img/icons/ic_vpn_key_black_24px.svg" class="name"></md-icon>
-        <input ng-model="pass" type="password" required autocomplete="off">
-      </md-input-container>
-       <div layout-align="center end">
-        <md-button class="md-raised" ng-click="setToken()">Connexion</md-button>
-       </div>
-    </div>
-  </md-content>
-</md-card>
+<div layout="column" layout-padding="" ng-cloak="" ng-app="Madera">
+    <md-card>
+        <h2>Connexion</h2>
+        <br>
+        <md-content class="md-padding">
+            <form name="signinForm" novalidate ng-submit="signinForm.$valid && setToken()">
+                <div layout-align="center end" flex-sm="66" flex-offset-sm="33" flex-md="66" flex-offset-md="33">
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Login</label>
+                        <md-icon md-svg-src="ressources/img/icons/ic_person_black_24px.svg" class="name"></md-icon>
+                        <input ng-model="login" name="login" type="text" required>
+                        <div md-auto-hide="false" ng-messages="signinForm.login.$error" role="alert" multiple="">
+                            <div ng-message="required" class="my-message">Login obligatoire.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Mot de passe</label>
+                        <md-icon md-svg-src="ressources/img/icons/ic_vpn_key_black_24px.svg" class="name"></md-icon>
+                        <input ng-model="pass" type="password" name="pass" required autocomplete="off">
+                        <div md-auto-hide="false" ng-messages="signinForm.pass.$error" role="alert" multiple="">
+                            <div ng-message="required" class="my-message">Mot de passe obligatoire.</div>
+                        </div>
+                    </md-input-container>
+                    <div layout-align="center end">
+                        <md-button class="md-raised" type="submit">Connexion</md-button>
+                    </div>
+                </div>
+            </form>
+        </md-content>
+    </md-card>
 </div>
