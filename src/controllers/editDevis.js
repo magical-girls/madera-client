@@ -9,11 +9,11 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     $scope.choixCatalogue = [];
     $scope.edit = $routeParams.edit;
     var id = $routeParams.id;
-    var prixToutComposantHT = 0;
+    var prixToutComposantHT = 0.00;
     $scope.addClientComment = false;
     $scope.addCommercialComment = false;
     $scope.gammeIsDefined = false;
-    $scope.prixHT = 0;
+    $scope.prixHT = 0.00;
     $scope.disable = true;
     // Création des tableaux pour le post
     $scope.moduleJson = [];
@@ -43,9 +43,9 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
             // Prix du devis
             for (var i = 0; i < $scope.composants.length; i++) {
                 prixToutComposantHT += $scope.composants[i].prixHT;
-                $scope.prixHT = prixToutComposantHT;
+                $scope.prixHT = parseFloat(prixToutComposantHT).toFixed(2);
             }
-            $scope.prixTTC = $scope.prixHT * 1.2;
+            $scope.prixTTC = parseFloat($scope.prixHT * 1.2).toFixed(2);
 
             // Création du tableau listant le contenu du devis
             if ($scope.modules.length != 0) {
@@ -180,8 +180,8 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     };
 
     $scope.updatePrices = function() {
-        $scope.prixHT = prixToutComposantHT + (1 + ($scope.margeComDevis / 100)) + (1 + ($scope.margeEntDevis / 100));
-        $scope.prixTTC = $scope.prixHT * 1.2;
+        $scope.prixHT = parseFloat(prixToutComposantHT + (1 + ($scope.margeComDevis / 100)) + (1 + ($scope.margeEntDevis / 100))).toFixed(2);
+        $scope.prixTTC = parseFloat($scope.prixHT * 1.2).toFixed(2);
     };
 
     // Fonction pour controller le form et déterminer si création ou update
