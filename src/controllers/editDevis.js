@@ -86,6 +86,12 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         commonCode.alertErreur();
     })
 
+    catalogueProvider.getComposants().async().then(function(response) {
+        $scope.datasComposants = response.data;
+    }, function(error) {
+        commonCode.alertErreur();
+    })
+
     //Gestion des commentaires
     $scope.clientComment = [];
     $scope.commercialComment = [];
@@ -102,13 +108,23 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     };
 
     $scope.add = function() {
-
-            $scope.addChoixCatalogueRow();
-            $scope.addModuleJson();
-            $scope.updatePrices();
-
+        $scope.addChoixCatalogueRow();
+        $scope.addModuleJson();
+        $scope.updatePrices();
+    }
+    $scope.updateComposantsHT = function(moduleRef) {
+        console.log("compo HT base: " + prixToutComposantHT);
+        for (var i = 0; i < $scope.datasComposants.length; i++) {
+            for (var j = 0; j < $scope.datasComposants[i].idModule.length; j++) {
+                if ($scope.datasComposants[i].idModule[j] == moduleRef) {
+                    prixToutComposantHT += $scope.datasComposants[i].prixHT;
+                }
+            }
         }
-        // ajout des nouveaux choix pour affichage
+        console.log("compo HT base " + prixToutComposantHT);
+        $scope.updatePrices();
+    };
+    // ajout des nouveaux choix pour affichage
 
     $scope.addChoixCatalogueRow = function() {
         $scope.choixCatalogue.push({
@@ -143,6 +159,11 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
             "typeAngle": $scope.typeAngle,
             "Angle": $scope.Angle
         });
+        $scope.updateComposantsHT($scope.moduleA);
+        if ($scope.moduleB != null) {
+            console.log("module B update composants");
+            $scope.updateComposantsHT($scope.moduleB);
+        }
     };
 
     // Supprimer des éléments de la liste des choix
