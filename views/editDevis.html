@@ -235,11 +235,11 @@
                         <div layout="row">
                             <md-input-container flex>
                                 <label>Prix HT</label>
-                                <input ng-disabled="disable" ng-model="prixHT" type="number">
+                                <input ng-disabled="disable" ng-model="prixHT | number : 2" type="number" string-to-number>
                             </md-input-container>
                             <md-input-container flex>
                                 <label>Prix TTC</label>
-                                <input ng-disabled="disable" ng-model="prixTTC" type="number">
+                                <input ng-disabled="disable" ng-model="prixTTC | number : 2" type="number" string-to-number>
                             </md-input-container>
                             <md-divider></md-divider>
                         </div>

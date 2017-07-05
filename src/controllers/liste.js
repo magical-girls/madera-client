@@ -62,7 +62,8 @@ app.controller('listCtrl', function ($scope, $routeParams, $location, devisProvi
         }
 
         $scope.addNewFournisseur = function () {
-          $location.url("/fournisseur/new/" + true);
+        	commonCode.showForbidden()
+          //$location.url("/fournisseur/new/" + true);
         }
         break;
       default:
