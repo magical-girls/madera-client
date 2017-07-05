@@ -127,9 +127,15 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
     // ajout des nouveaux choix pour affichage
 
     $scope.addChoixCatalogueRow = function() {
+        $scope.selectedGamme = "";
+        if ($scope.gammes != null) {
+            $scope.selectedGamme = $scope.gammes.nom;
+        } else {
+            $scope.selectedGamme = $scope.gamme;
+        }
         $scope.choixCatalogue.push({
             'id_row': new Date().getTime(),
-            'nom_gamme': $scope.gammes,
+            'nom_gamme': $scope.selectedGamme,
             'moduleA': $scope.moduleA,
             'sectionA': $scope.sectionA,
             'longueurA': $scope.longueurA,
