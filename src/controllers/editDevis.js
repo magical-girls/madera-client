@@ -47,23 +47,29 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
             }
             $scope.prixTTC = parseFloat($scope.prixHT * 1.2).toFixed(2);
 
-            // Création du tableau listant le contenu du devis
-            if ($scope.modules.length != 0) {
-                for (var i = 0; i < $scope.modules.length; i++) {
-                    $scope.choixCatalogue.push({
-                        'id_row': new Date().getTime(),
-                        'nom_gamme': $scope.gammes.nom,
-                        'moduleA': $scope.modules[i].moduleA.id,
-                        'sectionA': $scope.modules[i].moduleA.section,
-                        'longueurA': $scope.modules[i].moduleA.longueur,
-                        'moduleB': $scope.modules[i].moduleB.id,
-                        'sectionB': $scope.modules[i].moduleB.section,
-                        'longueurB': $scope.modules[i].moduleB.longueur,
-                        'type': $scope.modules[i].typeAngle,
-                        'degre': $scope.modules[i].angle
-                    });
+            catalogueProvider.getModules().async().then(function(response) {
+                $scope.datasModules = response.data;
+
+                // Création du tableau listant le contenu du devis
+                if ($scope.modules.length != 0) {
+                    for (var i = 0; i < $scope.modules.length; i++) {
+                        $scope.choixCatalogue.push({
+                            'id_row': new Date().getTime(),
+                            'nom_gamme': $scope.gammes.nom,
+                            'moduleA': $scope.getModuleName($scope.modules[i].moduleA.id),
+                            'sectionA': $scope.modules[i].moduleA.section,
+                            'longueurA': $scope.modules[i].moduleA.longueur,
+                            'moduleB': $scope.getModuleName($scope.modules[i].moduleB.id),
+                            'sectionB': $scope.modules[i].moduleB.section,
+                            'longueurB': $scope.modules[i].moduleB.longueur,
+                            'type': $scope.modules[i].typeAngle,
+                            'degre': $scope.modules[i].angle
+                        });
+                    }
                 }
-            }
+            }, function(error) {
+                commonCode.alertErreur();
+            })
         }, function(error) {
             commonCode.alertErreur();
         });
@@ -72,6 +78,12 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         console.log("id est new: " + id);
         $scope.new = true;
         $scope.comData = userProvider.getUser();
+
+        catalogueProvider.getModules().async().then(function(response) {
+            $scope.datasModules = response.data;
+        }, function(error) {
+            commonCode.alertErreur();
+        })
     }
     // Listes déroulantes - catalogueProvider    
     catalogueProvider.getGammes().async().then(function(response) {
@@ -80,11 +92,7 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         commonCode.alertErreur();
     })
 
-    catalogueProvider.getModules().async().then(function(response) {
-        $scope.datasModules = response.data;
-    }, function(error) {
-        commonCode.alertErreur();
-    })
+
 
     catalogueProvider.getComposants().async().then(function(response) {
         $scope.datasComposants = response.data;
@@ -106,14 +114,24 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
             $scope.addCommercialComment = false;
         }
     };
-
+    $scope.getModuleName = function(moduleID) {
+        var currentModuleName = "";
+        if (moduleID != null) {
+            for (var i = 0; i < $scope.datasModules.length; i++) {
+                console.log("moduleID = " + moduleID);
+                if ($scope.datasModules[i].idReference == moduleID) {
+                    currentModuleName = $scope.datasModules[i].commentaire;
+                }
+            }
+        }
+        return currentModuleName;
+    }
     $scope.add = function() {
         $scope.addChoixCatalogueRow();
         $scope.addModuleJson();
         $scope.updatePrices();
     }
     $scope.updateComposantsHT = function(moduleRef) {
-        console.log("compo HT base: " + prixToutComposantHT);
         for (var i = 0; i < $scope.datasComposants.length; i++) {
             for (var j = 0; j < $scope.datasComposants[i].idModule.length; j++) {
                 if ($scope.datasComposants[i].idModule[j] == moduleRef) {
@@ -121,7 +139,6 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
                 }
             }
         }
-        console.log("compo HT base " + prixToutComposantHT);
         $scope.updatePrices();
     };
     // ajout des nouveaux choix pour affichage
@@ -136,10 +153,10 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         $scope.choixCatalogue.push({
             'id_row': new Date().getTime(),
             'nom_gamme': $scope.selectedGamme,
-            'moduleA': $scope.moduleA,
+            'moduleA': $scope.getModuleName($scope.moduleA),
             'sectionA': $scope.sectionA,
             'longueurA': $scope.longueurA,
-            'moduleB': $scope.moduleB,
+            'moduleB': $scope.getModuleName($scope.moduleB),
             'sectionB': $scope.sectionB,
             'longueurB': $scope.longueurB,
             'type': $scope.typeAngle,
@@ -167,7 +184,6 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         });
         $scope.updateComposantsHT($scope.moduleA);
         if ($scope.moduleB != null) {
-            console.log("module B update composants");
             $scope.updateComposantsHT($scope.moduleB);
         }
     };
@@ -195,12 +211,10 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         if (devisForm.$valid) {
             // si update
             if ("new" != id) {
-                console.log("update devis");
                 updateDevis();
             }
             //sinon création
             else {
-                console.log("create devis");
                 createDevis()
             }
         } else {
