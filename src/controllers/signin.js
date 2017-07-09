@@ -12,7 +12,7 @@ app.controller('signinCtrl', function($scope, $route, $rootScope, $location, $wi
                     $rootScope.showNav = true;
                     console.log("connection succeed");
                 } else {
-                    $rootScope.showNav = false;
+                    //$rootScope.showNav = false;
                     // normalement failed et rester sur sign in
                     console.log("connection failed");
                 }

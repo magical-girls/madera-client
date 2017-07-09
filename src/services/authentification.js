@@ -25,7 +25,8 @@ app.factory('authentification', function($window, $http, $rootScope) {
                 $window.sessionStorage.setItem('matricule', response.data.login.matriculeSalarie);
                 $window.sessionStorage.setItem('nom', response.data.salarie.nom);
                 $window.sessionStorage.setItem('prenom', response.data.salarie.prenom);
-                console.log("check1 =" + check);
+                $window.sessionStorage.setItem('showNav', true);
+
                 $rootScope.check = true;
 
             }, function(error) {
@@ -35,7 +36,6 @@ app.factory('authentification', function($window, $http, $rootScope) {
                     alert('Erreur serveur');
                 }
                 check = false;
-                console.log("check2 =" + check);
                 $rootScope.check = false;
             });
         },

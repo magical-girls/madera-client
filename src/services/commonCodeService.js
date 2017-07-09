@@ -89,6 +89,10 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
 
     };
 
+    this.checkSession = function() {
+        checkSession();
+    }
+
     this.showConfirmEmail = function($event, idDevis) {
         //console.log("idDevis = " + idDevis);
         var confirm = $mdDialog.confirm()
@@ -150,6 +154,11 @@ app.service('commonCode', function(devisProvider, fournisseursProvider, $mdDialo
             .finally(function() {
                 alert = undefined;
             });
+    }
+
+    function checkSession() {
+        console.log("verifying storage nav");
+        return $window.sessionStorage.getItem('showNav');
     }
 
     function showAlertFieldsEmpty() {

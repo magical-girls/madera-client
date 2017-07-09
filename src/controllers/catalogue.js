@@ -1,8 +1,13 @@
 /////////////////////// Lists controller  /////////////////////////////////////////////////
-app.controller('catalogueCtrl', function($scope, $routeParams, catalogueProvider, $mdDialog, commonCode, $location, authentification) {
+app.controller('catalogueCtrl', function($window, $scope, $routeParams, catalogueProvider, $rootScope, $mdDialog, commonCode, $location, authentification) {
     $scope.authentification = authentification.validate('');
     if (!$scope.authentification) {
         $location.url("/signin");
+    }
+    if ($window.sessionStorage.getItem('showNav') != null) {
+        $rootScope.showNav = true;
+    } else {
+        $rootScope.showNav = false;
     }
     $scope.edit = $routeParams.edit;
 
