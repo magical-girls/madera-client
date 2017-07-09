@@ -118,7 +118,6 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
         var currentModuleName = "";
         if (moduleID != null) {
             for (var i = 0; i < $scope.datasModules.length; i++) {
-                console.log("moduleID = " + moduleID);
                 if ($scope.datasModules[i].idReference == moduleID) {
                     currentModuleName = $scope.datasModules[i].commentaire;
                 }
@@ -208,19 +207,19 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, us
 
     // Fonction pour controller le form et déterminer si création ou update
     $scope.mySubmit = function() {
-        if (devisForm.$valid) {
-            // si update
-            if ("new" != id) {
-                updateDevis();
-            }
-            //sinon création
-            else {
-                createDevis()
-            }
-        } else {
-            console.log("devis non valide");
-            commonCode.showAlertFieldsEmpty();
+        // if (devisForm.$valid) {
+        // si update
+        if ("new" != id) {
+            updateDevis();
         }
+        //sinon création
+        else {
+            createDevis();
+        }
+        /* } else {
+             console.log("devis non valide");
+             commonCode.showAlertFieldsEmpty();
+         }*/
     }
 
     // créer un devis
