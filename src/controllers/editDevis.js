@@ -270,7 +270,8 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, $r
     // Delete devis
 
     $scope.deleteDevis = function() {
-        var jsonDel = { "reference": $scope.devisData.devis.reference };
+        commonCode.showConfirmDel("a", "delete devis");
+        /*var jsonDel = { "reference": $scope.devisData.devis.reference };
         devisProvider.deleteDevis(
             angular.toJson(jsonDel)
         ).async().then(function(response) {
@@ -279,6 +280,7 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, $r
         }, function(error) {
             commonCode.alertErreur();
         });
+        */
     };
 
     // envoi email

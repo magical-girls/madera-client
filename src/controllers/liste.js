@@ -57,7 +57,11 @@
               break;
           case "fournisseurs":
               $scope.pageTitle = "Liste des fournisseurs";
-              $scope.datas = fournisseursProvider.getFournisseurs();
+              $scope.fournisseurs = fournisseursProvider.getFournisseurs().async().then(function(response) {
+                  $scope.dataFournisseurs = response.data;
+              }, function(error) {
+                  commonCode.alertErreur();
+              })
               $scope.labels = fournisseursProvider.getFournisseursLabels();
               $scope.displayFournisseurs = true;
 
