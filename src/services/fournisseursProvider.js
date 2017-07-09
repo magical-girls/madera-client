@@ -1,12 +1,12 @@
 'use strict';
 
 var fournisseursLabel = [{
-        "name": "nom",
-        "value": "nom"
+        "name": "Societe",
+        "value": "societe"
     },
     {
-        "name": "téléphone",
-        "value": "telephone"
+        "name": "Téléphone",
+        "value": "tel"
     },
 
     {
@@ -28,7 +28,7 @@ function getIndexFournisseurFromId(inputGamme, inputIdGamme) {
 
 app.service('fournisseursProvider', function($http, $window) {
     this.getFournisseursLabels = function() {
-        return devisLabel;
+        return fournisseursLabel;
     }
     this.getFournisseurs = function() {
 
