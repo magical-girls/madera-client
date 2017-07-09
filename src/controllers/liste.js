@@ -72,6 +72,9 @@
               break;
           default:
       }
+      $scope.editFournisseur = function() {
+          commonCode.showForbidden();
+      }
 
       $scope.deleteSomething = function($event, action) {
           commonCode.showConfirmDel($event, action);
