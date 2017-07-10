@@ -6,32 +6,63 @@
                 <h3>Informations générales</h3>
                 <div layout-gt-xs="row" layout-xs="column">
                     <md-input-container class="md-block">
-                        <label>Nom</label>
-                        <input ng-disabled="edit=='false'" required name="fournissseurNom" ng-model="fournisseurData.nom" type="text">
+                        <label>Société</label>
+                        <input ng-disabled="edit=='false'" required name="fournissseurNom" ng-model="fournisseur.societe" type="text">
                         <div ng-messages="fournisseurForm.fournissseurNom.$error" role="alert" multiple="">
-                            <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le nom du fournisseur.</div>
+                            <div ng-message="required" class="my-message">Vous devez obligatoirement entrer la société du fournisseur.</div>
                         </div>
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>Adresse</label>
-                        <input ng-disabled="edit=='false'" required name="fournisseurAdresse" ng-model="fournisseurData.prenom" type="text">
-                        <div ng-messages="fournisseurForm.fournisseurTel.$error" role="alert" multiple="">
+                        <input ng-disabled="edit=='false'" required name="fournisseurAdresse" ng-model="fournisseur.adresse" type="text">
+                        <div ng-messages="fournisseurForm.fournisseurAdresse.$error" role="alert" multiple="">
                             <div ng-message="required" class="my-message">Vous devez obligatoirement entrer l'adresse du fournisseur'.</div>
                         </div>
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>Tel</label>
-                        <input ng-disabled="edit=='false'" name="fournisseurTel" required ng-model="fournisseurData.telephone" type="text">
+                        <input ng-disabled="edit=='false'" name="fournisseurTel" required ng-model="fournisseur.telephone" type="text">
                         <div ng-messages="fournisseurForm.fournisseurTel.$error" role="alert" multiple="">
                             <div ng-message="required" class="my-message">Vous devez obligatoirement entrer le n° de téléphone du fournisseur.</div>
                         </div>
                     </md-input-container>
                 </div>
-                <md-input-container flex class="md-block">
-                    <label>Description</label>
-                    <textarea ng-disabled="edit=='false'" ng-model="fournisseurDescription" rows="2" md-select-on-focus=""></textarea>
-                </md-input-container>
-
+                <div layout-gt-xs="row" layout-xs="column">
+                    <md-input-container class="md-block">
+                        <label>Société</label>
+                        <input ng-disabled="edit=='false'" required name="fournissseurNom" ng-model="fournisseur.categorie" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Adresse</label>
+                        <input ng-disabled="edit=='false'" required name="fournisseurAdresse" ng-model="fournisseur.horaires" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Tel</label>
+                        <input ng-disabled="edit=='false'" name="fournisseurTel" required ng-model="fournisseur.pays" type="text">
+                    </md-input-container>
+                </div>
+                <h3>Contact</h3>
+                <div layout-gt-xs="row" layout-xs="column">
+                    <md-input-container class="md-block">
+                        <label>Prénom</label>
+                        <input ng-disabled="edit=='false'" required ng-model="fournisseur.contactPrenom" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Nom</label>
+                        <input ng-disabled="edit=='false'" required ng-model="fournisseur.contactNom" type="text">
+                    </md-input-container>
+                </div>
+                <div layout-gt-xs="row" layout-xs="column">
+                    <md-input-container class="md-block">
+                        <label>Téléphone</label>
+                        <input ng-disabled="edit=='false'" required ng-model="fournisseur.tel" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>E-mail</label>
+                        <input ng-disabled="edit=='false'" required ng-model="fournisseur.contactMail" type="text">
+                    </md-input-container>
+                </div>
+                <!--
                 <h3>Produits</h3>
                 <md-table-container>
                     <table md-table>
@@ -81,16 +112,16 @@
                         </md-select>
                     </md-input-container>
                     <md-input-container flex="10">
-                        <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, composant)" ng-disabled="gamme == undefined || module == undefined || composant == undefined"
-                            aria-label="Add">
+                        <md-button class="md-secondary md-raised" ng-click="addChoixCatalogueRow(gamme, module, composant)" ng-disabled="gamme == undefined || module == undefined || composant == undefined" aria-label="Add">
                             <md-icon md-svg-src="ressources/img/icons/ic_add_black_24px.svg"></md-icon>
                         </md-button>
                     </md-input-container>
                 </div>
+                -->
             </form>
             <div layout="row" layout-align="center end">
                 <!-- layout-xs="column"-->
-                <md-button class="md-raised">Enregistrer</md-button>
+                <md-button class="md-raised" ng-disabled="true">Enregistrer</md-button>
                 <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
             </div>
         </md-card-content>

@@ -10,6 +10,8 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, $r
     } else {
         $rootScope.showNav = false;
     }
+    $rootScope.selectedIndex = "0";
+    console.log("selected index = " + $rootScope.selectedIndex);
     // Vérification du mode edition (activé ou non)
     $scope.choixCatalogue = [];
     $scope.edit = $routeParams.edit;

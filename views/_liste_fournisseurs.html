@@ -11,9 +11,9 @@
             </thead>
             <tbody md-body>
                 <tr md-row mdSelectId="data.Id" ng-repeat="data in dataFournisseurs | orderBy:sortType:sortReverse | filter:searchText">
-                    <td md-cell ng-click="goToFournisseur(data.Id,false)">{{data.societe}}</td>
-                    <td md-cell ng-click="goToFournisseur(data.Id,false)">{{data.tel}}</td>
-                    <td md-cell ng-click="goToFournisseur(data.Id,false)">{{data.adresse}}</td>
+                    <td md-cell ng-click="goToFournisseur(data.id,false)">{{data.societe}}</td>
+                    <td md-cell ng-click="goToFournisseur(data.id,false)">{{data.tel}}</td>
+                    <td md-cell ng-click="goToFournisseur(data.id,false)">{{data.adresse}}</td>
                     <td md-cell>
                         <md-button class="md-secondary" ng-click="editFournisseur()" aria-label="Edit">
                             <md-icon md-svg-src="ressources/img/icons/ic_create_black_24px.svg"></md-icon>
