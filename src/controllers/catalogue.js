@@ -12,29 +12,29 @@ app.controller('catalogueCtrl', function($window, $scope, $routeParams, catalogu
     $scope.edit = $routeParams.edit;
 
     catalogueProvider.getGammes().async().then(function(response) {
-            $scope.datasGammes = response.data;
-            $routeParams.gammes = response.data;
-            //recupération des modules
-            $scope.datasModules = catalogueProvider.getModules().async().then(function(response) {
-                    $scope.datasModules = response.data;
-                    $routeParams.modules = response.data;
-                    // Récupération des composants
-                    $scope.datasComposants = catalogueProvider.getComposants().async().then(function(response) {
-                            $scope.datasComposants = response.data;
-                            $routeParams.composants = response.data;
-                            //echec composants
-                        }, function(error) {
-                            commonCode.alertErreur();
-                        })
-                        //Echec modules
-                }, function(error) {
-                    commonCode.alertErreur();
-                })
-                //Echec gammes
-        }, function(error) {
-            commonCode.alertErreur();
-        })
-        // Récupérer le nom des gammes de chacun des modules
+        $scope.datasGammes = response.data;
+        $routeParams.gammes = response.data;
+        //recupération des modules
+        $scope.datasModules = catalogueProvider.getModules().async().then(function(response) {
+                $scope.datasModules = response.data;
+                $routeParams.modules = response.data;
+                // Récupération des composants
+                $scope.datasComposants = catalogueProvider.getComposants().async().then(function(response) {
+                        $scope.datasComposants = response.data;
+                        $routeParams.composants = response.data;
+                        //echec composants
+                    }, function(error) {
+                        commonCode.alertErreur();
+                    })
+                    //Echec modules
+            }, function(error) {
+                commonCode.alertErreur();
+            })
+            //Echec gammes
+    }, function(error) {
+        commonCode.alertErreur();
+    });
+    // Récupérer le nom des gammes de chacun des modules
     $scope.getGammeName = function(id) {
         $scope.gammeName = "";
         for (var i = 0; i < id.length; i++) {

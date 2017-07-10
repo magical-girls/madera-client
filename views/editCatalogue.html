@@ -11,7 +11,7 @@
                         <div ng-message="required" class="my-message">Vous devez obligatoirement entrer un nom.</div>
                     </div>
                 </md-input-container>
-                <md-input-container flex class="md-block">
+                <md-input-container flex class="md-block" ng-show="type!='module'">
                     <label>Description</label>
                     <textarea ng-disabled="edit=='false'" ng-model="commentaire" rows="1" md-select-on-focus=""></textarea>
                 </md-input-container>
@@ -23,13 +23,13 @@
                         <div ng-message="pattern" class="my-message">Le prix n'est pas valide.</div>
                     </div>
                 </md-input-container>
-                <div ng-show="type!='gamme'">
+                <div ng-show="type=='module'">
                     <h3>Choix de l'appartenance</h3>
                     <md-input-container ng-show="type=='module'" flex>
                         <label>Gammes</label>
-<!--                         <md-select required ng-model="gamme" name="listGamme" ng-disabled="type!='module' || edit=='false'" ng-show="type!='module' || edit=='true'"> -->
-<!--                             <md-option ng-value="g.idReference" ng-repeat="g in gammes ">{{ g.idGamme }}</md-option> -->
-<!--                         </md-select> -->
+                        <!--                         <md-select required ng-model="gamme" name="listGamme" ng-disabled="type!='module' || edit=='false'" ng-show="type!='module' || edit=='true'"> -->
+                        <!--                             <md-option ng-value="g.idReference" ng-repeat="g in gammes ">{{ g.idGamme }}</md-option> -->
+                        <!--                         </md-select> -->
                         <input ng-disabled="edit=='false'" required name="gammes" ng-model="gammes" type="text" ng-show="type!='module' || edit=='false'">
                         <div ng-messages="catalogueForm.listGamme.$error" role="alert">
                             <div ng-message="required" class="my-message">Vous devez obligatoirement renseigner une gamme.</div>
@@ -37,25 +37,12 @@
                     </md-input-container>
                     <md-input-container ng-show="type=='composant'" flex>
                         <label>Modules</label>
-<!--                         <md-select ng-model="module" required name="listModule" required ng-show="type!='composant' || edit=='true'"> -->
-<!--                             <md-option ng-repeat="m in modules" ng-value="m.idModule">{{ m.idModule }}</md-option> -->
-<!--                         </md-select> -->
-                    	<input ng-disabled="edit=='false'" required name="modules" ng-model="module" type="text" ng-show="type!='composant' || edit=='false'">
+                        <!--                         <md-select ng-model="module" required name="listModule" required ng-show="type!='composant' || edit=='true'"> -->
+                        <!--                             <md-option ng-repeat="m in modules" ng-value="m.idModule">{{ m.idModule }}</md-option> -->
+                        <!--                         </md-select> -->
+                        <input ng-disabled="edit=='false'" required name="modules" ng-model="module" type="text" ng-show="type!='composant' || edit=='false'">
                         <div ng-messages="catalogueForm.listModule.$error" role="alert">
                             <div ng-message="required" class="my-message">Vous devez obligatoirement renseigner un module.</div>
-                        </div>
-                    </md-input-container>
-                </div>
-                <div ng-show="type=='composant'">
-                    <h3>Choix du fournisseur</h3>
-                    <md-input-container flex>
-                        <label>Fournisseur</label>
-                        <md-select ng-model="fournisseur" name="listFournisseur" required ng-show="type!='composant' || edit=='true'">
-                            <md-option ng-value="f.id_fournisseur" ng-repeat="f in fournisseurs ">{{ f.nom_fournisseur }}</md-option>
-                        </md-select>
-                        <input ng-disabled="edit=='false'" required name="modules" ng-model="fournisseur" type="text" ng-show="type!='composant' || edit=='false'">
-                        <div ng-messages="catalogueForm.listFournisseur.$error" role="alert">
-                            <div ng-message="required" class="my-message">Vous devez obligatoirement renseigner un fournisseur.</div>
                         </div>
                     </md-input-container>
                 </div>
@@ -76,7 +63,7 @@
                 </choose-file>
                 <div layout="row" layout-align="center end">
                     <md-button class="md-raised" ng-disabled="edit=='false'">Enregistrer</md-button>
-                    <md-button class="md-raised" ng-click="returnFunction()" >Retour</md-button>
+                    <md-button class="md-raised" ng-click="returnFunction()">Retour</md-button>
                 </div>
             </form>
         </md-card-content>
