@@ -16,14 +16,14 @@
                         <div layout-gt-xs="row" layout-xs="column">
                             <md-input-container class="md-block">
                                 <label>Prénom</label>
-                                <input ng-disabled="edit=='false'" name="clientPrenom" required ng-model="devisData.client.prenom" type="text">
+                                <input ng-disabled="edit=='false' || new == false" name="clientPrenom" required ng-model="devisData.client.prenom" type="text">
                                 <div md-auto-hide="false" ng-messages="devisForm.clientPrenom.$error" role="alert" multiple="">
                                     <div ng-message="required" class="my-message">Prénom du client obligatoire.</div>
                                 </div>
                             </md-input-container>
                             <md-input-container class="md-block">
                                 <label>Nom</label>
-                                <input ng-disabled="edit=='false'" name="clientNom" required ng-model="devisData.client.nom" type="text">
+                                <input ng-disabled="edit=='false' || new == false" name="clientNom" required ng-model="devisData.client.nom" type="text">
                                 <div md-auto-hide="false" ng-messages="devisForm.clientNom.$error" role="alert" multiple="">
                                     <div ng-message="required" class="my-message">Nom du client obligatoire.</div>
                                 </div>
@@ -31,14 +31,14 @@
                         </div>
                         <md-input-container class="md-block">
                             <label>Tel</label>
-                            <input ng-disabled="edit=='false'" required name="clientTel" ng-model="devisData.client.tel" type="text">
+                            <input ng-disabled="edit=='false' || new == false" required name="clientTel" ng-model="devisData.client.tel" type="text">
                             <div ng-messages="devisForm.clientTel.$error" role="alert" multiple="">
                                 <div ng-message="required" class="my-message">Téléphone du client obligatoire.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>E-mail</label>
-                            <input ng-disabled="edit=='false'" required name="clientMail" ng-model="devisData.client.mail" type="email">
+                            <input ng-disabled="edit=='false' || new == false" required name="clientMail" ng-model="devisData.client.mail" type="email">
                             <div ng-messages="devisForm.clientMail.$error" role="alert" multiple="">
                                 <div ng-message="required" class="my-message">Email du client obligatoire.</div>
                                 <div ng-message="email">Adresse non valide</div>
@@ -52,24 +52,24 @@
                         <div layout-gt-xs="row" layout-xs="column">
                             <md-input-container class="md-block">
                                 <label>Prénom</label>
-                                <input ng-disabled="edit=='false'" ng-model="user.prenom" type="text">
+                                <input ng-disabled="edit=='false' || new == false" ng-model="user.prenom" type="text">
                             </md-input-container>
                             <md-input-container class="md-block">
                                 <label>Nom</label>
-                                <input ng-disabled="edit=='false'" ng-model="user.nom" type="text">
+                                <input ng-disabled="edit=='false' || new == false" ng-model="user.nom" type="text">
                             </md-input-container>
                         </div>
                         <md-input-container class="md-block">
                             <label>Matricule</label>
-                            <input ng-disabled="edit=='false'" ng-model="user.idMatricule" type="text">
+                            <input ng-disabled="edit=='false' || new == false" ng-model="user.idMatricule" type="text">
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>Tel</label>
-                            <input ng-disabled="edit=='false'" ng-model="user.tel" type="text">
+                            <input ng-disabled="edit=='false' || new == false" ng-model="user.tel" type="text">
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>E-mail</label>
-                            <input ng-disabled="edit=='false'" ng-model="user.mail" type="text">
+                            <input ng-disabled="edit=='false' || new == false" ng-model="user.mail" type="text">
                         </md-input-container>
                     </md-card-content>
                 </md-card>
@@ -84,7 +84,7 @@
                         <div layout="row">
                             <md-input-container class="md-block">
                                 <label>Référence</label>
-                                <input ng-disabled="edit=='false'" required name="ref" ng-model="devisData.devis.reference" type="text">
+                                <input ng-disabled="edit=='false' || new == false" required name="ref" ng-model="devisData.devis.reference" type="text">
                                 <div ng-messages="devisForm.ref.$error" role="alert" multiple="">
                                     <div ng-message="required" class="my-message">Référence obligatoire.</div>
                                 </div>
@@ -94,10 +94,10 @@
                             <md-input-container>
                                 <label>Statut: </label>
                                 <md-select ng-model="statut" name="statut" required ng-disabled="edit=='false'">
-                                    <md-option ng-selected="devisData.devis.status=='Refusé'" value="Refusé">Refusé</md-option>
+                                    <md-option ng-selected="devisData.devis.status=='Refusé'" value="Refuse">Refusé</md-option>
                                     <md-option ng-selected="devisData.devis.status=='En cours'" value="En cours">En cours</md-option>
                                     <md-option ng-selected="devisData.devis.status=='En attente'" value="En attente">En attente</md-option>
-                                    <md-option ng-selected="devisData.devis.status=='Validé'" value="Validé">Validé</md-option>
+                                    <md-option ng-selected="devisData.devis.status=='Validé'" value="Valide">Validé</md-option>
                                 </md-select>
                                 <div ng-messages="devisForm.statut.$error" role="alert" multiple="">
                                     <div ng-message="required" class="my-message">Statut obligatoire.</div>

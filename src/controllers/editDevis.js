@@ -256,6 +256,8 @@ app.controller('editDevisCtrl', function($scope, $routeParams, devisProvider, $r
 
     //update devis
     updateDevis = function() {
+        $scope.devisData.devis.status = $scope.statut;
+        console.log($scope.devisData.devis.status);
         devisProvider.updateDevis(
             $scope.client,
             $scope.devisData.devis,
