@@ -124,24 +124,24 @@
                                     <div flex layout="row">
                                         <md-input-container flex>
                                             <label>Modules</label>
-                                            <md-select ng-model="moduleA" ng-disabled="edit=='false'">
+                                            <md-select ng-model="moduleA" required ng-disabled="edit=='false'">
                                                 <md-option ng-repeat="m in datasModules | filter: { idGamme: gamme }" value="{{m.idReference}}">{{ m.commentaire }}</md-option>
                                             </md-select>
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>Type Section</label>
-                                            <md-select ng-model="sectionA" ng-disabled="edit=='false'">
+                                            <md-select ng-model="sectionA" required ng-disabled="edit=='false'">
                                                 <md-option value="Lisses">Lissant</md-option>
                                                 <md-option value="Contreforts">Contrefort</md-option>
                                             </md-select>
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>Longueur</label>
-                                            <input ng-model="longueurA" min="0" type="number">
+                                            <input ng-model="longueurA" required min="0" type="number">
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>Type Angle</label>
-                                            <md-select ng-model="typeAngle" ng-init="options[0]" ng-disabled="edit=='false'">
+                                            <md-select ng-model="typeAngle" required ng-init="options[0]" ng-disabled="edit=='false'">
                                                 <md-option value="Aucun">Aucun</md-option>
                                                 <md-option value="Entrant">Entrant</md-option>
                                                 <md-option value="Sortant">Sortant</md-option>
